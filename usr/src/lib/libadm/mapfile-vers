@@ -1,0 +1,152 @@
+#
+#ident	"@(#)mapfile-vers	1.9	96/04/05 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/libadm.
+#
+# For information regarding the establishment of versioned definitions see:
+# 	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNW_1.1 {
+	global:
+		# OA&M Device Managment:
+
+		devattr;
+		devfree;
+		devreserv;
+		getdev;
+		getdgrp;
+		getvol;
+		listdev;
+		listdgrp;
+		reservdev;
+
+		# VTOC reading/writing:
+
+		read_vtoc;
+		write_vtoc;
+
+		# Regular Expressions:
+
+		advance;
+		circf;
+		compile;
+		loc1;
+		loc2;
+		locs;
+		nbra;
+		sed;
+		step;
+
+		# Packaging Stuff:
+
+		pkgdir;
+		pkginfo;
+		pkgnmchk;
+		pkgparam;
+
+		# Obsolete Physical Memory Information
+
+		asysmem;
+		sysmem;
+	local:
+		*;
+};
+
+SUNWprivate_1.1 {
+	global:
+		fpkginfo;		# cmd/oampkg/pkgadd
+		ckquit;			# cmd/oampkg/pkgadd
+		ckpath;			# cmd/oampkg/pkgadd
+		ckyorn;			# cmd/oampkg/pkgadd
+		_getvol;		# cmd/oampkg/pkgadd
+		ckitem;			# cmd/oampkg/pkgadd
+		fpkginst;		# cmd/oampkg/pkgadd
+		get_PKGADM;		# cmd/oampkg/pkgadd
+		set_PKGpaths;		# cmd/oampkg/pkgadd
+		fpkgparam;		# cmd/oampkg/pkgadd
+		allocmenu;		# cmd/oampkg/pkgadd
+		setinvis;		# cmd/oampkg/pkgadd
+		puttext;		# cmd/oampkg/pkgadd
+		setitem;		# cmd/oampkg/pkgadd
+		get_PKGOLD;		# cmd/oampkg/pkginstall
+		get_PKGLOC;		# cmd/oampkg/pkginstall
+		set_PKGADM;
+		set_PKGLOC;
+		getinput;
+		printmenu;		# cmd/oampkg/pkginstall
+		ckstr;			# cmd/oampkg/pkgrm
+		pkgfile;		# cmd/oampkg/pkgparam
+		getfullrawname;		# cmd/volmgt/util
+		getfullblkname;		# cmd/volmgt/util
+		_devtabpath;		# cmd/devmgt/de
+		_opendevtab;		# cmd/devmgt/de
+		_rsvtabpath;		# cmd/devmgt/de
+		ckwidth;		# cmd/devmgt/ge
+		_dgrptabpath;		# cmd/devmgt/putdgrp
+		_rmdgrpmems;		# cmd/devmgt/putdgrp
+		_rmdgrptabrec;		# cmd/devmgt/putdgrp
+		_adddgrptabrec;		# cmd/devmgt/putdgrp
+		_opendgrptab;		# cmd/devmgmt/libstrgrp
+		_rmdevtabrec;		# cmd/devmgt/putdev
+		_adddevtabrec;		# cmd/devmgt/putdev
+		_rmdevtabattrs;		# cmd/devmgt/putdev
+		_validalias;		# cmd/devmgt/putdev
+		_moddevtabrec;		# cmd/devmgt/putdev
+		_enddevtab;		# cmd/devmgmt/mkdtab
+		ckint;			# cmd/valtools
+		ckint_hlp;		# cmd/valtools
+		ckint_val;		# cmd/valtools
+		ckindent;		# cmd/valtools
+		ckint_err;		# cmd/valtools
+		ckitem_hlp;		# cmd/valtools
+		ckitem_err;		# cmd/valtools
+		ckpath_stx;		# cmd/valtools
+		ckpath_hlp;		# cmd/valtools
+		ckpath_val;		# cmd/valtools
+		ckpath_err;		# cmd/valtools
+		ckrange_hlp;		# cmd/valtools
+		ckrange_err;		# cmd/valtools
+		ckrange_val;		# cmd/valtools
+		ckrange;		# cmd/valtools
+		ckstr_hlp;		# cmd/valtools
+		ckstr_val;		# cmd/valtools
+		ckstr_err;		# cmd/valtools
+		ckyorn_hlp;		# cmd/valtools
+		ckyorn_val;		# cmd/valtools
+		ckyorn_err;		# cmd/valtools
+		ckkeywd;		# cmd/valtools
+		ckdate_hlp;		# cmd/valtools
+		ckdate_val;		# cmd/valtools
+		ckdate;			# cmd/valtools
+		ckdate_err;		# cmd/valtools
+		cktime_hlp;		# cmd/valtools
+		cktime_val;		# cmd/valtools
+		cktime_err;		# cmd/valtools
+		cktime;			# cmd/valtools
+		ckuid;			# cmd/valtools
+		ckuid_hlp;		# cmd/valtools
+		ckuid_dsp;		# cmd/valtools
+		ckuid_val;		# cmd/valtools
+		ckuid_err;		# cmd/valtools
+		ckgid_err;		# cmd/valtools
+		ckgid;			# cmd/valtools
+		ckgid_hlp;		# cmd/valtools
+		ckgid_dsp;		# cmd/valtools
+		ckgid_val;		# cmd/valtools
+		pkginfofind;		# required by pkginfo
+		puterror;
+		puthelp;
+		putprmpt;
+};

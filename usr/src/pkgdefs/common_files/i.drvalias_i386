@@ -1,0 +1,49 @@
+#!/bin/sh
+#
+#ident   "@(#)i.drvalias_i386 1.11     96/06/18 SMI"
+#
+# Copyright (c) 1993-1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f "$dest" ] ; then
+		cp $src $dest
+	else
+		grep '^dpt ' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'dpt "pci1044,a400"' >> $dest
+		fi
+		grep '"pci1011,1"' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pci_pci "pci1011,1"' >> $dest
+		fi
+		grep '"pci1011,21"' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pci_pci "pci1011,21"' >> $dest
+		fi
+		grep '"pci1014,22"' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pci_pci "pci1014,22"' >> $dest
+		fi
+		grep '"SUNW,CS4231"' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'audiocs "SUNW,CS4231"' >> $dest
+		fi
+		grep '^mlx ' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'mlx "pci1069,1"' >> $dest
+		fi
+		grep '^elx ' $dst > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'elx "pci10b7,5900"' >> $dst
+			echo 'elx "pci10b7,5950"' >> $dst
+		fi
+	fi
+done
+
+exit 0

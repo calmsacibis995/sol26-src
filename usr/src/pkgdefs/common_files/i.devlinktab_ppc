@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+# ident	"@(#)i.devlinktab_ppc	1.4	96/08/21 SMI"
+#
+# Copyright (c) 1994 by Sun Microsystems, Inc.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		# update the SCCS id
+		grep '^#ident[ 	]*"@(#)devlink.tab' $src \
+		    > /tmp/newident.$$ 2>/dev/null
+		egrep -v '^#(pragma ident|ident)[ 	]*"@\(#\)devlink.tab' $dest \
+		    > /tmp/rest.$$ 2>/dev/null
+		cat /tmp/newident.$$ /tmp/rest.$$ > $dest
+
+		grep '^type=ddi_pseudo;name=pm	' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			grep '^type=ddi_pseudo;name=pm	' $src >> $dest
+		fi
+	fi
+done
+
+exit 0

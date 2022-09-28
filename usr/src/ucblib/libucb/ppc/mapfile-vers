@@ -1,0 +1,14 @@
+#
+#ident	"@(#)mapfile-vers	1.2	96/01/04 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# PPC specific interface definition for usr/src/ucblib/libucb.
+
+
+SUNWprivate_1.1 {
+	global:
+		_syscall;
+		 syscall;
+};

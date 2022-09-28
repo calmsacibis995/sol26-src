@@ -1,0 +1,18 @@
+# Copyright (c) 1996, by Sun Microsystems, Inc.
+#
+# All Rights Reserved.
+#pragma ident   "@(#)pln.wlcmd  1.2    96/10/17 SMI"
+
+one pln
+root dummy_warlock
+
+#
+#
+for ptr in `funcptrs | grep '^fc_transport::'`
+do
+	add $ptr target warlock_dummy
+done
+for ptr in `funcptrs | grep '^pln_scsi_cmd::'`
+do
+	add $ptr target warlock_dummy
+done

@@ -1,0 +1,117 @@
+#
+#ident	"@(#)mapfile-vers	1.13	96/09/17 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/ucblib/libucb.
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNW_1.2 {
+	global:
+		alphasort64;
+		fopen64;
+		freopen64;
+		readdir64;
+		scandir64;
+} SUNW_1.1;
+
+SUNW_1.1 {
+	global:
+		alphasort;
+		bcmp;
+		bcopy;
+		bzero;
+		flock;
+		fopen;
+		fprintf;
+		freopen;
+		fstatfs;
+		ftime;
+		getdtablesize;
+		gethostid;
+		gethostname;
+		getpagesize;
+		getpriority;
+		getrusage;
+		gettimeofday;
+		getwd;
+		index;
+		killpg;
+		longjmp;
+		mctl;
+		nice;
+		nlist;
+		printf;
+		psignal;
+		rand;
+		re_comp;
+		re_exec;
+		readdir;
+		reboot;
+		rindex;
+		scandir;
+		setbuffer;
+		sethostname;
+		setjmp;
+		setlinebuf;
+		setpgrp;
+		setpriority;
+		settimeofday;
+		sigblock;
+		siginterrupt;
+		signal;
+		sigpause;
+		sigsetmask;
+		sigstack;
+		sigvec;
+		sigvechandler;
+		sleep;
+		sprintf;
+		srand;
+		statfs;
+		sys_siglist;
+		times;
+		ualarm;
+		usignal;
+		usigpause;
+		usleep;
+		vfprintf;
+		vprintf;
+		vsprintf;
+		wait3;
+		wait4;
+	local:
+		*;
+};
+
+SUNWprivate_1.1 {
+	global:
+		_doprnt;
+		_getarg;
+		_longjmp;
+		_mkarglst;
+		_setjmp;
+		_sigblock;
+		_siginterrupt;
+		_sigsetmask;
+		_sigstack;
+		_sigvec;
+		_sigvechandler;
+		ucbsigblock;
+		ucbsiginterrupt;
+		ucbsigpause;
+		ucbsigsetmask;
+		ucbsigvec;
+};

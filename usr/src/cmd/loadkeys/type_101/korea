@@ -1,0 +1,7 @@
+# @(#)korea 1.1 95/06/21 SMI
+#
+# Korean 103 keyboard
+#
+
+key 150	 base ' ' shift ' ' caps ' ' ctrl ' ' altg nop
+key 151	 base ' ' shift ' ' caps ' ' ctrl ' ' altg nop

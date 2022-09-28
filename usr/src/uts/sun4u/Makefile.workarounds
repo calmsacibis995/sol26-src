@@ -1,0 +1,24 @@
+#
+# uts/sun4u/Makefile.workarounds
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident   "@(#)Makefile.workarounds 1.2     96/03/05 SMI"
+#
+#	This makefile contains workaround defines to be shared
+#	by Makefile.sun4u and the sun4u genunix Makefile.
+#
+
+# Define the minimum cpu rev this kernel will support
+# (min is 0x11 with all workarounds enabled)
+WORKAROUND_DEFS = -DSPITFIRE_MINREV_SUPPORTED=0x21
+
+# The following are required to support Spitfire 1.x
+# WORKAROUND_DEFS += -DSF_ERRATA_6	# internal asi's (ldxa) don't work
+# WORKAROUND_DEFS += -DSF_ERRATA_12	# atomics cause hang
+
+# The following are required to support Spitfire <= 2.0
+# WORKAROUND_DEFS += -DSF_ERRATA_23	# call causes illegal-insn
+
+# The following are required to support Spitfire <= 2.1
+WORKAROUND_DEFS += -DSF_ERRATA_30	# call causes fp-disabled

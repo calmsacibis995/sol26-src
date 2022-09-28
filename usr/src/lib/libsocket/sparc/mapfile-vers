@@ -1,0 +1,40 @@
+#
+#ident	"@(#)mapfile-vers	1.8	96/06/10 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# SPARC specific interface definition for usr/src/lib/libsocket.
+
+
+SUNW_1.1 {
+
+} SISCD_2.3;
+
+SISCD_2.3 {
+	global:
+		 getprotobyname;		# Table 6-9
+		 getprotobynumber;
+		 getprotoent;
+		 getservbyname;
+		 getservbyport;
+		 inet_lnaof;
+		 inet_makeaddr;
+		 inet_network;
+		 socket;
+		 accept;
+		 bind;
+		 connect;
+		 getpeername;
+		 getsockname;
+		 getsockopt;
+		 listen;
+		 recv;
+		 recvfrom;
+		 recvmsg;
+		 send;
+		 sendmsg;
+		 sendto;
+		 setsockopt;
+		 shutdown;
+};

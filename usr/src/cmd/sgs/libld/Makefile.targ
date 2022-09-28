@@ -1,0 +1,47 @@
+#
+#ident	"@(#)Makefile.targ	1.10	96/08/19 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+
+pics/%.o:	../common/%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+pics/%.o:	$(SRCBASE)/uts/$(ARCH)/krtld/%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+$(DYNLIB):	$(MAPFILE)
+ 
+$(LIBLINKS):
+		-$(RM) $@; $(SYMLINK) $(DYNLIB) $@
+
+delete:
+		$(RM) $(DYNLIB)
+
+# Special target for native builds (ie. when we need to build a version of ld
+# to build a version of ld :-).
+
+native:		$(SGSPROTO)/$(DYNLIB)
+
+native :=	DYNFLAGS += -R$(SGSPROTO)
+native :=	LLDLIBS =
+
+$(SGSPROTO)/$(DYNLIB): \
+		pics .WAIT $$(PICS) $(MAPFILE)
+		$(CC) -o $@ -dy -G $(DYNFLAGS) $(PICS) $(LDLIBS)
+		$(POST_PROCESS_SO)
+		-@$(RM) $(SGSPROTO)/$(LIBLINKS);
+		$(SYMLINK) $(DYNLIB) $(SGSPROTO)/$(LIBLINKS)
+
+include		$(SRC)/lib/Makefile.targ
+
+# Derived source and header files (messaging).
+ 
+catalog:	$(BLTMESG)
+
+$(BLTDEFS) + \
+$(BLTDATA) + \
+$(BLTMESG) :	../common/libld.msg
+		$(SGSTOOLS)/sgsmsg $(SGSMSGFLAGS) ../common/libld.msg

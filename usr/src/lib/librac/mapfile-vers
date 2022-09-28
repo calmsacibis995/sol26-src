@@ -1,0 +1,65 @@
+#
+#ident	"@(#)mapfile-vers	1.6	96/01/04 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/librac.
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNW_1.1 {
+	global:
+		clnt_create;
+		clnt_create_vers;
+		clnt_dg_create;
+		clnt_tli_create;
+		clnt_tp_create;
+		clnt_vc_create;
+		rac_drop;
+		rac_poll;
+		rac_recv;
+		rac_send;
+		rac_senderr;
+		rpcb_getaddr;
+		rpcb_getmaps;
+		rpcb_gettime;
+		rpcb_rmtcall;
+		rpcb_set;
+		rpcb_taddr2uaddr;
+		rpcb_uaddr2taddr;
+		rpcb_unset;
+		xdrrec_create;
+		xdrrec_endofrecord;
+		xdrrec_eof;
+		xdrrec_readbytes;
+		xdrrec_skiprecord;
+	local:
+		*;
+};
+
+SUNWprivate_1.1 {
+	global:
+		__rpc_control;
+		__rpc_dtbsize;
+		__rpc_endconf;
+		__rpc_get_a_size;
+		__rpc_get_t_size;
+		__rpc_getconf;
+		__rpc_getconfip;
+		__rpc_setconf;
+		__seterr_reply;
+		__rpc_select_to_poll;
+		__rpc_timeval_to_msec;
+		_rpctypelist;
+};

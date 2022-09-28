@@ -1,0 +1,48 @@
+#
+#ident	"@(#)mapfile-vers	1.8	96/04/05 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/libmp.
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNW_1.1 {
+	global:
+		mp_gcd;
+		mp_itom;
+		mp_madd;
+		mp_mcmp;
+		mp_mdiv;
+		mp_mfree;
+		mp_min;
+		mp_mout;
+		mp_msqrt;
+		mp_msub;
+		mp_mtox;
+		mp_mult;
+		mp_pow;
+		mp_rpow;
+		mp_sdiv;
+		mp_xtom;
+	local:
+		*;
+};
+
+SUNWprivate_1.1 {
+	global:
+		_mp_move;	# referenced in libnsl.so.1
+		_mp_xalloc;
+		_mp_xfree;
+};

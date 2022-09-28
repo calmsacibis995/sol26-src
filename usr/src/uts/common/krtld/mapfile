@@ -1,0 +1,42 @@
+#
+#ident	"@(#)mapfile	1.3	96/07/12 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+{
+	global:
+		kobj_addrcheck;
+		kobj_alloc;
+		kobj_close;
+		kobj_close_file;
+		kobj_filbuf;
+		kobj_free;
+		kobj_get_packing_info;
+		kobj_getelfsym;
+		kobj_getmodinfo;
+		kobj_getsymname;
+		kobj_getsymvalue;
+		kobj_load_module;
+		kobj_lock_syms;
+		kobj_lookup;
+		kobj_lookup_all;
+		kobj_notify_add;
+		kobj_notify_remove;
+		kobj_open;
+		kobj_open_file;
+		kobj_open_path;
+		kobj_read;
+		kobj_read_file;
+		kobj_searchsym;
+		kobj_sync;
+		kobj_unload_module;
+		kobj_unlock_syms;
+		kobj_zalloc;
+		kobj_stat_get;
+		__tnf_tag_list_head;
+		__tnf_probe_list_head;
+	local:
+		*;
+};

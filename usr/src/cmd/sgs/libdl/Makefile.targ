@@ -1,0 +1,35 @@
+#
+#ident	"@(#)Makefile.targ	1.5	96/03/04 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# sgs/libdl/Makefile.targ
+
+pics/%.o:	../common/%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+$(DYNLIB):	$(MAPFILES)
+
+$(ETCLIBDIR)/%:	%
+		$(INS.file)
+
+delete:
+		$(RM) $(DYNLIB)
+
+# Special target for native builds (ie. when we need to build a version of ld
+# to build a version of ld :-).
+ 
+include		$(SRC)/cmd/sgs/Makefile.com
+
+native:		$(SGSPROTO)/$(DYNLIB)
+
+$(SGSPROTO)/$(DYNLIB): \
+		pics .WAIT $$(PICS)
+		$(BUILD.SO)
+		$(POST_PROCESS_SO)
+		-@$(RM) $(SGSPROTO)/$(LIBLINKS)
+		$(SYMLINK) $(DYNLIB) $(SGSPROTO)/$(LIBLINKS)
+
+include		$(SRC)/lib/Makefile.targ

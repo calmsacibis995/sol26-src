@@ -1,0 +1,40 @@
+#
+#ident	"@(#)Makefile.targ	1.5	96/06/18 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+
+%.o:		../common/%.c
+		$(COMPILE.c) $<
+		$(POST_PROCESS_O)
+
+all:		$(PROG)
+
+clean:
+		$(RM) $(OBJS) $(CLEANFILES)
+
+delete:
+		$(RM) $(PROG)
+
+install \
+package:	all $(ROOTPROG)
+
+lint:		$(LINTOUT)
+
+$(PROG):	$(OBJS)  $(MAPFILE)
+		$(LINK.c) -o $@ $(OBJS) $(LDLIBS)
+		$(POST_PROCESS)
+
+$(LINTOUT):	$(SRCS)
+		$(LINT.c) $(SRCS) > $(LINTOUT) 2>&1
+
+include		$(SRC)/cmd/Makefile.targ
+
+# Derived source and header files (messaging).
+ 
+catalog:	$(BLTMESG)
+
+$(BLTDEFS) + \
+$(BLTDATA) + \
+$(BLTMESG) :	../common/pvs.msg
+		$(SGSTOOLS)/sgsmsg $(SGSMSGFLAGS) ../common/pvs.msg

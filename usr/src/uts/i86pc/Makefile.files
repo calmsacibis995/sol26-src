@@ -1,0 +1,68 @@
+#
+# uts/i86pc/Makefile.files
+# Copyright (c) 1992-1996, by Sun Microsystems, Inc.
+#
+#pragma ident	"@(#)Makefile.files	1.71	96/08/19 SMI"
+#
+#	This Makefile defines all file modules in the directory uts/i86pc
+#	and it's children. These are the source files which i86pc
+#	"implementation architecture" dependent.
+#
+
+#
+#	object lists
+#
+CORE_OBJS += \
+	confunix.o	ddi_impl.o	dvma.o		\
+ 	mach_sysconfig.o machdep.o	mp_startup.o 	mpcore.o \
+	x_call.o 	mp_call.o	trap.o		\
+	mp_machdep.o	mp_implfuncs.o	hrtimers.o \
+	startup.o	mlsetup.o	ppage.o		bp_map.o \
+	putnext.o	notes.o
+
+AUTOCONF_OBJS += autoconf.o
+
+#
+#	locore.o is special. It must be the first file relocated so that it
+#	it is relocated just where its name implies.
+#
+SPECIAL_OBJS +=	locore.o
+
+#
+#			driver modules
+#
+ROOTNEX_OBJS += rootnex.o
+EISANEXUS_OBJS += eisa.o dma_engine.o i8237A.o
+ISANEXUS_OBJS += isa.o dma_engine.o i8237A.o
+MCANEXUS_OBJS += mc.o dma_engine.o i8237A.o
+PCINEXUS_OBJS += \
+	pci.o \
+	pci_mech1.o \
+	pci_mech2.o \
+	pci_neptune.o \
+	pci_orion.o
+
+TCIC_OBJS +=	tcic.o
+VDI_OBJS +=	vdi.o
+
+BOOTDEV_OBJS	+= bootdev.o
+#
+#	platform specific modules 
+#
+UPPC_OBJS += uppc.o uppc_ml.o
+PCI_AUTOCONFIG_OBJS += pci_autoconfig.o
+
+#
+#	Build up defines and paths.
+#
+ALL_DEFS	+= -Di86pc
+INC_PATH	+= -I$(UTSBASE)/i86pc
+
+#
+# Since assym.s is a derived file, the dependency must be explicit for
+# all files including this file. (This is only actually required in the
+# instance when the .nse_depinfo file does not exist.) It may seem that
+# the lint targets should also have a similar dependency, but they don't
+# since only C headers are included when #defined(lint) is true.
+#
+ASSYM_DEPS      += locore.o mpcore.o

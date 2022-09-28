@@ -1,0 +1,243 @@
+#!/bin/sh
+#	Copyright (c) 1996, by Sun Microsystems, Inc.
+#		All Rights Reserved
+#ident "@(#)raconfig	1.1	96/06/11 SMI"
+case "$1" in
+'start')
+	if [ "${_INIT_RECONFIG}" = "" -o ! -f /kernel/drv/pcic ]
+	then
+		exit 0
+	fi
+	egrep -s '^pcic[ 	]' /etc/name_to_major
+	if [ "$?" -eq 1 ]
+	then
+		exit 0
+	fi
+	if [ "${_INIT_VERBOSE}" != "" ]
+	then
+		echo "Checking PCMCIA Adapter Configuration."
+	fi
+	/usr/sbin/prtconf -v >/tmp/.prtconf
+	rm -f /tmp/ask /tmp/found /tmp/regs /tmp/intrs
+	echo 'name="ra" parent="rootnex"' >/tmp/ra.conf
+
+#
+# 	we need to know which devices are know
+# 	and which are unknown.  We later ask the
+# 	user to provide info on the unknown and
+# 	to add any extra info Solaris can\'t find
+#
+	if [ -f "/kernel/drv/ra.conf" ]
+	then
+		grep '^#exclude' /kernel/drv/ra.conf >/tmp/excluded
+	fi
+#
+# 	find details for removal from free list
+#
+	nawk '
+	function rev(str){
+		if (length(str) == 0)
+			return "";
+		return rev(substr(str,3)) substr(str,1,2)
+	}
+	function digit(str){
+		return match("0123456789abcdef",substr(str,1,1))-1;
+	}
+	function hex(str,v,i){
+		sub(/0x/,"",str);
+		str=rev(str);
+		v=0;
+		while (length(str) > 0){
+			v = v*16 + digit(str);
+			str = substr(str,2);
+		}
+		return v;
+	}
+	function skipname(name)
+	{
+		if (name == "pcic")
+			return (1);
+		if (name == "pcser")
+			return (1);
+		if (name == "pcmem")
+			return (1);
+		if (name == "pcelx")
+			return (1);
+		if (name == "kd")
+			return (1);
+		if (name == "dpctl")
+			return (1);
+		return (0);
+	}
+	BEGIN {intrs=0; regs=0; addrs=0;}
+	/, instance/ {sub(/\,/, "", $1);name=$1}
+	/chosen-/ {gsub(/[<>]/,"",$0);sub(/chosen-/,"");prop=$2; getline; gsub(/[<>\.]/,"",$0);val=$2;
+			if (!skipname(name) && match(prop,/interrupt/)) {
+				val=hex(substr(val,11));
+				interrupts[intrs] = val;
+				intrs = intrs + 1;
+			}
+			if (!skipname(name) && match(prop,/reg/)) {
+				x = hex(substr(val,11,8));
+				val=sprintf("%x,%x", x,
+				 hex(substr(val,19,8)));
+				registers[regs]=val;
+				regs = regs + 1;
+			}
+	}
+	/ioaddr/	{if (!skipname(name)) {
+				gsub(/[<>]/,"",$0);
+				prop=$2;getline;gsub(/[<>\.]/,"",$0);
+				ioaddr=sprintf("%x",hex($2));
+				addresses[addrs] = ioaddr;
+				if (name == "asy" || name == "lp")
+					alengths[addrs]=8;
+				else
+					alengths[addrs]=16;
+				addrs = addrs + 1;
+			 }
+			}
+	END {
+		for (i=0; i<intrs; i++) printf("%s\n", interrupts[i]) >"/tmp/intrs";
+		for (i=0; i<regs; i++) printf("%s\n", registers[i]) >"/tmp/regs";
+		for (i=0; i<addrs; i++) printf("%s %d\n",
+				addresses[i], alengths[i])>"/tmp/addrs";
+	}' </tmp/.prtconf
+	rm -f /tmp/.prtconf
+#
+# now add those from the users updated ra.conf
+#
+	if [ -f "/tmp/excluded" ]
+	then
+	   nawk '$2 ~ /interrupt/ { printf("%s\n", $3) >>"/tmp/intrs"; next}
+		$2 ~ /io-space/ { printf("%s %s\n", $3, $4) >>"/tmp/addrs"; next}
+		$2 ~ /device-memory/ { printf("%s %s\n", $3, $4) >>"/tmp/regs"; next}' </tmp/excluded
+	fi
+#
+# defines all resources that could be used by the PCIC
+# the "smi" property is the IRQ level of the management
+# interrupt level. We always exclude lp.
+#
+#
+# 	build the available interrupt list
+#
+	nawk '
+	BEGIN {
+		for (i=0; i<16; i++) intrs[i]=1;
+		intrs[0] = 0;
+		intrs[1] = 0;
+		intrs[6] = 0;
+		intrs[7] = 0;
+	      }
+	      {
+		intrs[$1+0] = 0;
+	      }
+	END   {
+		comma="";
+		printf("\tused-interrupts=");
+		for (i=0; i<16; i++) {
+			if (intrs[i] == 0) {
+				printf("%s%d", comma, i);
+				comma=",";
+			}
+		}
+		printf("\n");
+	      }' </tmp/intrs >>/tmp/ra.conf
+	rm -f /tmp/intrs	     
+	
+#
+#	build the available device I/O address list
+#
+	cat >>/tmp/addrs <<!
+2f8 8
+3c0 10
+378 8
+3e0 2
+${ioaddresslist}
+!
+	sort -fu /tmp/addrs |
+		nawk '
+	function rev(str){
+		if (length(str) == 0)
+			return "";
+		return rev(substr(str,3)) substr(str,1,2)
+	}
+	function digit(str){
+		return match("0123456789abcdef",substr(str,1,1))-1;
+	}
+	function hex(str,v,i){
+		sub(/0x/,"",str);
+		v=0;
+		while (length(str) > 0){
+			v = v*16 + digit(str);
+			str = substr(str,2);
+		}
+		return v;
+	}
+	BEGIN 	{
+			printf("\tio-space=0,0x200");
+		}
+		{
+		    x = hex($1);
+		    if (x != 0) {
+			printf(",0x%x,0x%0x", x, x + $2);
+		    }
+		}
+	END	{
+			printf("\n")
+		}
+	' >>/tmp/ra.conf
+	rm -f /tmp/addrs
+	#
+	# now build the available device memory list
+	#
+	cat >>/tmp/regs <<!
+f0000 10000
+!
+	sed -e 's/,/ /' /tmp/regs |
+	sort -fu |
+		nawk '
+	function rev(str){
+		if (length(str) == 0)
+			return "";
+		return rev(substr(str,3)) substr(str,1,2)
+	}
+	function digit(str){
+		return match("0123456789abcdef",substr(str,1,1))-1;
+	}
+	function hex(str,v,i){
+		sub(/0x/,"",str);
+		v=0;
+		while (length(str) > 0){
+			v = v*16 + digit(str);
+			str = substr(str,2);
+		}
+		return v;
+	}
+
+	BEGIN 	{
+			printf("\tdevice-memory=0x0,0xcc000");
+		}
+		{
+			x = hex($1);
+			printf(",0x%x,0x%x", x, x + hex($2))
+		}
+	END	{
+			printf("\n")
+		}
+	' >>/tmp/ra.conf
+	echo "	;" >>/tmp/ra.conf
+	rm -f /tmp/regs
+	rm -f /tmp/found
+	if [ -f "/tmp/excluded" ]
+	then
+		cat /tmp/ra.conf /tmp/excluded >>/kernel/drv/ra.conf.x
+		mv /kernel/drv/ra.conf /kernel/drv/ra.conf.bak
+		mv /kernel/drv/ra.conf.x /kernel/drv/ra.conf
+		rm /tmp/excluded /tmp/ra.conf
+	fi
+	;;
+
+'stop')
+	;;
+esac

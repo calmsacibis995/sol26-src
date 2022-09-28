@@ -1,0 +1,60 @@
+#
+#ident	"@(#)mapfile-vers	1.10	96/08/26 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/libaio.
+#
+# For information regarding the establishment of versioned definitions see:
+# 	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNW_1.1 {
+	global:
+		 aio_close;
+		 aio_fork;
+		 aioread64;
+		 aiowrite64;
+		 assfail;
+		 close;
+		 fork;
+		 sigaction;
+		 sigignore;
+		 signal;
+		 sigset;
+	local:
+		*;
+};
+
+SUNWprivate_1.1 {
+	global:
+		_pagesize;
+		_aiosigaction;
+		__lio_listio;
+		__aio_suspend;
+		__aio_error;
+		__aio_return;
+		__aio_read;
+		__aio_write;
+		__aio_fsync;
+		__aio_cancel;
+#ifdef _LARGEFILE64_SOURCE
+		__lio_listio64;
+		__aio_suspend64;
+		__aio_error64;
+		__aio_return64;
+		__aio_read64;
+		__aio_write64;
+		__aio_fsync64;
+		__aio_cancel64;
+#endif
+};

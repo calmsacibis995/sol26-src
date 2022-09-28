@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+#ident	"@(#)preremove	1.2	96/07/12 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+
+# Check for installed start/stop script. If it exists, use it to stop daemon.
+if [ -f ${PKG_INSTALL_ROOT}/etc/init.d/dhcp ] ; then
+	${PKG_INSTALL_ROOT}/etc/init.d/dhcp stop
+fi
+
+# Remove any leftover links to /etc/init.d/dhcp.
+TMPR=${PKG_INSTALL_ROOT}/etc/
+for i in rc0.d/K34dhcp rc1.d/K34dhcp rc2.d/K34dhcp rc3.d/S34dhcp
+do
+	if [ -f ${TMPR}${i} ]
+	then
+		rm -f ${TMPR}${i}
+	fi
+done
+
+exit 0

@@ -1,0 +1,127 @@
+#	Copyright (c) 1995-1996, Sun Microsystems, Inc.
+#		All Rights Reserved
+#
+#	@(#)prototype_com	1.18	96/08/13 (c) Sun Microsystems, Inc.
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i i.preserve
+#
+# source locations relative to the prototype file
+#
+# SUNWcar.p
+#
+d none platform 755 root sys
+d none platform/prep 755 root sys
+f none platform/prep/ufsboot 644 root sys
+f none platform/prep/kadb 644 root sys
+d none platform/prep/kernel 755 root sys
+d none platform/prep/kernel/drv 755 root sys
+f none platform/prep/kernel/drv/audiocs.conf 644 root sys
+f none platform/prep/kernel/drv/openeepr 755 root sys
+f none platform/prep/kernel/drv/openeepr.conf 644 root sys
+f none platform/prep/kernel/drv/pci 755 root sys
+f none platform/prep/kernel/drv/pci_to_isa 755 root sys
+f none platform/prep/kernel/drv/profile.conf 644 root sys
+f none platform/prep/kernel/drv/rootnex 755 root sys
+d none platform/prep/kernel/mach 755 root sys
+f none platform/prep/kernel/mach/uppc 755 root sys
+d none platform/prep/kernel/misc 755 root sys
+f none platform/prep/kernel/misc/bootdev 755 root sys
+d none platform/prep/kernel/strmod 755 root sys
+f none platform/prep/kernel/strmod/kb 755 root sys
+f none platform/prep/kernel/unix 755 root sys
+d none platform/IBM,PPS_Model_6015 755 root sys
+d none platform/IBM,PPS_Model_6015/kernel 755 root sys
+s none platform/IBM,PPS_Model_6015/kernel/unix=../../prep/kernel/unix
+d none platform/IBM,PPS_Model_6015/kernel/drv 755 root sys
+f none platform/IBM,PPS_Model_6015/kernel/drv/audiocs.conf 644 root sys
+s none platform/IBM,PPS_Model_6015/kadb=../prep/kadb
+d none platform/IBM,PPS_Model_6040 755 root sys
+d none platform/IBM,PPS_Model_6040/kernel 755 root sys
+s none platform/IBM,PPS_Model_6040/kernel/unix=../../prep/kernel/unix
+d none platform/IBM,PPS_Model_6040/kernel/drv 755 root sys
+f none platform/IBM,PPS_Model_6040/kernel/drv/audiocs.conf 644 root sys
+s none platform/IBM,PPS_Model_6040/kadb=../prep/kadb
+d none platform/IBM,PPS_Model_6040__E_ 755 root sys
+d none platform/IBM,PPS_Model_6040__E_/kernel 755 root sys
+s none platform/IBM,PPS_Model_6040__E_/kernel/unix=../../prep/kernel/unix
+d none platform/IBM,PPS_Model_6040__E_/kernel/drv 755 root sys
+f none platform/IBM,PPS_Model_6040__E_/kernel/drv/audiocs.conf 644 root sys
+s none platform/IBM,PPS_Model_6040__E_/kadb=../prep/kadb
+d none platform/IBM,PPS_Model_6042 755 root sys
+d none platform/IBM,PPS_Model_6042/kernel 755 root sys
+s none platform/IBM,PPS_Model_6042/kernel/unix=../../prep/kernel/unix
+d none platform/IBM,PPS_Model_6042/kernel/drv 755 root sys
+f none platform/IBM,PPS_Model_6042/kernel/drv/audiocs.conf 644 root sys
+s none platform/IBM,PPS_Model_6042/kadb=../prep/kadb
+d none platform/IBM,PPS_Model_6042__E_ 755 root sys
+d none platform/IBM,PPS_Model_6042__E_/kernel 755 root sys
+s none platform/IBM,PPS_Model_6042__E_/kernel/unix=../../prep/kernel/unix
+d none platform/IBM,PPS_Model_6042__E_/kernel/drv 755 root sys
+f none platform/IBM,PPS_Model_6042__E_/kernel/drv/audiocs.conf 644 root sys
+s none platform/IBM,PPS_Model_6042__E_/kadb=../prep/kadb
+d none platform/IBM,PPS_Model_6050_6070 755 root sys
+d none platform/IBM,PPS_Model_6050_6070/kernel 755 root sys
+s none platform/IBM,PPS_Model_6050_6070/kernel/unix=../../prep/kernel/unix
+d none platform/IBM,PPS_Model_6050_6070/kernel/drv 755 root sys
+f none platform/IBM,PPS_Model_6050_6070/kernel/drv/audiocs.conf 644 root sys
+s none platform/IBM,PPS_Model_6050_6070/kadb=../prep/kadb
+d none platform/IBM,PPS_Model_6050_6070__E_ 755 root sys
+d none platform/IBM,PPS_Model_6050_6070__E_/kernel 755 root sys
+s none platform/IBM,PPS_Model_6050_6070__E_/kernel/unix=../../prep/kernel/unix
+d none platform/IBM,PPS_Model_6050_6070__E_/kernel/drv 755 root sys
+f none platform/IBM,PPS_Model_6050_6070__E_/kernel/drv/audiocs.conf 644 root sys
+s none platform/IBM,PPS_Model_6050_6070__E_/kadb=../prep/kadb
+d none platform/IBM,PPS_Model_6070 755 root sys
+d none platform/IBM,PPS_Model_6070/kernel 755 root sys
+s none platform/IBM,PPS_Model_6070/kernel/unix=../../prep/kernel/unix
+d none platform/IBM,PPS_Model_6070/kernel/drv 755 root sys
+f none platform/IBM,PPS_Model_6070/kernel/drv/audiocs.conf 644 root sys
+s none platform/IBM,PPS_Model_6070/kadb=../prep/kadb
+d none platform/IBM,PPS_Model_6070__E_ 755 root sys
+d none platform/IBM,PPS_Model_6070__E_/kernel 755 root sys
+s none platform/IBM,PPS_Model_6070__E_/kernel/unix=../../prep/kernel/unix
+d none platform/IBM,PPS_Model_6070__E_/kernel/drv 755 root sys
+f none platform/IBM,PPS_Model_6070__E_/kernel/drv/audiocs.conf 644 root sys
+s none platform/IBM,PPS_Model_6070__E_/kadb=../prep/kadb
+d none platform/IBM,PPS_Model_7248 755 root sys
+d none platform/IBM,PPS_Model_7248/kernel 755 root sys
+s none platform/IBM,PPS_Model_7248/kernel/unix=../../prep/kernel/unix
+d none platform/IBM,PPS_Model_7248/kernel/drv 755 root sys
+f none platform/IBM,PPS_Model_7248/kernel/drv/audiocs.conf 644 root sys
+s none platform/IBM,PPS_Model_7248/kadb=../prep/kadb
+d none platform/IBM,PPS_Model_7248__E_ 755 root sys
+d none platform/IBM,PPS_Model_7248__E_/kernel 755 root sys
+s none platform/IBM,PPS_Model_7248__E_/kernel/unix=../../prep/kernel/unix
+d none platform/IBM,PPS_Model_7248__E_/kernel/drv 755 root sys
+f none platform/IBM,PPS_Model_7248__E_/kernel/drv/audiocs.conf 644 root sys
+s none platform/IBM,PPS_Model_7248__E_/kadb=../prep/kadb
+d none platform/MOT,Blackhawk 755 root sys
+d none platform/MOT,Blackhawk/kernel 755 root sys
+s none platform/MOT,Blackhawk/kernel/unix=../../prep/kernel/unix
+d none platform/MOT,Blackhawk/kernel/drv 755 root sys
+f none platform/MOT,Blackhawk/kernel/drv/audiocs.conf 644 root sys
+s none platform/MOT,Blackhawk/kadb=../prep/kadb
+d none platform/MOT,Comet 755 root sys
+d none platform/MOT,Comet/kernel 755 root sys
+s none platform/MOT,Comet/kernel/unix=../../prep/kernel/unix
+d none platform/MOT,Comet/kernel/drv 755 root sys
+f none platform/MOT,Comet/kernel/drv/audiocs.conf 644 root sys
+s none platform/MOT,Comet/kadb=../prep/kadb
+d none platform/MOT,Genesis_1_X 755 root sys
+d none platform/MOT,Genesis_1_X/kernel 755 root sys
+s none platform/MOT,Genesis_1_X/kernel/unix=../../prep/kernel/unix
+d none platform/MOT,Genesis_1_X/kernel/drv 755 root sys
+s none platform/MOT,Genesis_1_X/kadb=../prep/kadb

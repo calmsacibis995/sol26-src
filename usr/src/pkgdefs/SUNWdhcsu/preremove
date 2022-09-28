@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+#ident	"@(#)preremove	1.1	96/07/03 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+
+# Check for installed start/stop script. If it exists, use it to stop daemon.
+if [ -f ${PKG_INSTALL_ROOT}/etc/init.d/dhcp ] ; then
+	${PKG_INSTALL_ROOT}/etc/init.d/dhcp stop
+fi
+
+exit 0

@@ -1,0 +1,32 @@
+#!/bin/sh
+#
+#ident	"@(#)i.kclasses_i386	1.4	95/10/27 SMI"
+#
+# Copyright (c) 1993-1994, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		grep '^pci[ 	].*pci' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pci	pci' >> $dest
+		fi
+		grep '^pci_pci[ 	].*pci' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pci_pci pci' >> $dest
+		fi
+		grep '^mscsi[ 	].*scsi' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'mscsi scsi' >> $dest
+		fi
+	fi
+done
+
+exit 0

@@ -1,0 +1,15 @@
+#
+# Copyright (c) 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)mapfile.cprboot	1.5	96/04/16 SMI"
+ 
+text    = LOAD ?RX V0xedd00000;
+text    : $PROGBITS ?A!W;
+ 
+data    = LOAD ?RWX;
+data    : $PROGBITS ?AW;
+data    : $NOBITS ?AW;
+ 
+note    = NOTE;
+note    : $NOTE;

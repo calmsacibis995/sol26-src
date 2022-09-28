@@ -1,0 +1,64 @@
+#	Copyright (c) 1990-1996 Sun Microsystems, Inc.
+#		All Rights Reserved
+#
+#	@(#)prototype_com	1.13	96/08/05 SMI
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+#
+# source locations relative to the prototype file
+#
+# SUNWkvm.p
+#
+d none usr 775 root sys
+d none usr/platform 755 root sys
+d none usr/platform/prep 755 root sys
+d none usr/platform/prep/sbin 755 bin bin
+f none usr/platform/prep/sbin/eeprom 2555 bin sys
+d none usr/platform/prep/lib 755 bin bin
+#
+# platform-dependent adb macros
+#
+d none usr/platform/prep/lib/adb 755 bin bin
+f none usr/platform/prep/lib/adb/ctx 644 root sys
+f none usr/platform/prep/lib/adb/msgbuf 644 root sys
+f none usr/platform/prep/lib/adb/mutex 644 root sys
+f none usr/platform/prep/lib/adb/regs 644 root sys
+f none usr/platform/prep/lib/adb/rwlock 644 root sys
+f none usr/platform/prep/lib/adb/sema 644 root sys
+#
+# platform-dependent boot objects
+#
+d none usr/platform/prep/lib/fs 755 bin bin
+d none usr/platform/prep/lib/fs/nfs 755 bin bin
+f none usr/platform/prep/lib/fs/nfs/inetboot 644 root sys
+d none usr/platform/prep/lib/fs/ufs 755 bin bin
+f none usr/platform/prep/lib/fs/ufs/bootblk 444 root sys
+#
+# make the links to other machine types
+#
+s none usr/platform/IBM,PPS_Model_6015=prep
+s none usr/platform/IBM,PPS_Model_6040=prep
+s none usr/platform/IBM,PPS_Model_6040__E_=prep
+s none usr/platform/IBM,PPS_Model_6042=prep
+s none usr/platform/IBM,PPS_Model_6042__E_=prep
+s none usr/platform/IBM,PPS_Model_6050_6070=prep
+s none usr/platform/IBM,PPS_Model_6050_6070__E_=prep
+s none usr/platform/IBM,PPS_Model_6070=prep
+s none usr/platform/IBM,PPS_Model_6070__E_=prep
+s none usr/platform/IBM,PPS_Model_7248=prep
+s none usr/platform/IBM,PPS_Model_7248__E_=prep
+s none usr/platform/MOT,Blackhawk=prep
+s none usr/platform/MOT,Comet=prep
+s none usr/platform/MOT,Genesis_1_X=prep

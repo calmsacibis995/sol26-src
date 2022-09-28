@@ -1,0 +1,78 @@
+#	Copyright (c) 1995 Sun Microsystems, Inc.
+#		All Rights Reserved
+#
+#	@(#)prototype_com	1.2	96/09/10 (c) Sun Microsystems, Inc.
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWosdem
+#
+d none usr 775 root sys
+d none usr/demo 775 root bin
+d none usr/demo/ELF 775 root bin
+f none usr/demo/ELF/Makefile 644 bin bin
+f none usr/demo/ELF/README 644 bin bin
+f none usr/demo/ELF/acom.c 644 bin bin
+f none usr/demo/ELF/pcom.c 644 bin bin
+f none usr/demo/ELF/dcom.c 644 bin bin
+f none usr/demo/ELF/tpcom.c 644 bin bin
+d none usr/demo/librtld_db 775 root bin
+f none usr/demo/librtld_db/00README 644 bin bin
+f none usr/demo/librtld_db/Makefile.com 644 bin bin
+f none usr/demo/librtld_db/Makefile.targ 644 bin bin
+d none usr/demo/librtld_db/common 775 root bin
+f none usr/demo/librtld_db/common/bpt.c 644 bin bin
+f none usr/demo/librtld_db/common/callstack.c 644 bin bin
+f none usr/demo/librtld_db/common/dis.c 644 bin bin
+f none usr/demo/librtld_db/common/disasm.c 644 bin bin
+f none usr/demo/librtld_db/common/disasm.h 644 bin bin
+f none usr/demo/librtld_db/common/globals.c 644 bin bin
+f none usr/demo/librtld_db/common/gram.y 644 bin bin
+f none usr/demo/librtld_db/common/help.c 644 bin bin
+f none usr/demo/librtld_db/common/lex.l 644 bin bin
+f none usr/demo/librtld_db/common/main.c 644 bin bin
+f none usr/demo/librtld_db/common/maps.c 644 bin bin
+f none usr/demo/librtld_db/common/ps.c 644 bin bin
+f none usr/demo/librtld_db/common/rdb.h 644 bin bin
+f none usr/demo/librtld_db/common/rdb.man 644 bin bin
+f none usr/demo/librtld_db/common/syms.c 644 bin bin
+f none usr/demo/librtld_db/common/utils.c 644 bin bin
+d none usr/demo/librtld_db/i386 775 root bin
+f none usr/demo/librtld_db/i386/Makefile 644 bin bin
+f none usr/demo/librtld_db/i386/m_utils.c 644 bin bin
+f none usr/demo/librtld_db/i386/rdb_mach.h 644 bin bin
+f none usr/demo/librtld_db/i386/regs.c 644 bin bin
+d none usr/demo/librtld_db/ppc 775 root bin
+f none usr/demo/librtld_db/ppc/Makefile 644 bin bin
+f none usr/demo/librtld_db/ppc/m_utils.c 644 bin bin
+f none usr/demo/librtld_db/ppc/rdb_mach.h 644 bin bin
+f none usr/demo/librtld_db/ppc/regs.c 644 bin bin
+d none usr/demo/librtld_db/sparc 775 root bin
+f none usr/demo/librtld_db/sparc/Makefile 644 bin bin
+f none usr/demo/librtld_db/sparc/m_utils.c 644 bin bin
+f none usr/demo/librtld_db/sparc/rdb_mach.h 644 bin bin
+f none usr/demo/librtld_db/sparc/regs.c 644 bin bin
+d none usr/demo/librtld_db/tests 775 root bin
+f none usr/demo/librtld_db/tests/breaks 644 bin bin
+f none usr/demo/librtld_db/tests/loadmaps 644 bin bin
+f none usr/demo/librtld_db/tests/object_padding_maps 644 bin bin
+f none usr/demo/librtld_db/tests/plt_skip 644 bin bin
+f none usr/demo/librtld_db/tests/simp.c 644 bin bin
+f none usr/demo/librtld_db/tests/steps 644 bin bin
+f none usr/demo/librtld_db/tests/sub.c 644 bin bin
+f none usr/demo/librtld_db/tests/test-sparc-regs 644 bin bin

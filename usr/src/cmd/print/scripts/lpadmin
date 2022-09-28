@@ -1,0 +1,188 @@
+#!/bin/sh
+#
+# Copyright (c) 1994, 1995, 1996 by Sun Microsystems, Inc.
+# All Rights Reserved
+#
+#	@(#)lpadmin	1.22	96/09/30 SMI
+#
+PATH=/bin:/usr/bin:/usr/sbin export PATH
+ 
+LPSET=/usr/bin/lpset
+LPGET=/usr/bin/lpget
+
+
+cmd_name=`basename $0`
+exit_code=0
+
+usage() {
+	echo "Usage:"
+	echo "	lpadmin -p (printer) (options)"
+	echo "	lpadmin -x (dest)"
+	echo "	lpadmin -d (dest)"
+	echo "	lpadmin -S print-wheel -A alert-type [ -W minutes ]"
+	echo "		[ -Q requests ]"
+	echo "	lpadmin -M -f form-name [ -a [ -o filebreak ]"
+	echo "		[ -t tray-number ]]"
+	exit 1
+}
+
+if [ $# -lt 1 ] ; then
+	usage
+	exit 1
+fi
+
+#		Strip off legal options
+while getopts "A:ac:d:D:e:f:F:H:hi:I:lm:Mo:p:Q:r:S:s:T:u:U:v:W:x:t:P:" arg
+do
+	case $arg in
+	D)
+		description="${OPTARG}"
+	;;
+	d)
+		if [ -n "${printer}" -o -n "${delete}" -o -n "${server}" -o \
+		     -n "${device}" -o -n "${description}" ] ; then
+			usage
+		fi
+		default=${OPTARG}
+		printer=${OPTARG}
+	;;
+	p)
+		if [ -n "${default}" -o -n "${delete}" ] ; then
+			usage
+		fi
+		printer=${OPTARG}
+	;;
+	s)
+		server=${OPTARG}
+	;;
+	v)
+		device=${OPTARG}
+		server=`uname -n`
+	;;
+	x)
+		if [ -n "${printer}" -o -n "${default}" -o -n "${server}" -o \
+		     -n "${device}" -o -n "${description}" ] ; then
+			usage
+		fi
+		delete=${OPTARG}
+		printer=${OPTARG}
+	;;
+	S|M)
+		local="true"
+	;;
+	esac
+done
+
+#
+# We don't have anything to do; let user know and bail
+#
+if [ ! -n "${printer}" -a ! -n "${default}" -a ! -n "${delete}" -a ! -n "${local}" ] ; then
+	gettext "lpadmin: ERROR: Nothing to do.\n"
+	gettext "        TO FIX: You must give one of these options:\n"
+	gettext "		      -p, -d, -x -S\n"
+	exit 1
+fi
+
+#
+#       Printer does not exist
+#       To be consistent with 2.5, assume adding local printer
+#
+if [ ! -n "${device}" -a ! -n "${server}" -a ! -n "${default}" -a ! -n "${delete}" \
+					 -a ! -n "${local}" ] ; then
+        ${LPGET} "${printer}" > /dev/null 2>&1
+        lpget_stat=$?
+        if [ ${lpget_stat} -ne 0 ] ; then
+                gettext "lpadmin: ERROR: Missing -U or -v option.\n"
+                gettext "           TO FIX: Local printers must have\n"
+                gettext "                   a port defined (-v option) or\n"
+                gettext "                   have dial-out instructions (-U option).\n"
+                exit 1
+        fi
+fi
+
+#
+#	Do the LP configuration for a local printer served by lpsched
+#
+if [ -f /usr/lib/lp/local/$cmd_name ] ; then
+	if [ -f /etc/lp/printers/${printer}/configuration -o -n "${device}" \
+				-o -n "${local}" ] ; then
+		# to deal with multi-word arguments
+		CMD="/usr/lib/lp/local/$cmd_name"
+		while [ -n "$*" ] ; do
+			CMD="$CMD \"$1\""
+			shift
+		done
+		case "$CMD" in
+			*\"-D\")
+				CMD="$CMD \"\""
+			;;
+		esac
+		eval $CMD
+		exit_code=$?
+	fi
+fi
+
+if [ $exit_code != 0 ] ; then
+	exit $exit_code
+fi
+
+
+#	split the "server" into printer and server
+if [ -n "${server}" ] ; then
+	if [ `echo ${server} | grep -c !` = 1 ] ; then
+		rem_printer=`echo ${server} | cut -d! -f2`
+	fi
+	server=`echo ${server} | cut -d! -f1`
+fi
+
+if [ -z "${rem_printer}" ] ; then
+	rem_printer=${printer}
+fi
+
+
+
+#
+#	Do the Solstice Print Configuration in /etc
+#
+if [ ! -f ${LPSET} ] ; then
+	exit_code=2
+else
+	if [ -n "${default}" ] ; then
+		${LPGET} -k bsdaddr ${default} >/dev/null 2>&1
+		exit_code=$?
+		if [ $exit_code -eq 0 ] ; then
+			${LPSET} -n system -a use=${default} _default
+			exit_code=$?
+		else
+			echo "${default}: undefined printer" 1>&2
+		fi
+	fi
+
+	if [ -n "${delete}" ] ; then
+		if [ "${delete}" = "all" ] ; then
+   			eval "/usr/lib/lp/local/lpadmin -x all"
+   			exit_code=$?
+   			${LPSET} -n system -x ${delete}
+   			lpset_exit_code=$?
+			if [ $exit_code -eq 0 ] ; then
+				exit_code=$lpset_exit_code
+			fi
+   		else
+   			${LPSET} -n system -x ${delete}
+   			exit_code=$?
+   		fi
+	fi
+
+	if [ -n "${printer}" -a -n "${server}" ] ; then
+		${LPSET} -n system \
+			-a "bsdaddr=${server},${rem_printer},Solaris" \
+			${printer}
+		exit_code=$?
+	fi
+	if [ -n "${printer}" -a -n "${description}" ] ; then
+		${LPSET} -n system -a "description=${description}" ${printer}
+		exit_code=$?
+	fi
+fi
+
+exit $exit_code

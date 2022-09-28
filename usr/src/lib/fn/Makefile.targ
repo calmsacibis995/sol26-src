@@ -1,0 +1,41 @@
+#
+#ident	"@(#)Makefile.targ	1.12	96/03/31 SMI"
+#
+# Copyright (c) 1989 - 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/fn/Makefile.targ
+#
+# We are using this file to share target rules across all subdirs
+
+# lib/Makefile.lib changes FILEMODE to 755 underneath us causing
+# multiple (and eventually wrong) install of headers from lib subdirs
+$(ROOT)/usr/include/xfn/% := FILEMODE = 644
+$(FNINCDIR)/xfn/% := FILEMODE = 644
+
+# for now, we only want .h files to get installed in /usr/include
+$(ROOT)/usr/include/xfn/%.h: %.h
+	$(INS.file)
+
+# for now, keep .hh files in $(FNINCDIR)
+$(FNINCDIR)/xfn/%.hh: %.hh
+	$(INS.file)
+
+$(ROOT)/usr/lib $(FNLIBDIR) $(ROOTDIRS) $(FNINCDIR) $(FNINCDIR)/xfn:
+	$(INS.dir)
+
+$(ROOTFNLINKS): $(FNLIBDIR)
+	$(RM) $@
+	$(SYMLINK) $(FNLINKTARG) $@
+
+# CC -G drops /opt/SUNWspro/lib from the library_path it passes to ld.
+# This restores it so we can find -lC.  (SC2.0.1 only.)
+NATIVECCCLIB= $($(NATIVE_MACH)_NATIVECCC)/lib
+LDLIBFIX= case $(NATIVECCC) in *SC2.*) echo -L$(NATIVECCCLIB);; esac
+$(DYNLIBCCC) := LDLIBS += $(LDLIBFIX:sh)
+
+# CC -G also adds /opt/SUNWspro/lib and other stuff to the run_path it
+# passes to ld.  This overrides it.
+$(DYNLIBCCC) := LDLIBS += -Qoption ld -R$(FNRPATH)
+
+include $(SRC)/lib/Makefile.targ

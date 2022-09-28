@@ -1,0 +1,67 @@
+#
+#ident	"@(#)Makefile.targ	1.8	96/06/11 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+
+pics/%.o:	%.s
+		$(BUILD.s)
+		$(POST_PROCESS_O)
+
+pics/%.o:	%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+pics/%.o:	../common/%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+pics/%.o:	$(SRCBASE)/uts/$(ARCH)/krtld/%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+adb/%:		../adbmacros/%.adb
+		$(ADBGEN1) < $< > $@.c
+		$(LINK.c) $(ADBGENFLAGS) -o $@.run $(ADBSUB) $@.c
+		$@.run | $(ADBGEN3) | $(ADBGEN4) > $@
+		rm -f $@.run $@.c
+
+$(RTLD):	pics $(PICS) $(CRTS) $(MAPFILE)
+		$(LD) -o $@ -dy -G $(DYNFLAGS) $(CRTI) $(PICS) $(LDLIBS) $(CRTN)
+		@ if (dump -rv $@ | fgrep "  R_" | \
+		    egrep -v "RELATIVE|JMP_SLOT" ) then \
+			echo "fatal: invalid relocations found in ld.so.1" ; \
+			exit 1 ; \
+		    else \
+			exit 0 ; \
+		    fi
+		$(POST_PROCESS_SO)
+
+
+adb:
+		-@mkdir -p $@
+
+delete:
+		-$(RM) $(RTLD)
+
+lint:		$(LINTOUT)
+
+$(LINTOUT):	$(SRCS)
+		$(LINT.c) $(SRCS) > $(LINTOUT) 2>&1
+
+$(ETCLIBDIR)/%:	%
+		$(INS.file)
+
+$(SGSONLD)/lib/adb/%: adb/%
+		$(INS.file)
+
+include		$(SRC)/lib/Makefile.targ
+
+# Derived source and header files (messaging).
+
+catalog:	$(BLTMESG)
+
+$(BLTDEFS) + \
+$(BLTDATA) + \
+$(BLTMESG) :	../common/rtld.msg
+		$(SGSTOOLS)/sgsmsg $(SGSMSGFLAGS) ../common/rtld.msg

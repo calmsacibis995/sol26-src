@@ -1,0 +1,45 @@
+#
+#ident	"@(#)preinstall	1.12	96/09/16 SMI"
+#
+# Copyright (c) 1995 by Sun Microsystems, Inc.
+# All rights reserved.
+
+files="\
+	etc/lib/ld.so.1 \
+	usr/include/dlfcn.h \
+	usr/include/libelf.h \
+	usr/include/link.h \
+	usr/include/proc_service.h \
+	usr/include/sys/elf_386.h \
+	usr/include/sys/elf_SPARC.h \
+	usr/include/sys/elf_ppc.h \
+	usr/include/sys/elf.h \
+	usr/include/sys/link.h \
+	usr/include/sys/rtld_db.h \
+	usr/ccs/bin/ar \
+	usr/ccs/bin/ld \
+	usr/ccs/bin/mcs \
+	usr/ccs/bin/strip \
+	usr/lib/ld.so.1 \
+	usr/lib/libelf.so.1 \
+	usr/lib/libelf.a \
+	usr/lib/libld.so.2 \
+	usr/lib/liblddbg.so.3 \
+	usr/lib/libldstab.so.1 \
+	usr/lib/librtld.so.1 \
+	usr/lib/librtld_db.so.1 \
+	usr/bin/ldd \
+	usr/bin/pvs \
+	"
+
+
+for F in $files
+do
+	if [ ! -f ${BASEDIR}/$F.orig ]
+	then
+		if [ -f ${BASEDIR}/$F ]
+		then
+			cp ${BASEDIR}/$F ${BASEDIR}/$F.orig
+		fi
+	fi
+done

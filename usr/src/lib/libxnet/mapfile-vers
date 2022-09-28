@@ -1,0 +1,113 @@
+#
+#ident	"@(#)mapfile-vers	1.3	96/10/14 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/libxnet.
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNW_1.1 {
+	global:
+
+#	Sockets (X/Open CAE Specification (1994), page 6):
+		accept = FUNCTION;
+
+		__xnet_bind = FUNCTION;
+		__xnet_connect = FUNCTION;
+		getpeername = FUNCTION;
+		getsockname = FUNCTION;
+		getsockopt = FUNCTION;
+		__xnet_listen = FUNCTION;
+		recv = FUNCTION;
+		recvfrom = FUNCTION;
+		__xnet_recvmsg = FUNCTION;
+		send = FUNCTION;
+		__xnet_sendmsg = FUNCTION;
+		__xnet_sendto = FUNCTION;
+		setsockopt = FUNCTION;
+		shutdown = FUNCTION;
+		socket = FUNCTION;
+		socketpair = FUNCTION;
+
+#	X/Open Networking Services, Issue 4, page 6 XTI interfaces
+		_xti_accept = FUNCTION;
+		_xti_alloc = FUNCTION;
+		_xti_bind = FUNCTION;
+		_xti_close = FUNCTION;
+		_xti_connect = FUNCTION;
+		_xti_error = FUNCTION;
+		_xti_free = FUNCTION;
+		_xti_getinfo = FUNCTION;
+		_xti_getprotaddr = FUNCTION;
+		_xti_getstate = FUNCTION;
+		_xti_listen = FUNCTION;
+		_xti_look = FUNCTION;
+		_xti_open = FUNCTION;
+		_xti_optmgmt = FUNCTION;
+		_xti_rcv = FUNCTION;
+		_xti_rcvconnect = FUNCTION;
+		_xti_rcvdis = FUNCTION;
+		_xti_rcvrel = FUNCTION;
+		_xti_rcvudata = FUNCTION;
+		_xti_rcvuderr = FUNCTION;
+		_xti_snd = FUNCTION;
+		_xti_snddis = FUNCTION;
+		_xti_sndrel = FUNCTION;
+		_xti_sndudata = FUNCTION;
+		_xti_strerror = FUNCTION;
+		_xti_sync = FUNCTION;
+		_xti_unbind = FUNCTION;
+
+		t_errno = DATA S0x4;
+		__t_errno = FUNCTION;
+
+
+#	IP Address Resolution: (X/Open CAE Specification (1994), page 6)
+		endhostent = FUNCTION;
+		getprotoent = FUNCTION;
+		inet_addr = FUNCTION;
+		ntohs = FUNCTION;
+		endnetent = FUNCTION;
+		gethostname = FUNCTION;
+		getservbyname = FUNCTION;
+		inet_lnaof = FUNCTION;
+		sethostent = FUNCTION;
+		endprotoent = FUNCTION;
+		getnetbyaddr = FUNCTION;
+		getservbyport = FUNCTION;
+		inet_makeaddr = FUNCTION;
+		setnetent = FUNCTION;
+		endservent = FUNCTION;
+		getnetbyname = FUNCTION;
+		getservent = FUNCTION;
+		inet_netof = FUNCTION;
+		setprotoent = FUNCTION;
+		gethostbyaddr = FUNCTION;
+		getnetent = FUNCTION;
+		h_errno = DATA S0x4;
+		inet_network = FUNCTION;
+		setservent = FUNCTION;
+		gethostbyname = FUNCTION;
+		getprotobyname = FUNCTION;
+		htonl = FUNCTION;
+		inet_ntoa = FUNCTION;
+		gethostent = FUNCTION;
+		getprotobynumber = FUNCTION;
+		htons = FUNCTION;
+		ntohl = FUNCTION;
+
+	local:
+		*;
+};

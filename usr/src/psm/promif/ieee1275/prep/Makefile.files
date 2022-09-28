@@ -1,0 +1,27 @@
+#
+# Copyright (c) 1992-1994, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.files	1.3	95/06/28 SMI"
+#
+# psm/promif/ieee1275/ppc/Makefile.files
+#
+#	This Makefile defines all the promif file modules for the 
+#	directory psm/promif/ieee1275/ppc.
+#
+
+#
+#			PROM Platform-dependent routines
+#
+CORE_OBJS +=				\
+	prom_alloc.o			\
+	prom_init.o			\
+	prom_mmu.o			\
+	prom_map.o			\
+	prom_mem.o			\
+	prom_prop_ppc.o			\
+	prom_set_callback.o		\
+	prom_macaddr.o			\
+	prom_ppc.o			\
+	prom_vername.o			\
+	swap_int.o

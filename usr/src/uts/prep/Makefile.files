@@ -1,0 +1,90 @@
+#
+# uts/prep/Makefile.files
+# Copyright (c) 1995 - 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.files	1.84	96/08/13 SMI"
+#
+#	This Makefile defines all file modules in the directory uts/prep
+#	and it's children. These are the source files which prep
+#	"implementation architecture" dependent.
+#
+
+#
+#	object lists
+#
+CORE_OBJS += \
+	bp_map.o \
+	confunix.o \
+	ddi_impl.o \
+	dvma.o \
+	machdep.o \
+	mem_kern.o \
+	mlsetup.o \
+	mp_call.o \
+	mp_implfuncs.o \
+	mp_machdep.o \
+	mach_sysconfig.o \
+	notes.o \
+	ppage.o \
+	prom_config.o \
+	putnext.o \
+	startup.o \
+	mach_page.o \
+	trap.o
+
+
+AUTOCONF_OBJS += autoconf.o
+
+#
+#	locore.o is special. It must be the first file relocated so that it
+#	it is relocated just where its name implies.
+#
+SPECIAL_OBJS +=	locore.o
+
+#
+#			driver modules
+#
+ROOTNEX_OBJS += rootnex.o
+PCINEXUS_OBJS += pci.o
+#PCINEXUS_OBJS += pci.o dma_engine.o i8237A.o
+PCI_TO_ISA_NEXUS_OBJS += pci_to_isa.o dma_engine.o i8237A.o
+
+#ISANEXUS_OBJS += isa.o dma_engine.o i8237A.o
+
+OPENEEPR_OBJS +=	openprom.o
+
+S3_OBJS +=	s3.o
+ICECUBE_OBJS +=	icecube.o
+CLGD5434_OBJS +=	clgd5434.o
+
+WOODFIELD_WD90C24A2_OBJS +=	woodfield-wd90c24a2.o
+
+P9000_OBJS +=	p9000.o
+P9100_OBJS +=	p9100.o
+
+#
+#	Misc modules
+#
+OBPSYM_OBJS +=	obpsym.o
+BOOTDEV_OBJS +=	bootdev.o
+
+#
+#	platform specific modules 
+#
+UPPC_OBJS += uppc.o uppc_ml.o
+
+#
+#	Build up defines and paths.
+#
+ALL_DEFS	+= -Dprep
+INC_PATH	+= -I$(UTSBASE)/prep
+
+#
+# Since assym.s is a derived file, the dependency must be explicit for
+# all files including this file. (This is only actually required in the
+# instance when the .nse_depinfo file does not exist.) It may seem that
+# the lint targets should also have a similar dependency, but they don't
+# since only C headers are included when #defined(lint) is true.
+#
+ASSYM_DEPS	+= locore.o

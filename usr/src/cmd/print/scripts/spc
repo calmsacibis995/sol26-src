@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# Copyright (c) 1996, by Sun Microsystems, Inc.
+# All Rights Reserved
+#
+#	ident	"@(#)spc	1.8	96/05/09 SMI"
+#
+PATH=/bin:/usr/bin:/usr/sbin export PATH
+
+state=$1
+
+set `who -r`
+case $state in
+
+'start')
+	if [ $9 = "2" -o $9 = "3" ]
+	then
+		exit
+	fi
+
+	rm -f /var/spool/print/tf* >/dev/null 2>&1	# clean up after crash
+	[ -f /usr/lib/print/printd ] && /usr/lib/print/printd
+
+	;;
+'stop')
+	;;
+esac

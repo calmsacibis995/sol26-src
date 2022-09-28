@@ -1,0 +1,12 @@
+#ident	"@(#)services	1.7	96/01/29 SMI"	/* SVr4.0 1.2	*/
+# RPC services
+rpcbind	rpc
+keyserv	keyserv
+statd statd
+lockd lockd
+kerbd kerbd
+nfs nfs
+vold vold
+autofs autofs
+ufsd ufsd
+nfsauth nfsauth

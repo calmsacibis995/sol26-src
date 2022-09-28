@@ -1,0 +1,114 @@
+# Copyright (c) 1996 Sun Microsystems, Inc.
+# All Rights Reserved
+#
+#ident	"@(#)prototype	1.26	96/09/16 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i preinstall
+i postremove
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWonld
+#
+d none etc 775 root sys
+d none etc/lib 775 root sys
+f none etc/lib/ld.so.1 755 bin bin
+d none usr 775 root sys
+d none usr/include 775 root bin
+f none usr/include/dlfcn.h 644 bin bin
+f none usr/include/libelf.h 644 bin bin
+f none usr/include/link.h 644 bin bin
+f none usr/include/proc_service.h 644 bin bin
+f none usr/include/rtld_db.h 644 bin bin
+d none usr/include/sys 775 root bin
+f none usr/include/sys/elf.h 644 bin bin
+f none usr/include/sys/elf_386.h 644 bin bin
+f none usr/include/sys/elf_SPARC.h 644 bin bin
+f none usr/include/sys/elf_ppc.h 644 bin bin
+f none usr/include/sys/link.h 644 bin bin
+d none usr/ccs 755 bin bin
+d none usr/ccs/bin 755 bin bin
+f none usr/ccs/bin/ar 755 bin bin
+f none usr/ccs/bin/ld 755 bin bin
+f none usr/ccs/bin/mcs 555 bin bin
+l none usr/ccs/bin/strip=mcs
+d none usr/lib 775 root bin
+f none usr/lib/ld.so.1 755 bin bin
+f none usr/lib/ld.so 755 bin bin
+f none usr/lib/libelf.so.1 755 bin bin
+s none usr/lib/libelf.so=./libelf.so.1
+f none usr/lib/libelf.a 644 bin bin
+f none usr/lib/libdl.so.1 755 bin bin
+s none usr/lib/libdl.so=./libdl.so.1
+f none usr/lib/libld.so.2 755 bin bin
+f none usr/lib/liblddbg.so.3 755 bin bin
+f none usr/lib/libldstab.so.1 755 bin bin
+f none usr/lib/librtld.so.1 755 bin bin
+s none usr/lib/librtld_db.so=./librtld_db.so.1
+f none usr/lib/librtld_db.so.1 755 bin bin
+f none usr/lib/0@0.so.1 755 bin bin
+d none usr/bin 775 root sys
+f none usr/bin/ldd 755 bin bin
+f none usr/bin/pvs 755 bin bin
+d none opt 775 root sys
+d none opt/SUNWonld 775 root sys
+f none opt/SUNWonld/SUNWonld-README 444 bin bin
+d none opt/SUNWonld/bin 775 root sys
+f none opt/SUNWonld/bin/elfdump 755 bin bin
+f none opt/SUNWonld/bin/comment_filter 755 bin bin
+f none opt/SUNWonld/bin/check_mapfile.pl 755 bin bin
+f none opt/SUNWonld/bin/check_syms.pl 755 bin bin
+f none opt/SUNWonld/bin/extract_exports.pl 755 bin bin
+f none opt/SUNWonld/bin/find_bind.pl 755 bin bin
+f none opt/SUNWonld/bin/find_libs.pl 755 bin bin
+f none opt/SUNWonld/bin/find_scoped.pl 755 bin bin
+f none opt/SUNWonld/bin/list_scoped.pl 755 bin bin
+f none opt/SUNWonld/bin/print_globs.pl 755 bin bin
+f none opt/SUNWonld/bin/run_print.pl 755 bin bin
+f none opt/SUNWonld/bin/lsd 755 bin bin
+f none opt/SUNWonld/bin/so425 755 bin bin
+f none opt/SUNWonld/bin/rdb 755 bin bin
+f none opt/SUNWonld/bin/intf_cmp 755 bin bin
+f none opt/SUNWonld/bin/intf_create 755 bin bin
+d none opt/SUNWonld/lib 775 root sys
+f none opt/SUNWonld/lib/libldmake.so.1 755 bin bin
+d none opt/SUNWonld/lib/adb 775 root sys
+f none opt/SUNWonld/lib/adb/fmap 444 root sys
+f none opt/SUNWonld/lib/adb/link_map 444 root sys
+f none opt/SUNWonld/lib/adb/rt_map 444 root sys
+f none opt/SUNWonld/lib/adb/permit 444 root sys
+f none opt/SUNWonld/lib/adb/fct 444 root sys
+f none opt/SUNWonld/lib/adb/pnode 444 root sys
+f none opt/SUNWonld/lib/adb/maps 444 root sys
+f none opt/SUNWonld/lib/adb/maps.next 444 root sys
+f none opt/SUNWonld/lib/adb/dyn 444 root sys
+f none opt/SUNWonld/lib/adb/dyn.next 444 root sys
+d none opt/SUNWonld/man 775 root sys
+d none opt/SUNWonld/man/man1l 775 root sys
+f none opt/SUNWonld/man/man1l/elfdump.1l 444 bin bin
+f none opt/SUNWonld/man/man1l/interface.1l 444 bin bin
+f none opt/SUNWonld/man/man1l/lsd.1l 444 bin bin
+f none opt/SUNWonld/man/man1l/so425.1l 444 bin bin
+f none opt/SUNWonld/man/man1l/scoping.1l 444 bin bin
+d none opt/SUNWonld/man/man3t 775 root sys
+f none opt/SUNWonld/man/man3t/ld_concurrency.3t 444 bin bin
+d none opt/SUNWonld/man/man3l 775 root sys
+f none opt/SUNWonld/man/man3l/ld_support.3l 444 bin bin
+d none usr/lib/locale 775 root sys
+d none usr/lib/locale/jive 775 root sys
+d none usr/lib/locale/jive/LC_MESSAGES 775 root sys
+f none usr/lib/locale/jive/LC_MESSAGES/SUNW_OST_SGS.mo 444 bin bin

@@ -1,0 +1,12 @@
+#
+#ident  "@(#)mapfile-vers 1.4     96/02/27 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+
+SUNWprivate_1.1 {
+	global:
+		rt_dldump;
+	local:
+		*;
+};

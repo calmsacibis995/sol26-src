@@ -1,0 +1,203 @@
+#ident	"@(#)SUNWonld-README	1.26	96/10/23 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+--------------------------------------------------------------------------------
+SUNWonld - link-editors development package.
+--------------------------------------------------------------------------------
+
+
+  The SUNWonld package is an internal development package containing the
+  link-editors and some related tools.  All components live in the OSNET
+  source base, but not all components are delivered as part of the normal
+  OSNET consolidation.  The intent of this package is to provide access
+  to new features/bugfixes before they become generally available.
+
+  General link-editor information can be found:
+
+    url: http://bondage.eng/linkers
+
+  Comments and Questions:
+
+    Contact Rod Evans, Mike Walker and/or Seizo Sakurai.
+
+  Warnings:
+
+    The postremove script for this package employs /usr/sbin/static/mv,
+    and thus, besides the common core dependencies, this package also
+    has a dependency on the SUNWsutl package.
+
+  History:
+
+    The following bug fixes exist in the OSNET consolidation workspace
+    from which this package is created:
+
+---
+5.5
+---
+Bugid   Risk Synopsis
+--------------------------------------------------------------------------------
+1179363 segment addresses not being caclulated properly when mapfiles are used
+1179076 gprof has trouble finding the etext symbol for scoped libraries
+1179880 the symbol _end is calculated with the wrong address
+1180010 Versioning/Scoping updates.
+1181026 ld.so.1 - dbx just can't handle it.
+1181174 x86 ABI shows only 1 reserved PLT entry rather than 4
+1182089 the continuing saga of invalid relocations in ld.so.1
+1181841 run-time loader debugger doesn't work if ld.so.1 built without profiling
+1181633 pvs(1) updates.
+1181166 Unclear message output from ld w.r.t. map files
+1171726 Enhanced LD_PRELOAD (or new environment variable) for higher trust
+1184436 relocations against non-allocable sections are passed to ld.so.1
+1183916 Some copy relocations aren't necessary.
+1184330 text alignment calculation incorrect when .align padding is in effect
+1178994 RTLD_GLOBAL semantics not clear
+1184454 ldd should process non-executable shared objects.
+1186050 ld is in-efficient in how it creates it's output relocations
+1185256 ld.so.1 is not threads safe durring it's run-time binding of symbols
+1194710 mapfile section identifier $REL broken in 2.5
+1187274 rtld doesn't always do the correct thing for copy relocations
+1187869 Seg fault executing 4.1.x compiled program on sol 2.4 with setgid/setuid
+1190133 Why spend time linking libdl.so?
+1193794 .bss section must be the last section of a segment
+1167049 Need additional relocation types for C++
+1198994 new filters cause dbx/rtc grief
+1199539 RFE for significant reduction of swap space need to link with large
+	archives
+1206122 ld(1) support interface makes life hard for unbundled products
+1210707 ld(1) core dumps on unknown section types
+1198970 ldd doesn't work with sbcp
+1214740 nss_*.so files should only be loaded from /usr/lib
+1214211 dlopen
+1212392 BCP's "dlsym()" lookup defective
+1216291 Gets ld: fatal: small GOT overflows error when linking Dyn Lib on
+	2.5 Beta.
+1218109 runtime linker BCP support requires additional iflush instructions
+
+
+-----
+5.5.1
+-----
+Bugid   Risk Synopsis
+--------------------------------------------------------------------------------
+1229498 linker has problems detecting out-of-range offsets
+1233113 refine range checking and error checking for relocation processing
+1224970	linker should use block zero instructions for zeroing bss on ppc
+1205913	Incomplete implementation of sync_instruction_memory(); need linker
+	change
+1240680 ld does not implement all relocation types specified by PowerPC ABI
+1241843 ld.so security problem
+1242249 DPS library (libserverdps.so) compiled on x86, 2.5 (and 2.5.1)
+	is unusable
+
+
+
+---
+5.6
+---
+Bugid   Risk Synopsis
+--------------------------------------------------------------------------------
+1056449 ld should handle an empty archive without aborting with an error
+--------------------------------------------------------------------------------
+All above changes are incorporated in the following patches:
+	Solaris 5.5_sparc:	patch 103242-03
+	Solaris 5.5_x86:	patch 103243-03
+	Solaris 5.4_sparc:	patch 102049-03
+	Solaris 5.4_x86:	patch 102778-03
+	Solaris 5.5.1_sparc	patch 103606-01
+	Solaris 5.5.1_x86	patch 103607-01
+	Solaris 5.5.1_ppc	patch 103608-01
+--------------------------------------------------------------------------------
+
+
+Bugid   Risk Synopsis
+--------------------------------------------------------------------------------
+1244333 The SHF_EXCLUDE flag defined in ppc ABI should be implemented for all
+	ISA's
+--------------------------------------------------------------------------------
+All above changes are incorporated in the following patches:
+	Solaris 5.5.1_sparc	patch 103606-02
+	Solaris 5.5.1_x86	patch 103607-02
+	Solaris 5.5.1_ppc	patch 103608-02
+	Solaris 5.5_sparc:	patch 103242-04
+	Solaris 5.5_x86:	patch 103243-04
+	Solaris 5.4_sparc:	patch 102049-04
+	Solaris 5.4_x86:	patch 102778-04
+--------------------------------------------------------------------------------
+
+
+Bugid   Risk Synopsis
+--------------------------------------------------------------------------------
+1264828 Linker patch 102049-03 breaks binary compatibility for 2.4
+--------------------------------------------------------------------------------
+All above changes are incorporated in the following patches:
+	Solaris 5.4		patch 102049-05
+--------------------------------------------------------------------------------
+
+
+Bugid   Risk Synopsis
+--------------------------------------------------------------------------------
+1211314 libelf rewrite/MT-hot
+1209374 Debug output from linker, when LD_BINDINGS is on, is garbled
+        for MT processes
+xxxxxxx add suport for the mapfile commands $NEED, $ADDVERS, & $SPECVERS
+1068307 librtld_db.so debugger interface
+1183695 mcs command fails when swap space gets low
+1211653 mcs get arith exception when processing  profile binary built with ild
+1109538 mcs does not handle ar%archives like the man page says it does
+1236011 versioning processing within ld(1) has inconsistancies
+1239275 ld build fails for large files project
+1207279 WEAK symbols as tentative external references not just defines on
+        Solaris 2.x
+1236001 weak symbol references are not being handled consistantly.
+1231489 2.5 ld core dumps when referencing a symbol assigned to .hash section
+1136286 null lex input generates error:"lex.yy.c", line84: If-less endif
+1144937 size dumps core
+1242447 librtld_db.so: rl_refnameaddr should point into malloced memory
+1241834	libelf inefficiently uses PAGESIZE throughout code
+1242605	Cannot link C program with '-lxfn' without also using '-lC'.
+1245719 ld.so.1 dies when trying to load the same object twice if via
+	different path
+1234586 linker bug causes dynamically-linked applications to dump core when run
+1083126 strcoll (3) error not correctly messaged because libdl is not messaged
+1194771 ld(1) could do with some diagnostic cleanup
+1245467 be sympathetic to NULL character pointers
+1239423	Locus/Merge require a virtual segment reservation.
+1241127 sections should be assigned to segments based on sh_flags -
+	not section type
+xxxxxxx performance improvement to dlopen() of same object
+1248207 add suport for specifying DT_NEEDED's via ld command line for
+	relocatable object
+1247793 dlsym() can't find symbol
+1253568	ld.so.1 system errors cause segv in localized environment
+1248401	relocation error in libxfn.so.2 fini section
+1187549 modload doesn't correctly handle all relocation entry types
+1249861 rtld_db.h header file belongs in /usr/include, not /usr/include/sys
+xxxxxxx fixup data usage (paddr_t) in rdb (per tpm's request)
+1243653 C++ relocations do not output relative relocations when they are
+        performed
+xxxxxxx fix lint for doreloc.c
+1173320 problem with re-opening simularly named shared objects...
+1253656 Need a way from rtld to put holes between libraries
+1250505 Need krtld hooks for notification of module loads/unloads
+1256687 rtld_db interface gives redundant information....
+1258330 krtld bootstrap on ppc doesn't new relocation types...
+1215722 dlsym does not resolve symbols from prevous dlopen'd objects
+1258269 dlopen(, RTLD_GLOBAL) behaviour changed in build 12
+1261756 shared object relocation does not completely protect against recursion
+1261396 dlopen() of relocatable objects ignores the DT_NEEDED entries
+1263968 endhostent() SEGVs on dev_14 WOS
+1265223 infinite recursion in elf_intp_find_sym() filter symbol resolution
+1266632 core file read errors when dbx uses system rtld_db in 2.6 build 15
+1267122 proc_service.h & rtld_db.h shouldn't use 32bit centric paddr_t 
+	type for mem ptrs
+1267163 add librtld_db sample code to SUNWosdem package
+1260997 would like to be able filter more than one library
+1267524 librtld_db demo directories installed with bad permissions
+1261247 The SHF_ORDERED flag defined by ppcs and V9 ABIs should be on all
+	platforms.
+4006945 The link editor, ld, should not call free().
+4008147 Need way to "scope" linker symbol names
+1258508 dlopen family of routines require Xopen/Aspen extensions/corrections
+4009779 strip -x corrupted ELF symbol info causing ld to SEGV

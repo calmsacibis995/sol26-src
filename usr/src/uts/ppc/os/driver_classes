@@ -1,0 +1,9 @@
+#
+# Copyright (c) 1994, Sun Microsystems, Inc.
+#
+#pragma ident	"@(#)driver_classes	1.14	95/05/17 SMI"
+
+pci	pci
+pci_to_isa	sysbus
+pci_pci	pci
+ata	scsi

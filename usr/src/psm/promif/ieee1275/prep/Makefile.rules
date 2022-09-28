@@ -1,0 +1,109 @@
+#
+# Copyright (c) 1992-1994 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.rules	1.5	95/06/28 SMI"
+#
+# psm/promif/ieee1275/prep/Makefile.rules
+#
+#	This Makefile defines all build rules for the promif version for
+#	IEEE 1275 compliant firmware (generic portions).
+
+#
+#	This was implemented by pattern matching rules of the form:
+#
+# $(OBJS_DIR)/%.o:	 $(UTSBASE)/common/os/%.c
+#	$(COMPILE.c) -o $@ $<
+#
+# $(LINTS_DIR)/%.ln:	$(UTSBASE)/common/os/%.c
+#	@($(LHEAD) $(LINT.c) $< $(LTAIL))
+#
+#	for each directory containing source. 
+#	This technique proved to be too slow under
+#	Nse because it caused a significant additional number of stats
+#	and stats are real slow under TFS. If TFS performance should
+#	improve, one might consider returning to the former implementation.
+#	In the former implementation, this file (Makefile.rules) was not
+#	needed and the pattern matching rules were in Makefile.files.
+#
+
+#
+#	C object build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+
+PROM_PLAT_SRC = $(PSMBASE)/promif/ieee1275/prep
+
+$(OBJS_DIR)/prom_alloc.o:	$(PROM_PLAT_SRC)/prom_alloc.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_alloc.c
+
+$(OBJS_DIR)/prom_init.o:	$(PROM_PLAT_SRC)/prom_init.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_init.c
+
+$(OBJS_DIR)/prom_mmu.o:		$(PROM_PLAT_SRC)/prom_mmu.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_mmu.c
+
+$(OBJS_DIR)/prom_map.o:		$(PROM_PLAT_SRC)/prom_map.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_map.c
+
+$(OBJS_DIR)/prom_mem.o:		$(PROM_PLAT_SRC)/prom_mem.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_mem.c
+
+$(OBJS_DIR)/prom_ppc.o:	$(PROM_PLAT_SRC)/prom_ppc.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_ppc.c
+
+$(OBJS_DIR)/prom_prop_ppc.o:	$(PROM_PLAT_SRC)/prom_prop_ppc.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_prop_ppc.c
+
+$(OBJS_DIR)/prom_macaddr.o:	$(PROM_PLAT_SRC)/prom_macaddr.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_macaddr.c
+
+$(OBJS_DIR)/prom_set_callback.o:	$(PROM_PLAT_SRC)/prom_set_callback.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_set_callback.c
+
+$(OBJS_DIR)/prom_vername.o:	$(PROM_PLAT_SRC)/prom_vername.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_vername.c
+
+$(OBJS_DIR)/swap_int.o:	$(PROM_PLAT_SRC)/swap_int.s
+	$(COMPILE.s) -o $@ $(PROM_PLAT_SRC)/swap_int.s
+
+#
+#	Lint `object' build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(LINTS_DIR)/prom_alloc.ln:	$(PROM_PLAT_SRC)/prom_alloc.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_alloc.c $(LTAIL))
+
+$(LINTS_DIR)/prom_init.ln:	$(PROM_PLAT_SRC)/prom_init.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_init.c $(LTAIL))
+
+$(LINTS_DIR)/prom_mmu.ln:	$(PROM_PLAT_SRC)/prom_mmu.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_mmu.c $(LTAIL))
+
+$(LINTS_DIR)/prom_map.ln:	$(PROM_PLAT_SRC)/prom_map.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_map.c $(LTAIL))
+
+$(LINTS_DIR)/prom_mem.ln:	$(PROM_PLAT_SRC)/prom_mem.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_mem.c $(LTAIL))
+
+$(LINTS_DIR)/prom_ppc.ln:	$(PROM_PLAT_SRC)/prom_ppc.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_ppc.c $(LTAIL))
+
+$(LINTS_DIR)/prom_prop_ppc.ln:	$(PROM_PLAT_SRC)/prom_prop_ppc.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_prop_ppc.c $(LTAIL))
+
+$(LINTS_DIR)/prom_macaddr.ln:	$(PROM_PLAT_SRC)/prom_macaddr.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_macaddr.c $(LTAIL))
+
+$(LINTS_DIR)/prom_set_callback.ln:	$(PROM_PLAT_SRC)/prom_set_callback.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_set_callback.c $(LTAIL))
+
+$(LINTS_DIR)/prom_vername.ln:	$(PROM_PLAT_SRC)/prom_vername.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_vername.c $(LTAIL))
+
+$(LINTS_DIR)/swap_int.ln:	$(PROM_PLAT_SRC)/swap_int.s
+	@($(LHEAD) $(LINT.s) $(PROM_PLAT_SRC)/swap_int.s $(LTAIL))

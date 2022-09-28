@@ -1,0 +1,21 @@
+#pragma ident	"@(#)kbd.dfl	1.2	96/06/07 SMI"
+#
+# Copyright 1996, Sun Microsystems, Inc.
+# All Rights Reserved.
+#
+# /etc/default/kbd
+#
+# kbd default settings processed via kbd(1).
+#
+# KEYBOARD_ABORT affects the default behavior of the keyboard abort
+# sequence, see kbd(1) for details.  The default value is "enable".
+# The optional value is "disable".  Any other value is ignored.
+#
+# KEYCLICK affects the default keyclick behavior. Possible values are
+# 'on' and 'off'.  Any other value is ignored. The default behavior is
+# to leave the current keyclick setting unchanged.
+#
+# Uncomment the following lines to change the default values.
+#
+#KEYBOARD_ABORT=enable
+#KEYCLICK=off

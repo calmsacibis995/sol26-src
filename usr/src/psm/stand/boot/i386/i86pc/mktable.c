@@ -1,0 +1,382 @@
+/*	Copyright (c) 1990, 1991 UNIX System Laboratories, Inc.	*/
+/*	Copyright (c) 1984, 1986, 1987, 1988, 1989, 1990 AT&T	*/
+/*	  All Rights Reserved  	*/
+
+/*	THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF		*/
+/*	UNIX System Laboratories, Inc.				*/
+/*	The copyright notice above does not evidence any   	*/
+/*	actual or intended publication of such source code.	*/
+
+/*	Copyright (c) 1987, 1988 Microsoft Corporation	*/
+/*	  All Rights Reserved	*/
+
+/*	This Module contains Proprietary Information of Microsoft  */
+/*	Corporation and should be treated as Confidential.	   */
+
+/*
+ * Copyrighted as an unpublished work.
+ * (c) Copyright INTERACTIVE Systems Corporation 1986, 1988, 1990
+ * All rights reserved.
+ *
+ * RESTRICTED RIGHTS
+ *
+ * These programs are supplied under a license.  They may be used,
+ * disclosed, and/or copied only as permitted under such license
+ * agreement.  Any copy must contain the above copyright notice and
+ * this restricted rights notice.  Use, copying, and/or disclosure
+ * of the programs is strictly prohibited unless otherwise provided
+ * in the license agreement.
+ */
+
+
+#ident "@(#)mktable.c	1.2     96/01/10 SMI"
+
+#include	"sys/types.h"
+#include	"sys/bootdef.h"
+
+/* Creatively stolen from segment.h */
+
+/*
+ *  Call/Interrupt/Trap Gate table descriptions
+ *
+ *	This is the structure used for declaration of Gates.
+ *	If this is changed in any way, the code in uprt.s
+ *	must be changed to match.  It is especially important
+ *	that the type byte be in the last position so that the
+ *	real mode start up code can determine if the gate is
+ *	intended to be a gate or segment descriptor.
+ */
+
+struct gate_desc {
+	unsigned long  g_off;		/* offset */
+	unsigned short g_sel;		/* selector */
+	unsigned char  g_wcount;	/* word count */
+	unsigned char  g_type;		/* type of gate and access rights */
+};
+
+/* ...and the way the hardware sees it */
+
+struct gdscr {
+	unsigned int	gd_off0015:16,
+			gd_selector:16,
+			gd_unused:8,
+			gd_acc0007:8,
+			gd_off1631:16;
+};
+
+#define	IDTSZ		256
+
+/* access rights field for gates */
+#define	GATE_KACC	0x80		/* present and dpl = 0 */
+#define	GATE_386INT	0xE		/* 386 int gate */
+#define	GATE_386TRP	0xF		/* 386 trap gate */
+
+#define	MKGATE(rtn, sel, acc) \
+	{(u_long)(rtn), (u_short)(sel), (u_char)0, (u_char)(acc)}
+#define	MKINTG(rtn)	MKGATE(rtn, C_GDT, GATE_KACC|GATE_386INT)
+#define	MKKTRPG(rtn)	MKGATE(rtn, C_GDT, GATE_KACC|GATE_386TRP)
+
+/*
+ *	386 Interrupt Descriptor Table
+ */
+extern div0trap(), dbgtrap(), nmiint(), brktrap(), ovflotrap(), boundstrap();
+extern invoptrap(), ndptrap0(), ndptrap2(), ndptrap3(), ndptrap4();
+extern ndptrap(), syserrtrap(), invaltrap(), invtsstrap();
+extern segnptrap(), stktrap(), gptrap(), pftrap(), ndperr();
+extern dbfault(), overrun(), resvtrap();
+extern vstart(), sys_call(), sig_clean(), cmnint();
+
+/*
+ * And about 10 million interrupt handlers.....
+ */
+extern inval17(), inval18(), inval19(), progent();
+extern inval21(), inval22(), inval23(), inval24();
+extern inval25(), inval26(), inval27(), inval28();
+extern inval29(), inval30(), inval31(), inval33();
+extern inval34(), inval35(), inval36(), inval37();
+extern inval38(), inval39(), inval40(), inval41();
+extern inval42(), inval43(), inval44(), inval45();
+extern inval46(), inval47(), inval48(), inval49();
+extern inval50(), inval51(), inval52(), inval53();
+extern inval54(), inval55(), inval56(), inval57();
+extern inval58(), inval59(), inval60(), inval61();
+extern inval62(), inval63();
+extern ivctM0(), ivctM1(), ivctM2(), ivctM3();
+extern ivctM4(), ivctM5(), ivctM6(), ivctM7();
+extern ivctM0S0(), ivctM0S1(), ivctM0S2(), ivctM0S3();
+extern ivctM0S4(), ivctM0S5(), ivctM0S6(), ivctM0S7();
+extern ivctM1S0(), ivctM1S1(), ivctM1S2(), ivctM1S3();
+extern ivctM1S4(), ivctM1S5(), ivctM1S6(), ivctM1S7();
+extern ivctM2S0(), ivctM2S1(), ivctM2S2(), ivctM2S3();
+extern ivctM2S4(), ivctM2S5(), ivctM2S6(), ivctM2S7();
+extern ivctM3S0(), ivctM3S1(), ivctM3S2(), ivctM3S3();
+extern ivctM3S4(), ivctM3S5(), ivctM3S6(), ivctM3S7();
+extern ivctM4S0(), ivctM4S1(), ivctM4S2(), ivctM4S3();
+extern ivctM4S4(), ivctM4S5(), ivctM4S6(), ivctM4S7();
+extern ivctM5S0(), ivctM5S1(), ivctM5S2(), ivctM5S3();
+extern ivctM5S4(), ivctM5S5(), ivctM5S6(), ivctM5S7();
+extern ivctM6S0(), ivctM6S1(), ivctM6S2(), ivctM6S3();
+extern ivctM6S4(), ivctM6S5(), ivctM6S6(), ivctM6S7();
+extern ivctM7S0(), ivctM7S1(), ivctM7S2(), ivctM7S3();
+extern ivctM7S4(), ivctM7S5(), ivctM7S6(), ivctM7S7();
+
+/* The second level boot's protected mode IDT */
+
+struct gate_desc slbidt[IDTSZ] = {
+			MKKTRPG(div0trap),	/* 000 */
+			MKKTRPG(dbgtrap), 	/* 001 */
+			MKINTG(nmiint),		/* 002 */
+			MKKTRPG(brktrap), 	/* 003 */
+			MKKTRPG(ovflotrap),	/* 004 */
+			MKKTRPG(boundstrap),	/* 005 */
+			MKKTRPG(invoptrap),	/* 006 */
+			MKKTRPG(ndptrap0),	/* 007 */
+			MKKTRPG(dbfault),	/* 008 */
+			MKKTRPG(overrun),	/* 009 */
+			MKKTRPG(invtsstrap),	/* 010 */
+			MKKTRPG(segnptrap),	/* 011 */
+			MKKTRPG(stktrap),	/* 012 */
+			MKKTRPG(gptrap),	/* 013 */
+			MKKTRPG(pftrap),	/* 014 */
+			MKKTRPG(resvtrap),	/* 015 */
+			MKKTRPG(ndperr),	/* 016 */
+			MKKTRPG(inval17),	/* 017 */
+			MKKTRPG(inval18),	/* 018 */
+			MKKTRPG(inval19),	/* 019 */
+			MKKTRPG(progent),	/* 020 */
+			MKKTRPG(inval21),	/* 021 */
+			MKKTRPG(inval22),	/* 022 */
+			MKKTRPG(inval23),	/* 023 */
+			MKKTRPG(inval24),	/* 024 */
+			MKKTRPG(inval25),	/* 025 */
+			MKKTRPG(inval26),	/* 026 */
+			MKKTRPG(inval27),	/* 027 */
+			MKKTRPG(inval28),	/* 028 */
+			MKKTRPG(inval29),	/* 029 */
+			MKKTRPG(inval30),	/* 030 */
+			MKKTRPG(inval31),	/* 031 */
+			MKKTRPG(ndptrap2),	/* 032 */ /* for fp emul */
+			MKKTRPG(inval33),	/* 033 */
+			MKKTRPG(inval34),	/* 034 */
+			MKKTRPG(inval35),	/* 035 */
+			MKKTRPG(inval36),	/* 036 */
+			MKKTRPG(inval37),	/* 037 */
+			MKKTRPG(inval38),	/* 038 */
+			MKKTRPG(inval39),	/* 039 */
+			MKKTRPG(inval40),	/* 040 */
+			MKKTRPG(inval41),	/* 041 */
+			MKKTRPG(inval42),	/* 042 */
+			MKKTRPG(inval43),	/* 043 */
+			MKKTRPG(inval44),	/* 044 */
+			MKKTRPG(inval45),	/* 045 */
+			MKKTRPG(inval46),	/* 046 */
+			MKKTRPG(inval47),	/* 047 */
+			MKKTRPG(inval48),	/* 048 */
+			MKKTRPG(inval49),	/* 049 */
+			MKKTRPG(inval50),	/* 050 */
+			MKKTRPG(inval51),	/* 051 */
+			MKKTRPG(inval52),	/* 052 */
+			MKKTRPG(inval53),	/* 053 */
+			MKKTRPG(inval54),	/* 054 */
+			MKKTRPG(inval55),	/* 055 */
+			MKKTRPG(inval56),	/* 056 */
+			MKKTRPG(inval57),	/* 057 */
+			MKKTRPG(inval58),	/* 058 */
+			MKKTRPG(inval59),	/* 059 */
+			MKKTRPG(inval60),	/* 060 */
+			MKKTRPG(inval61),	/* 061 */
+			MKKTRPG(inval62),	/* 062 */
+			MKKTRPG(inval63),	/* 063 */
+			MKINTG(ivctM0),		/* 064 */
+			MKINTG(ivctM1),		/* 065 */
+			MKINTG(ivctM2),		/* 066 */
+			MKINTG(ivctM3),		/* 067 */
+			MKINTG(ivctM4),		/* 068 */
+			MKINTG(ivctM5),		/* 069 */
+			MKINTG(ivctM6),		/* 070 */
+			MKINTG(ivctM7),		/* 071 */
+			MKINTG(ivctM0S0),	/* 072 */
+			MKINTG(ivctM0S1),	/* 073 */
+			MKINTG(ivctM0S2),	/* 074 */
+			MKINTG(ivctM0S3),	/* 075 */
+			MKINTG(ivctM0S4),	/* 076 */
+			MKINTG(ivctM0S5),	/* 077 */
+			MKINTG(ivctM0S6),	/* 078 */
+			MKINTG(ivctM0S7),	/* 079 */
+			MKINTG(ivctM1S0),	/* 080 */
+			MKINTG(ivctM1S1),	/* 081 */
+			MKINTG(ivctM1S2),	/* 082 */
+			MKINTG(ivctM1S3),	/* 083 */
+			MKINTG(ivctM1S4),	/* 084 */
+			MKINTG(ivctM1S5),	/* 085 */
+			MKINTG(ivctM1S6),	/* 086 */
+			MKINTG(ivctM1S7),	/* 087 */
+			MKINTG(ivctM2S0),	/* 088 */
+			MKINTG(ivctM2S1),	/* 089 */
+			MKINTG(ivctM2S2),	/* 090 */
+			MKINTG(ivctM2S3),	/* 091 */
+			MKINTG(ivctM2S4),	/* 092 */
+			MKINTG(ivctM2S5),	/* 093 */
+			MKINTG(ivctM2S6),	/* 094 */
+			MKINTG(ivctM2S7),	/* 095 */
+			MKINTG(ivctM3S0),	/* 096 */
+			MKINTG(ivctM3S1),	/* 097 */
+			MKINTG(ivctM3S2),	/* 098 */
+			MKINTG(ivctM3S3),	/* 099 */
+			MKINTG(ivctM3S4),	/* 100 */
+			MKINTG(ivctM3S5),	/* 101 */
+			MKINTG(ivctM3S6),	/* 102 */
+			MKINTG(ivctM3S7),	/* 103 */
+			MKINTG(ivctM4S0),	/* 104 */
+			MKINTG(ivctM4S1),	/* 105 */
+			MKINTG(ivctM4S2),	/* 106 */
+			MKINTG(ivctM4S3),	/* 107 */
+			MKINTG(ivctM4S4),	/* 108 */
+			MKINTG(ivctM4S5),	/* 109 */
+			MKINTG(ivctM4S6),	/* 110 */
+			MKINTG(ivctM4S7),	/* 111 */
+			MKINTG(ivctM5S0),	/* 112 */
+			MKINTG(ivctM5S1),	/* 113 */
+			MKINTG(ivctM5S2),	/* 114 */
+			MKINTG(ivctM5S3),	/* 115 */
+			MKINTG(ivctM5S4),	/* 116 */
+			MKINTG(ivctM5S5),	/* 117 */
+			MKINTG(ivctM5S6),	/* 118 */
+			MKINTG(ivctM5S7),	/* 119 */
+			MKINTG(ivctM6S0),	/* 120 */
+			MKINTG(ivctM6S1),	/* 121 */
+			MKINTG(ivctM6S2),	/* 122 */
+			MKINTG(ivctM6S3),	/* 123 */
+			MKINTG(ivctM6S4),	/* 124 */
+			MKINTG(ivctM6S5),	/* 125 */
+			MKINTG(ivctM6S6),	/* 126 */
+			MKINTG(ivctM6S7),	/* 127 */
+			MKINTG(ivctM7S0),	/* 128 */
+			MKINTG(ivctM7S1),	/* 129 */
+			MKINTG(ivctM7S2),	/* 130 */
+			MKINTG(ivctM7S3),	/* 131 */
+			MKINTG(ivctM7S4),	/* 132 */
+			MKINTG(ivctM7S5),	/* 133 */
+			MKINTG(ivctM7S6),	/* 134 */
+			MKINTG(ivctM7S7),	/* 135 */
+			MKKTRPG(invaltrap),	/* 136 */
+			MKKTRPG(invaltrap),	/* 137 */
+			MKKTRPG(invaltrap),	/* 138 */
+			MKKTRPG(invaltrap),	/* 139 */
+			MKKTRPG(invaltrap),	/* 140 */
+			MKKTRPG(invaltrap),	/* 141 */
+			MKKTRPG(invaltrap),	/* 142 */
+			MKKTRPG(invaltrap),	/* 143 */
+			MKKTRPG(invaltrap),	/* 144 */
+			MKKTRPG(invaltrap),	/* 145 */
+			MKKTRPG(invaltrap),	/* 146 */
+			MKKTRPG(invaltrap),	/* 147 */
+			MKKTRPG(invaltrap),	/* 148 */
+			MKKTRPG(invaltrap),	/* 149 */
+			MKKTRPG(invaltrap),	/* 150 */
+			MKKTRPG(invaltrap),	/* 151 */
+			MKKTRPG(invaltrap),	/* 152 */
+			MKKTRPG(invaltrap),	/* 153 */
+			MKKTRPG(invaltrap),	/* 154 */
+			MKKTRPG(invaltrap),	/* 155 */
+			MKKTRPG(invaltrap),	/* 156 */
+			MKKTRPG(invaltrap),	/* 157 */
+			MKKTRPG(invaltrap),	/* 158 */
+			MKKTRPG(invaltrap),	/* 159 */
+			MKKTRPG(invaltrap),	/* 160 */
+			MKKTRPG(invaltrap),	/* 161 */
+			MKKTRPG(invaltrap),	/* 162 */
+			MKKTRPG(invaltrap),	/* 163 */
+			MKKTRPG(invaltrap),	/* 164 */
+			MKKTRPG(invaltrap),	/* 165 */
+			MKKTRPG(invaltrap),	/* 166 */
+			MKKTRPG(invaltrap),	/* 167 */
+			MKKTRPG(invaltrap),	/* 168 */
+			MKKTRPG(invaltrap),	/* 169 */
+			MKKTRPG(invaltrap),	/* 170 */
+			MKKTRPG(invaltrap),	/* 171 */
+			MKKTRPG(invaltrap),	/* 172 */
+			MKKTRPG(invaltrap),	/* 173 */
+			MKKTRPG(invaltrap),	/* 174 */
+			MKKTRPG(invaltrap),	/* 175 */
+			MKKTRPG(invaltrap),	/* 176 */
+			MKKTRPG(invaltrap),	/* 177 */
+			MKKTRPG(invaltrap),	/* 178 */
+			MKKTRPG(invaltrap),	/* 179 */
+			MKKTRPG(invaltrap),	/* 180 */
+			MKKTRPG(invaltrap),	/* 181 */
+			MKKTRPG(invaltrap),	/* 182 */
+			MKKTRPG(invaltrap),	/* 183 */
+			MKKTRPG(invaltrap),	/* 184 */
+			MKKTRPG(invaltrap),	/* 185 */
+			MKKTRPG(invaltrap),	/* 186 */
+			MKKTRPG(invaltrap),	/* 187 */
+			MKKTRPG(invaltrap),	/* 188 */
+			MKKTRPG(invaltrap),	/* 189 */
+			MKKTRPG(invaltrap),	/* 190 */
+			MKKTRPG(invaltrap),	/* 191 */
+			MKKTRPG(invaltrap),	/* 192 */
+			MKKTRPG(invaltrap),	/* 193 */
+			MKKTRPG(invaltrap),	/* 194 */
+			MKKTRPG(invaltrap),	/* 195 */
+			MKKTRPG(invaltrap),	/* 196 */
+			MKKTRPG(invaltrap),	/* 197 */
+			MKKTRPG(invaltrap),	/* 198 */
+			MKKTRPG(invaltrap),	/* 199 */
+			MKKTRPG(invaltrap),	/* 200 */
+			MKKTRPG(invaltrap),	/* 201 */
+			MKKTRPG(invaltrap),	/* 202 */
+			MKKTRPG(invaltrap),	/* 203 */
+			MKKTRPG(invaltrap),	/* 204 */
+			MKKTRPG(invaltrap),	/* 205 */
+			MKKTRPG(invaltrap),	/* 206 */
+			MKKTRPG(invaltrap),	/* 207 */
+			MKKTRPG(invaltrap),	/* 208 */
+			MKKTRPG(invaltrap),	/* 209 */
+			MKKTRPG(invaltrap),	/* 210 */
+			MKKTRPG(invaltrap),	/* 211 */
+			MKKTRPG(invaltrap),	/* 212 */
+			MKKTRPG(invaltrap),	/* 213 */
+			MKKTRPG(invaltrap),	/* 214 */
+			MKKTRPG(invaltrap),	/* 215 */
+			MKKTRPG(invaltrap),	/* 216 */
+			MKKTRPG(invaltrap),	/* 217 */
+			MKKTRPG(invaltrap),	/* 218 */
+			MKKTRPG(invaltrap),	/* 219 */
+			MKKTRPG(invaltrap),	/* 220 */
+			MKKTRPG(invaltrap),	/* 221 */
+			MKKTRPG(invaltrap),	/* 222 */
+			MKKTRPG(invaltrap),	/* 223 */
+			MKKTRPG(invaltrap),	/* 224 */
+			MKKTRPG(invaltrap),	/* 225 */
+			MKKTRPG(invaltrap),	/* 226 */
+			MKKTRPG(invaltrap),	/* 227 */
+			MKKTRPG(invaltrap),	/* 228 */
+			MKKTRPG(invaltrap),	/* 229 */
+			MKKTRPG(invaltrap),	/* 230 */
+			MKKTRPG(invaltrap),	/* 231 */
+			MKKTRPG(invaltrap),	/* 232 */
+			MKKTRPG(invaltrap),	/* 233 */
+			MKKTRPG(invaltrap),	/* 234 */
+			MKKTRPG(invaltrap),	/* 235 */
+			MKKTRPG(invaltrap),	/* 236 */
+			MKKTRPG(invaltrap),	/* 237 */
+			MKKTRPG(invaltrap),	/* 238 */
+			MKKTRPG(invaltrap),	/* 239 */
+			MKKTRPG(invaltrap),	/* 240 */
+			MKKTRPG(invaltrap),	/* 241 */
+			MKKTRPG(invaltrap),	/* 242 */
+			MKKTRPG(invaltrap),	/* 243 */
+			MKKTRPG(invaltrap),	/* 244 */
+			MKKTRPG(invaltrap),	/* 245 */
+			MKKTRPG(invaltrap),	/* 246 */
+			MKKTRPG(invaltrap),	/* 247 */
+			MKKTRPG(invaltrap),	/* 248 */
+			MKKTRPG(invaltrap),	/* 249 */
+			MKKTRPG(invaltrap),	/* 250 */
+			MKKTRPG(invaltrap),	/* 251 */
+			MKKTRPG(invaltrap),	/* 252 */
+			MKKTRPG(invaltrap),	/* 253 */
+			MKKTRPG(invaltrap),	/* 254 */
+			MKKTRPG(invaltrap),	/* 255 */
+};

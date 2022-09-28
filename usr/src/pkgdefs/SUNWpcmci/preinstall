@@ -1,0 +1,66 @@
+#!/bin/sh
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+
+# ident "@(#)preinstall	1.3	96/08/15 SMI"
+# SUNWpcmci preinstall script
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+EXIT=0
+
+ARCH="`uname -p`"
+
+#
+# remove_minor - removes minor node in /dev for passed driver
+#
+#    Usage:	remove_minor {driver_name}
+#
+remove_minor()
+{
+	DRIVER="$1"
+	DEVNODE="${BASEDIR}/dev/${DRIVER}"
+	rm -f $DEVNODE
+}
+
+#
+# Remove the existing ${BASEDIR}/devices/pcmcia directory since
+#	we will recreate the appropriate directories when the
+#	PCMCIA user daemon loads
+#
+rm -rf ${BASEDIR}/devices/pcmcia
+
+#
+# We remove any dangling /dev links in this order:
+#
+#    SPARC:
+#	/dev/stp4020
+#	/dev/pem
+#
+#    x86 and PPC:
+#	/dev/ra
+#	/dev/pcic
+#	/dev/pem
+#
+case "${ARCH}" in
+	sparc)
+		remove_minor stp4020
+		;;
+	ppc|i386)
+		remove_minor ra
+		remove_minor pcic
+		;;
+esac
+
+remove_minor pem
+#
+# remove all traces of the former pcmcia nexus.  This allows upgrade
+# to work and not leave the system unbootable
+#
+if grep pcmcia ${BASEDIR}/etc/name_to_major >/dev/null
+then
+	rem_drv -b ${BASEDIR} pcmcia
+fi
+remove_minor pcmcia
+
+exit ${EXIT}

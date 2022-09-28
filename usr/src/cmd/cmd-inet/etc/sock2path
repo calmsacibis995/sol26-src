@@ -1,0 +1,19 @@
+#pragma ident	"@(#)sock2path	1.6	96/09/25 SMI"
+#
+# socket configuration information
+#
+#     Family   Type  Protocol	Path
+	2	2	0	/dev/tcp
+	2	2	6	/dev/tcp
+
+	2	1	0	/dev/udp
+	2	1	17	/dev/udp
+
+	1	2	0	/dev/ticotsord
+	1	6	0	/dev/ticotsord
+	1	1	0	/dev/ticlts
+
+	2	4	0	/dev/rawip
+
+	24	4	0	/dev/rts
+	24	4	2	/dev/rts

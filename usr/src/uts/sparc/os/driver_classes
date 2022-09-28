@@ -1,0 +1,18 @@
+#
+# Copyright (c) 1992-1994, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident   "@(#)driver_classes 1.16     95/10/20 SMI"
+
+esp	scsi
+ncr	scsi
+isp	scsi
+fas	scsi
+vme	vme
+sbus	sbus
+sbi	sbus
+xbox	sbus
+pci	pci
+pci_pci	pci
+ebus	ebus
+glm	scsi

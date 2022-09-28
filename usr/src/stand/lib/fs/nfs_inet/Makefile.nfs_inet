@@ -1,0 +1,33 @@
+#
+#ident	"@(#)Makefile.nfs_inet	1.23	96/03/22 SMI"
+#
+# Copyright (c) 1991-1996 by Sun Microsystems, Inc.
+# All Rights Reserved.
+# 
+# stand/lib/fs/nfs_inet/Makefile.nfs_inet
+#
+# NFS using internet/DARPA protocols filesystem boot specific library.
+#
+# This Makefile is included by ../../[sun,i386]/Makefile and is used
+# when building $(LIBNFS_INET).  The library is built in ../../[sun,i386].
+#
+
+NFS_INETOBJ= 	auth_none.o auth_unix.o bootparams.o getdents.o inet.o \
+		lookup.o mount.o netaddr.o network_open.o nfsops.o pathname.o \
+		pmap.o rpc.o rpc_prot.o udp_ip.o xdr.o xdr_array.o \
+		xdr_mem.o xdr_refer.o
+
+NFS_INETOBJ_L= 	$(NFS_INETOBJ:%.o=%.ln)
+NFS_INETSRC=	$(NFS_INETOBJ:%.o=$(NFS_INETDIR)/%.c)
+
+$(NFS_INETOBJ:%=objs/%) :=	LOC_CPP = -I$(NFS_INETDIR)
+$(NFS_INETOBJ_L:%=objs/%) :=	LOC_CPP = -I$(NFS_INETDIR)
+$(LIBNFS_INET_L) :=		LINT.inc = -I$(NFS_INETDIR)
+
+$(LIBNFS_INET) :=	FS_OBJECTS=	$(NFS_INETOBJ)
+$(LIBNFS_INET_L) :=	FS_OBJECTS_L=	$(NFS_INETOBJ_L)
+$(LIBNFS_INET_L) :=	FS_SOURCES=	$(NFS_INETSRC)
+
+.PARALLEL:	$(NFS_INETOBJ:%=objs/%) $(NFS_INETOBJ_L:%=objs/%)
+.PARALLEL:	$(NFS_INETOBJ:%=kadbobjs/%)
+

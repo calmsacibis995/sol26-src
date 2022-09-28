@@ -1,0 +1,69 @@
+#!/bin/sh
+#
+# Copyright (c) 1993 - 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)postinstall	1.11	96/09/13 SMI"
+#
+# SUNWpmr postinstall script
+
+#
+# Add power manageable devices to /etc/power.conf if system is an
+# SS Voyager
+#
+
+if /usr/sbin/prtconf -vp | /bin/fgrep -s "SUNW,S240"; then
+	/bin/grep -s "^[ 	]*# SPARCstation Voyager" $BASEDIR/etc/power.conf
+	if [ $? != 0 ] ; then
+		echo " " >> $BASEDIR/etc/power.conf
+		echo "# SPARCstation Voyager specific fields" >> \
+			$BASEDIR/etc/power.conf
+	fi
+	/bin/grep -s "^[ 	]*/dev/dsk/c0t3d0s0" $BASEDIR/etc/power.conf
+	if [ $? != 0 ] ; then
+		echo "/dev/dsk/c0t3d0s0	1800" >> $BASEDIR/etc/power.conf
+	fi
+	/bin/grep -s "^[ 	]*esp@4,8800000" $BASEDIR/etc/power.conf
+	if [ $? != 0 ] ; then
+		echo "esp@4,8800000		0" >> $BASEDIR/etc/power.conf
+	fi
+	/bin/grep -s "^[ 	]*zs@0,0" $BASEDIR/etc/power.conf
+	if [ $? != 0 ] ; then
+		echo "zs@0,0			0 0 0" >> $BASEDIR/etc/power.conf
+	fi
+	/bin/grep -s "^[ 	]*zs@0,100000" $BASEDIR/etc/power.conf
+	if [ $? != 0 ] ; then
+		echo "zs@0,100000		0 0 0" >> $BASEDIR/etc/power.conf
+	fi
+	/bin/grep -s "^[ 	]*SUNW,DBRIe@2,10000" $BASEDIR/etc/power.conf
+	if [ $? != 0 ] ; then
+		echo "SUNW,DBRIe@2,10000	0 0 0" >> $BASEDIR/etc/power.conf
+	fi
+fi
+
+#
+# If the old format of "autoshutdown" is used, upgrade it to the new format.
+#
+
+/bin/grep -s "^[ 	]*autoshutdown\>" $BASEDIR/etc/power.conf >/dev/null
+if [ $? = 0 ] ; then
+	set - `/bin/grep "^[ 	]*autoshutdown\>" $BASEDIR/etc/power.conf`
+	if [ $# -ne 5 ] ; then
+		if [ ${2} -lt 0 ] ; then
+			BEHAVIOUR="noshutdown"
+		else
+			BEHAVIOUR="shutdown"
+		fi
+		cp $BASEDIR/etc/power.conf /tmp/power.conf
+		( echo "/^autoshutdown"
+		  echo "s/$/		${BEHAVIOUR}/"
+		  echo "."; echo "w"; echo "q"
+		) | ed -s $BASEDIR/etc/power.conf > /dev/null
+		if [ $? != 0 ] ; then
+			echo "Updating autoshutdown entry failed."
+			cp /tmp/power.conf $BASEDIR/etc/power.conf
+		fi
+	fi
+fi
+
+exit 0

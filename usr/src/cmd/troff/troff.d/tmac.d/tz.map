@@ -1,0 +1,249 @@
+'	# TZ - Resolve a SunOS 5.x Title Reference
+.de TZ
+.ds Tz "UNKNOWN TITLE ABBREVIATION: \\$1
+.if '\\$1'ABADMIN' .ds Tz "Software and AnswerBook Packages Administration Guide
+.if '\\$1'ABINSTALL' .ds Tz "Software and AnswerBook Installation Guide
+.if '\\$1'ADMININDEX' .ds Tz "Index to System and Network Administration Documentation
+.if '\\$1'ADMINREF' .ds Tz "Administration Application Reference Manual
+.if '\\$1'ADMINSUPP' .ds Tz "Administration Supplement for Solaris Platforms
+.if '\\$1'ADSUPRTADMIN' .ds Tz "Solstice AdminSuite 2.1 Print Administration Guide
+.if '\\$1'ADVOSUG' .ds Tz "Solaris Advanced User's Guide
+.if '\\$1'ASPA' .ds Tz "Security, Performance, and Accounting Administration
+.if '\\$1'BINARY' .ds Tz "Binary Compatibility Guide
+.if '\\$1'CAT' .ds Tz "Common Administration Tasks
+.if '\\$1'CDEPORTGU' .ds Tz "Solaris Common Desktop Environment: Motif Transition Guide
+.if '\\$1'DDADD' .ds Tz "Peripherals Administration
+.if '\\$1'DESKSETQREF' .ds Tz "DeskSet Quick Reference
+.if '\\$1'DIRXLIBUG' .ds Tz "Direct Xlib User's Guide
+.if '\\$1'DOCORDER' .ds Tz "Doc Order Card
+.if '\\$1'DRIVER' .ds Tz "Writing Device Drivers
+.if '\\$1'ENCRYPTINST' .ds Tz "Encryption Kit Installation Guide
+.if '\\$1'FCODE' .ds Tz "Writing FCode 2.x Programs
+.if '\\$1'FCODE_3.x' .ds Tz "Writing FCode 3.x Programs
+.if '\\$1'FEDNAMESERV' .ds Tz "Federated Naming Service Guide
+.if '\\$1'HWCONFIG' .ds Tz "x86 Device Configuration Guide
+.if '\\$1'I18N' .ds Tz "Developer's Guide to Internationalization
+.if '\\$1'INTRODEV' .ds Tz "Solaris 2.5 Software Developer Kit Introduction
+.if '\\$1'INTRODRIVER' .ds Tz "Driver Developer Kit Introduction
+.if '\\$1'INTROUSER' .ds Tz "Solaris 2.5 Introduction
+.if '\\$1'LLM' .ds Tz "Linker and Libraries Guide
+.if '\\$1'MAILADMIN' .ds Tz "Mail Administration Guide
+.if '\\$1'MASTERDEV' .ds Tz "Software Developer Kit Master Developer Series Guide
+.if '\\$1'MEDIAPREPGU' .ds Tz "Source Installation and Media Preparation Guide
+.if '\\$1'MOTIFTRANS' .ds Tz "OPENLOOK to Motif GUI Transition Guide
+.if '\\$1'MTP' .ds Tz "Multithreaded Programming Guide
+.if '\\$1'NAMESERVINSTALL' .ds Tz "Naming Services 1.2 Kit Installation Guide
+.if '\\$1'NETCOM' .ds Tz "TCP/IP and Data Communications Administration Guide
+.if '\\$1'NETNAME' .ds Tz "NIS+ and FNS Administration Guide
+.if '\\$1'NETP' .ds Tz "Network Interfaces Programmer's Guide
+.if '\\$1'NETSHARE' .ds Tz "NFS Administration Guide
+.if '\\$1'NETTRANS' .ds Tz "NIS+ Transition Guide
+.if '\\$1'NISQSTART' .ds Tz "NIS+ and DNS Setup and Configuration Guide
+.if '\\$1'OBQUICKREF_2.x' .ds Tz "OpenBoot 2.x Quick Reference Card
+.if '\\$1'OBQUICKREF_3.x' .ds Tz "OpenBoot 3.x Quick Reference Card
+.if '\\$1'OLITREF' .ds Tz "OLIT Reference Manual
+.if '\\$1'OLITSTART' .ds Tz "OLIT QuickStart Programmer's Guide
+.if '\\$1'ONCDG' .ds Tz "ONC+ Developer's Guide
+.if '\\$1'ONLINEOPEN' .ds Tz "2.5.1 Online Open Issues
+.if '\\$1'OPENBOOTCMDREF' .ds Tz "OpenBoot 2.x Command Reference Manual
+.if '\\$1'OPENBOOTCMDREF_3.x' .ds Tz "OpenBoot 3.x Command Reference Manual
+.if '\\$1'OWDDG' .ds Tz "X Server Device Developer's Guide
+.if '\\$1'OWPG' .ds Tz "Solaris X Window System Developer's Guide
+.if '\\$1'OWREFMAN' .ds Tz "OpenWindows Desktop Reference Manual
+.if '\\$1'PACKINSTALL' .ds Tz "Application Packaging Developer's Guide
+.if '\\$1'PPCASSY' .ds Tz "Solaris PowerPC Edition: Assembly Language Reference Manual
+.if '\\$1'PPCDDKNOTES' .ds Tz "Solaris 2.5 PowerPC Edition: Driver Developer Kit Release Note
+.if '\\$1'PPCDEVINSTALL' .ds Tz "Solaris 2.5.1 Software Developer Kit Installation Guide
+.if '\\$1'PPCDRIVERINSTALL' .ds Tz "Solaris 2.5.1:  Driver Developer Kit Installation Guide
+.if '\\$1'PPCHW' .ds Tz "Solaris 2.5.1 PowerPC Edition: Hardware Compatibility List
+.if '\\$1'PPCINSTALL' .ds Tz "Solaris PowerPC Edition: Installing Solaris Software
+.if '\\$1'PPCINSTDESK' .ds Tz "Solaris PowerPC Edition: Installing Solaris Software on the Desktop
+.if '\\$1'PPCINSTNOTES' .ds Tz "Solaris 2.5.1 PowerPC Edition: Installation Notes
+.if '\\$1'PPCINTRODRIVER' .ds Tz "Solaris 2.5.1:  Driver Developer Kit Introduction
+.if '\\$1'PPCNOTES' .ds Tz "Solaris 2.5.1: Release Notes
+.if '\\$1'PPCPACKLIST' .ds Tz "Solaris 2.5.1 PowerPC Edition: Desktop Roadmap
+.if '\\$1'PPCSDKNOTES' .ds Tz "Solaris 2.5.1: Software Developer Kit Release Notes
+.if '\\$1'PPCSVRROADMAP' .ds Tz "Solaris 2.5.1 PowerPC Edition: Workgroup Server Roadmap
+.if '\\$1'PROGUTILS' .ds Tz "Programming Utilities Guide
+.if '\\$1'REFMAN' .ds Tz "Sun OS Reference Manual
+.if '\\$1'REFMAN1' .ds Tz "man Pages(1): User Commands
+.if '\\$1'REFMAN1M' .ds Tz "man Pages(1M): System Administration Commands
+.if '\\$1'REFMAN2' .ds Tz "man Pages(2): System Calls
+.if '\\$1'REFMAN3' .ds Tz "man Pages(3): Library Routines
+.if '\\$1'REFMAN4' .ds Tz "man Pages(4): File Formats
+.if '\\$1'REFMAN5' .ds Tz "man Pages(5): Headers, Tables and Macros
+.if '\\$1'REFMAN6' .ds Tz "man Pages(6): Demos
+.if '\\$1'REFMAN7' .ds Tz "man Pages(7): Device and Network Interfaces
+.if '\\$1'REFMAN9' .ds Tz "man Pages(9): Device Driver Interfaces
+.if '\\$1'REFMAN9E' .ds Tz "man Pages(9E): Driver Entry Points
+.if '\\$1'REFMAN9F' .ds Tz "man Pages(9F): Kernel Functions for Drivers
+.if '\\$1'REFMAN9S' .ds Tz "man Pages(9S): Data Structures for Drivers
+.if '\\$1'RSAG' .ds Tz "File System Administration
+.if '\\$1'SHIELD' .ds Tz "SunSHIELD Basic Security Module Guide
+.if '\\$1'SOLBCKUPNOTES' .ds Tz "Solstice Backup Installation and Product Notes
+.if '\\$1'SOLNETINSTALL' .ds Tz "SolarNet PC Protocol Services 1.1: Installation Notes
+.if '\\$1'SOURCE' .ds Tz "Source Compatibility Guide
+.if '\\$1'SPARC' .ds Tz "SPARC Assembly Language Reference Manual
+.if '\\$1'SPARCINSTALL' .ds Tz "SPARC: Installing Solaris Software
+.if '\\$1'SPARCINSTDESK' .ds Tz "SPARC: Installing Solaris Software on the Desktop
+.if '\\$1'SPARCINSTNOTES' .ds Tz "Solaris 2.5.1 SPARC: Installation Notes
+.if '\\$1'SPDTROADMAP' .ds Tz "Solaris 2.5.1 SPARC: Desktop Roadmap
+.if '\\$1'SPSVRROADMAP' .ds Tz "Solaris 2.5.1 SPARC: Server Roadmap
+.if '\\$1'SRCENCRYPT' .ds Tz "Source Encryption Supplement
+.if '\\$1'SS' .ds Tz "System Interface Guide
+.if '\\$1'SSDIG' .ds Tz "Desktop Integration Guide
+.if '\\$1'SSUG' .ds Tz "Solaris User's Guide
+.if '\\$1'STANDARDS' .ds Tz "Standards Conformance Guide
+.if '\\$1'STREAMS' .ds Tz "STREAMS Programming Guide
+.if '\\$1'SUNDIAG' .ds Tz "SunDiag User's Guide
+.if '\\$1'SUUPAM' .ds Tz "User Accounts, Printers, and Mail Administration
+.if '\\$1'SVCONVERT' .ds Tz "XView Developer's Notes
+.if '\\$1'SVRRELNOTES' .ds Tz "Solaris 2.5.1 Server Release Notes
+.if '\\$1'SYSADMIN1' .ds Tz "System Administration Guide, Volume I
+.if '\\$1'SYSADMIN2' .ds Tz "System Administration Guide, Volume II
+.if '\\$1'TELEOVERVIEW' .ds Tz "XTL Architecture Guide
+.if '\\$1'TRANSITION' .ds Tz "Solaris 1.x to 2.x Transition Guide
+.if '\\$1'TRANSPORTPG' .ds Tz "Transport Interfaces Programming Guide
+.if '\\$1'TROUBLESHOOT' .ds Tz "Solaris Common Messages and Troubleshooting Guide
+.if '\\$1'TTREF' .ds Tz "ToolTalk Reference Guide
+.if '\\$1'TTUG' .ds Tz "ToolTalk User's Guide
+.if '\\$1'UNDOCMSG' .ds Tz "Undocumented Messages
+.if '\\$1'XGLDDKCB' .ds Tz "Getting Started Writing XGL Device Handlers
+.if '\\$1'XTELADMIN' .ds Tz "XTL Administrator's Guide
+.if '\\$1'XTELPG' .ds Tz "XTL Application Programmer's Guide
+.if '\\$1'XTELPROVIDER' .ds Tz "XTL Provider Programmer's Guide
+.if '\\$1'XWINREFMAN' .ds Tz "Solaris X Window System Reference Manual
+.if '\\$1'x86' .ds Tz "x86 Assembly Language Reference Manual
+.if '\\$1'x86DBINSTALL' .ds Tz "Solaris x86 Installation Scripts for Database Server Systems
+.if '\\$1'x86DTROADMAP' .ds Tz "Solaris 2.5.1 x86: Desktop Roadmap
+.if '\\$1'x86HW' .ds Tz "Solaris 2.5.1 x86 Hardware Compatibility List
+.if '\\$1'x86INSTALL' .ds Tz "x86: Installing Solaris Software
+.if '\\$1'x86INSTDESK' .ds Tz "x86: Installing Solaris Software on the Desktop
+.if '\\$1'x86INSTNOTES' .ds Tz "Solaris 2.5.1 x86: Installation Notes
+.if '\\$1'x86SVRROADMAP' .ds Tz "Solaris 2.5.1 x86: Server Roadmap
+.if '\\$1'x86WGSVRMAP' .ds Tz "Solaris 2.5.1 x86: Workgroup Server Roadmap
+.	# SPARCstorage Array
+.if '\\$1'VOLMGRREFMAN' .ds Tz "Manpages For The Volume Manager
+.if '\\$1'ARRAYCONFG' .ds Tz "SPARCstorage Array Configuration Guide
+.if '\\$1'ARRAYUG' .ds Tz "SPARCstorage Array User's Guide
+.	# SPARCworks
+.if '\\$1'BROWSESC' .ds Tz "Browsing Source Code
+.if '\\$1'DEBUGAPROG' .ds Tz "Debugging a Program
+.if '\\$1'TOOLSET' .ds Tz "Managing the Toolset
+.if '\\$1'MAKETOOL' .ds Tz "Building Programs with MakeTool
+.if '\\$1'MERGE' .ds Tz "Merging Source Files
+.if '\\$1'PERFTUNAPP' .ds Tz "Performance Tuning an Application
+.if '\\$1'SPARCWTR' .ds Tz "SPARCworks/ProWorks Tutorial
+.	# Languages - C
+.if '\\$1'CTRANSITION' .ds Tz "C 3.0.1 Transition Guide for SPARC Systems
+.if '\\$1'CUG' .ds Tz "C 3.0.1 User's Guide
+.	# Languages - C++
+.if '\\$1'CLANGREF' .ds Tz "C++ 4.0.1 Language System Product Reference Manual
+.if '\\$1'CPPLIBREF' .ds Tz "C++ 4.0.1 Library Reference Manual
+.if '\\$1'CPPPUG' .ds Tz "C++ 4.0.1 User's Guide
+.	# Languages - Fortran
+.if '\\$1'FORTRANREF' .ds Tz "FORTRAN 3.0.1 Reference Manual
+.if '\\$1'FORTRANUG' .ds Tz "FORTRAN 3.0.1 Users Guide
+.	# Languages - Pascal
+.if '\\$1'PASCALREF' .ds Tz "SPARCompiler Pascal 3.0.3 Reference Manual
+.if '\\$1'PASCALUG' .ds Tz "SPARCompiler Pascal 3.0.3 User Guide
+.	# Languages - Common to all
+.if '\\$1'NUMCOMPGD' .ds Tz "Numerical Computation Guide
+.if '\\$1'PROGTOOLS' .ds Tz "Profiling Tools
+.if '\\$1'SWSC2' .ds Tz "Installing SunPro Software on Solaris
+.	# DiagExec
+.if '\\$1'BASICSDIAG' .ds Tz "Basic System Diagnostics
+.if '\\$1'GRAPHDIAG' .ds Tz "Graphics Diagnostics
+.if '\\$1'NETDIAG' .ds Tz "Networking Diagnostics
+.if '\\$1'PERIPHDIAG' .ds Tz "Peripheral Diagnostics
+.if '\\$1'SDIAGEXECPG' .ds Tz "SunDiagnostic Executive Programmer's Guide
+.if '\\$1'SDIAGEXECUG' .ds Tz "Using the SunDiagnostic Executive
+.if '\\$1'SDIAGEXECINST' .ds Tz "SunDiagnostics AnswerBook Install
+.if '\\$1'MPDQREF' .ds Tz "MPDiag Quick Reference Guide
+.if '\\$1'MPDUG' .ds Tz "MPDiag User's Guide
+.	# NeWSprint
+.if '\\$1'NPUSING' .ds Tz "Using NeWSprint Printers
+.if '\\$1'SPUSER' .ds Tz "Using SunPics AnswerBook
+.if '\\$1'NPINSTALL' .ds Tz "Installing NeWSprint
+.if '\\$1'NPADMIN' .ds Tz "NeWSprint Printer Administrator's Guide
+.if '\\$1'PRELIMN' .ds Tz "PreLimn Reference Guide
+.if '\\$1'NPREFERENCE' .ds Tz "NeWSprint Reference
+.if '\\$1'NPDEVGUIDE' .ds Tz "NeWSprint Developer's Guide
+.if '\\$1'NPRELEASE' .ds Tz "NeWSprint Release Notes
+.if '\\$1'SPINSTALL' .ds Tz "SPARCprinter Installation and User's Guide
+.if '\\$1'NP20INSTALL' .ds Tz "NeWSprinter 20 Installation and User's Guide
+.if '\\$1'SBUSINSTALL' .ds Tz "SBus Printer Card Installation Guide
+.	# DevGuide
+.if '\\$1'XVIEWCODEGEN' .ds Tz "OpenWindows Developer's Guide: XView Code Generator Programmer's Guide
+.if '\\$1'OLITCODEGEN' .ds Tz "OpenWindows Developer's Guide: OLIT Code Generator Programmer's Guide
+.if '\\$1'DEVGUIDEUG' .ds Tz "OpenWindows Developer's Guide: User's Guide
+.if '\\$1'MOTIFUTIL' .ds Tz "OpenWindows Developer's Guide: Motif Conversion Utilities Guide
+.	# KCMS
+.if '\\$1'KCMSAPPDG' .ds Tz "KCMS Application Developer's Guide
+.if '\\$1'KCMSCMMDG' .ds Tz "KCMS CMM Developer's Guide
+.if '\\$1'KCMSCMMREF' .ds Tz "KCMS CMM Reference Manual
+.if '\\$1'KCMSCALIBR' .ds Tz "KCMS Calibrator Tool Loadable Interface Guide
+.	# PEX
+.if '\\$1'PEXSPEC' .ds Tz "Solaris PEX Implementation Specification
+.if '\\$1'PEXLIBREFMAN' .ds Tz "Solaris PEXlib Reference Manual
+.if '\\$1'CGEPEXPORTG' .ds Tz "CGE PEX 5.1 Portability Guide
+.	# XGL
+.if '\\$1'XGLACCEL' .ds Tz "XGL Accelerator Guide for Reference Frame Buffers
+.if '\\$1'XGLARCH' .ds Tz "XGL Architecture Guide
+.if '\\$1'XGLDDKCOOKBOOK' .ds Tz "Getting Started Writing XGL Device Handlers
+.if '\\$1'XGLPORTGU' .ds Tz "XGL Device Pipeline Porting Guide
+.if '\\$1'XGLPG' .ds Tz "XGL Programmer's Guide
+.if '\\$1'XGLREFMAN' .ds Tz "XGL Reference Manual
+.if '\\$1'XGLTESTUG' .ds Tz "XGL Test Suite User's Guide
+.	# XIL
+.if '\\$1'XILPG' .ds Tz "XIL Programmer's Guide
+.if '\\$1'XILREFMAN' .ds Tz "XIL Reference Manual
+.if '\\$1'XILSYSPG' .ds Tz "XIL Device Porting and Extensibility Guide
+.if '\\$1'XILTESTUG' .ds Tz "XIL Test Suite User's Guide
+.	# New for S2.6
+.if '\\$1'CDEADMIN' .ds Tz "Solaris Common Desktop Environment: Advanced User's and System Administrator's Guide
+.if '\\$1'CDEAPPLUG' .ds Tz "Common Desktop Environment: Application Builder User's Guide
+.if '\\$1'CDEGLOSS' .ds Tz "Common Desktop Environment: Product Glossary
+.if '\\$1'CDEHELP' .ds Tz "Common Desktop Environment: Help System Author's and Programmer's Guide
+.if '\\$1'CDEINTRO' .ds Tz "Introduction to Solaris Common Desktop Environment
+.if '\\$1'CDEL10NPG' .ds Tz "Common Desktop Environment: Internationalization Programmer's Guide
+.if '\\$1'CDEPG' .ds Tz "Common Desktop Environment: Programmer's Guide
+.if '\\$1'CDESTYLE' .ds Tz "Common Desktop Environment: Style Guide and Certification Checklist
+.if '\\$1'CDETRANS' .ds Tz "Solaris Common Desktop Environment: User's Transition Guide
+.if '\\$1'CDETTMSG' .ds Tz "Common Desktop Environment: ToolTalk Messaging Overview
+.if '\\$1'CDEUG' .ds Tz "Solaris Common Desktop Environment: User's Guide
+.if '\\$1'DTKSHUG' .ds Tz "Common Desktop Environment: Desktop KornShell  User's Guide
+.if '\\$1'FONTADMINUG' .ds Tz "Font Administrator User's Guide
+.if '\\$1'POSIX1DOC' .ds Tz "POSIX.1 CONFORMANCE DOCUMENT
+.if '\\$1'POSIX2DOC' .ds Tz "POSIX.2 CONFORMANCE DOCUMENT
+.if '\\$1'SMAGTUG' .ds Tz "Solstice SmartAgent 1.0 User Guide
+.if '\\$1'SPARCINFOLIB' .ds Tz "Information Library for Solaris 2.6 (SPARC Platform Edition)
+.if '\\$1'XOPCDEDOC' .ds Tz "X/OPEN COMMON DESKTOP ENVIRONMENT CONFORMANCE DOCUMENT
+.if '\\$1'XOPUNIXDOC' .ds Tz "X/OPEN UNIX CONFORMANCE DOCUMENT
+.if '\\$1'XOPXPG3DOC' .ds Tz "X/OPEN XPG3 CONFORMANCE DOCUMENT
+.if '\\$1'XOPXPG4DOC' .ds Tz "X/OPEN XPG4 CONFORMANCE DOCUMENT
+.if '\\$1'x86INFOLIB' .ds Tz "Information Library for Solaris 2.6 (Intel Platform Edition)
+.if '\\$1'x86SVRLIGHT' .ds Tz "Solaris 2.6 x86 Workgroup Server Roapmap
+.	# non-Sun titles
+.if '\\$1'KR' .ds Tz "The C Programming Language
+\fI\\*(Tz\f1\\$2
+..
+.de HC
+.ds Hc "UNKNOWN TITLE ABBREVIATION: \\$1
+.   # Hard Copy Docs Only
+.if '\\$1'HC_DRIVERINSTALL' .ds Hc "Driver Developer Kit Installation Guide
+.if '\\$1'HC_OPENNEWSDDR' .ds Hc "Driver Developer Kit Open Issues and Late-Breaking News
+.if '\\$1'HC_ENCRYPTINST' .ds Hc "Encryption Kit Installation Guide
+.if '\\$1'HC_SPARCHW' .ds Hc "SPARC Hardware Platform Guide
+.if '\\$1'HC_DEVINSTALL' .ds Hc "Software Developer Kit Installation Guide
+.if '\\$1'HC_OPENNEWSDEV' .ds Hc "Software Developer Kit Open Issues and Late-Breaking News
+.if '\\$1'HC_OPENNEWSUSER' .ds Hc "Solaris 2.5 Open Issues and Late-Breaking News
+.if '\\$1'HC_x86DUG' .ds Hc "Solaris 2.5 x86 Driver Update Guide
+.if '\\$1'HC_x86HW' .ds Hc "Solaris 2.5 x86 Hardware Compatibility List
+.if '\\$1'HC_DESKSETQREF' .ds Hc "Solaris QuickStart Guide
+.if '\\$1'HC_ROADMAP' .ds Hc "Solaris Roadmap
+.if '\\$1'HC_MEDIAPREPGU' .ds Hc "Source Installation and Media Preparation Guide
+.if '\\$1'HC_SRCENCRYPT' .ds Hc "Source Encryption Supplement
+.if '\\$1'HC_HWCONFIG' .ds Hc "x86 Device Configuration Guide
+\fI\\*(Hc\f1\\$2
+..

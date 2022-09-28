@@ -1,0 +1,40 @@
+#	Copyright (c) 1996 Sun Microsystems, Inc.
+#		All Rights Reserved
+#
+#	@(#)prototype_com  1.2	96/10/11 (c) Sun Microsystems, Inc.
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i i.preserve
+i i.automaster
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWatfsr
+#
+d none etc 755 root sys
+e preserve etc/auto_home 644 root bin
+e automaster etc/auto_master 644 root bin
+d none etc/init.d 775 root sys
+f none etc/init.d/autofs 744 root sys
+d none etc/rc0.d 775 root sys
+l none etc/rc0.d/K69autofs=../../etc/init.d/autofs
+d none etc/rc1.d 775 root sys
+l none etc/rc1.d/K68autofs=../../etc/init.d/autofs
+d none etc/rc2.d 775 root sys
+l none etc/rc2.d/S74autofs=../../etc/init.d/autofs
+d none kernel 755 root sys
+d none kernel/fs 755 root sys
+f none kernel/fs/autofs 755 root sys

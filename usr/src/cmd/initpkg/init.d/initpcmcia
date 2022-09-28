@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# Copyright (c) 1994-1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)initpcmcia	1.4	96/05/23 SMI"
+
+#
+# Pre network startup initialization for PCMCIA
+#
+
+case "$1" in
+'start')
+	if [ -c /dev/ra ]
+	then
+# resource allocation and override
+		sh -c 'echo </dev/ra' >/dev/null 2>&1
+	fi
+# force the nexus in and then wait a while for stabilization
+
+	while read driver class
+	do
+		if [ "$class" = "pcmcia" ]
+		then
+			sh -c "echo </dev/$driver" >/dev/null 2>&1
+		fi
+	done < /etc/driver_classes
+	;;
+'stop')
+	;;
+*)
+	echo "Usage: /etc/init.d/pcmcia { start | stop }"
+	;;
+esac
+exit 0

@@ -1,0 +1,67 @@
+/*
+ * Copyright (c) 1993, 1994 Sun Microsystems, Inc.  All Rights Reserved.
+ */
+
+#pragma ident	"@(#)TODO	1.3	94/03/11 SMI"
+#pragma ident   "@(#)TODO 1.6	93/10/19 vla"
+
+Vicki's TODO list for the PowerPC Disassembler
+==============================================
+
+1. add logic to each case statement - check that fields that must be
+   zero, are correct - otherwise cannot catch invalid instruction format!
+6. miscellaneous instructions (marked vla fornow XXXPPC.....) need to be
+   revisited for a variety of reasons.
+
+11. don't limit usage to the 32-bit implementation.
+12. look at the instruction timing (chapter 7 of blue book) WRT trying
+    out some timing calcs using pipeline and superscalar instruction
+    data.
+
+DONE:
+2.0	    5. mcrf - needs another structure?
+2.0	    10. still need to crack the BO operand (love that name!) WRT
+		extended mnemonics.
+931004	    15. add addressing information in the left column
+931016	    14. The extended mnemonic "mr" (Move Register) may be implemented
+    		by one of several instructions (or/or./ori/ori./and/and.).  
+			Add this functionality to all applicable instructions.
+931017	    13. all unsigned numbers have been converted to hex.
+	       currently, signed numbers are represented as signed decimal
+	       numbers.  Is this OK?
+931017	    19. 54e707ff	clrlwi.	r7,r7,0
+		5484442e	clrlslwi	r4,r4,0x10,0x8
+		7fff8670	srawisrawi	r31,431,16
+		81a1fff8	lwz	r13,0xfff8(r1) (should be -8(r1))
+931018	    17. Rearrange output format -
+		addr	 label	hex-inst  opcode     symbols
+		f80331d8: main:	55		push %ebp	[label]
+931018	    18. instructions that do not disassemble should be displayed in hex.
+931019	    8.	For the crclr and crset instructions, break down into specific
+		CR field, and bit; e.g., instead of CR bit 15, can be CR3/SO.
+931019	    9.	Interpret CR bits - bit 3 == SO.
+940308	    add hex display of instruction (as long)
+	    add symbol lookup for labels and branches
+	    display offsets from registers in selectable format;
+            (default is hex.)
+            display register numbers in decimal (matches assembler)
+            display registers in "%r" format (to match assembler)
+            add address information in left column
+            3. need to find out symbol table format.
+            4. check - do I need to re-arrange the opcode.h structure formats
+               for BIG-ENDIAN operation?
+            2. track jumps (bl instructions now show symbols)
+            7. for the addi, addis instructions, how to determine between the
+               following cases: (load immediate/load displacement(base)/subtract
+               immediate) vs.  plain ol' addition? (extended mnemonics now
+               disabled in cases of address loading)
+940311	    16. remove processor-specific ifdef's for optional instructions.
+	        Instead, show all instructions, but denote optional PowerPC
+	        instructions within parentheses.
+	    display branch offsets	Format: symbol+offset
+	    (x86 display both relative/absolute, and sparc displays absolute)
+	    add support for POWER instructions that have been deleted from
+	        the PowerPC instruction set, but are implemented on the 601,
+	        (typically, they use the MQ register.)
+	    move all printing (for standalone disassembler, and adb/kadb)
+	        within the parser module.

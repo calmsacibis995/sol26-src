@@ -1,0 +1,50 @@
+#!/bin/sh
+#
+#ident	"@(#)preinstall	1.2	96/10/05 SMI"
+#
+# Copyright (c) 1996 Sun Microsystems Inc. All rights reserved.
+#
+# Pre-install script to ensure an Old version of SUNWpcnet is not installed.
+# Stop in.dhcpd if it is running.
+#
+
+# kill the named process(es)
+killproc()
+{
+	pid=`/usr/bin/ps -e |
+	     /usr/bin/grep ${1} |
+	     /usr/bin/sed -e 's/^  *//' -e 's/ .*//'`
+	[ "${pid}" != "" ] && kill ${pid}
+}
+
+# Check for valid run environment
+if [ ! -d /usr/bin ] ; then
+	exit 0
+fi
+PATH="/usr/sbin:/usr/bin:/bin"
+export PATH
+
+#
+# If an instance of the SUNWpcnet package is already installed, and is less than
+# 2.0, warn the user.
+#
+SNSTART=${PKG_INSTALL_ROOT}/etc/init.d/solarnet
+ERROR=0
+VERSION=`pkginfo -c networking -x SUNWpcnet 2> /dev/null | \
+awk '/^ / {a=$2; FS = "."; split(a,b); printf("%s%s", b[1], b[2]); }'`
+
+if [ ${VERSION:=0} -lt 20 ]
+then
+	if [ -f ${SNSTART} ] && grep -s -i dhcp ${SNSTART} > /dev/null 2>&1
+	then
+		echo "WARNING: Edit ${PKG_INSTALL_ROOT}/etc/init.d/solarnet, and remove all lines referring to DHCP." >&2
+	fi
+fi
+
+#
+# Stop any running in.dhcpd daemon.
+#
+echo "Stopping BOOTP/DHCP Service." >&2
+killproc in.dhcpd
+
+exit 0

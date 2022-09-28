@@ -1,0 +1,19 @@
+#
+#ident	"@(#)Makefile.targ	1.2	95/03/09 SMI"
+#
+# Copyright (c) 1995 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/libsys/Makefile.targ
+
+pics/%.o:	%.s
+		$(COMPILE.s) -o $@ $<
+		$(POST_PROCESS_O)
+
+pics/%.o:	%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+$(DYNLIB):	$(MAPFILES)
+
+include		../../../lib/Makefile.targ

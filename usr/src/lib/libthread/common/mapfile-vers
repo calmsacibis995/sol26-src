@@ -1,0 +1,258 @@
+#
+#ident	"@(#)mapfile-vers	1.26	96/06/14 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/libthread.
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+# Large file interfaces
+SUNW_1.2 {
+	global:
+		open64;
+		creat64;
+} SUNW_1.1;
+
+SUNW_1.1 {
+	global:
+		__pthread_cleanup_pop;
+		__pthread_cleanup_push;
+		_getfp;
+		_mutex_held;
+		_rw_read_held;
+		_rw_write_held;
+		_sema_held;
+		alarm;
+		close;
+		creat;
+		fcntl;
+		fork;
+		fsync;
+		lwp_self;
+		msync;
+		open;
+		pause;
+		pthread_atfork;
+		pthread_attr_destroy;
+		pthread_attr_getdetachstate;
+		pthread_attr_getinheritsched;
+		pthread_attr_getschedparam;
+		pthread_attr_getschedpolicy;
+		pthread_attr_getscope;
+		pthread_attr_getstackaddr;
+		pthread_attr_getstacksize;
+		pthread_attr_init;
+		pthread_attr_setdetachstate;
+		pthread_attr_setinheritsched;
+		pthread_attr_setschedparam;
+		pthread_attr_setschedpolicy;
+		pthread_attr_setscope;
+		pthread_attr_setstackaddr;
+		pthread_attr_setstacksize;
+		pthread_cancel;
+		pthread_cond_broadcast;
+		pthread_cond_destroy;
+		pthread_cond_init;
+		pthread_cond_signal;
+		pthread_cond_timedwait;
+		pthread_cond_wait;
+		pthread_condattr_destroy;
+		pthread_condattr_getpshared;
+		pthread_condattr_init;
+		pthread_condattr_setpshared;
+		pthread_create;
+		pthread_detach;
+		pthread_equal;
+		pthread_exit;
+		pthread_getschedparam;
+		pthread_getspecific;
+		pthread_join;
+		pthread_key_create;
+		pthread_key_delete;
+		pthread_kill;
+		pthread_mutex_destroy;
+		pthread_mutex_getprioceiling;
+		pthread_mutex_init;
+		pthread_mutex_lock;
+		pthread_mutex_setprioceiling;
+		pthread_mutex_trylock;
+		pthread_mutex_unlock;
+		pthread_mutexattr_destroy;
+		pthread_mutexattr_getprioceiling;
+		pthread_mutexattr_getprotocol;
+		pthread_mutexattr_getpshared;
+		pthread_mutexattr_init;
+		pthread_mutexattr_setprioceiling;
+		pthread_mutexattr_setprotocol;
+		pthread_mutexattr_setpshared;
+		pthread_once;
+		pthread_self;
+		pthread_setcancelstate;
+		pthread_setcanceltype;
+		pthread_setschedparam;
+		pthread_setspecific;
+		pthread_sigmask;
+		pthread_testcancel;
+		read;
+		setitimer;
+		setcontext;
+		sigaction;
+		sigpending;
+		sigprocmask;
+		sigsuspend;
+		sleep;
+		tcdrain;
+		wait;
+		waitpid;
+		write;
+	local:
+		*;
+};
+
+SUNWprivate_1.1 {
+	global:
+		_assfail;
+		_cond_broadcast;
+		_cond_destroy;
+		_cond_init;
+		_cond_signal;
+		_cond_timedwait;
+		_cond_wait;
+		_fork;
+		_fork1;
+		_mutex_destroy;
+		_mutex_init;
+		_mutex_lock;
+		_mutex_trylock;
+		_mutex_unlock;
+		_pthread_atfork;
+		_resume;			# libtnfprobe.so.1
+		_resume_ret;			# libtnfprobe.so.1
+		_rw_rdlock;
+		_rw_tryrdlock;
+		_rw_trywrlock;
+		_rw_unlock;
+		_rw_wrlock;
+		_rwlock_destroy;
+		_rwlock_init;
+		_sema_destroy;
+		_sema_init;
+		_sema_post;
+		_sema_trywait;
+		_sema_wait;
+		_sigaction;
+		_sigon;
+		_sigoff;
+		_sigsuspend;
+		_sigprocmask;
+		__sigtimedwait;
+		_sigwait;
+		_sleep;
+		_thr_continue;
+		_thr_create;
+		__thr_door_unbind;
+		_thr_exit;
+		_thr_getconcurrency;
+		_thr_getprio;
+		_thr_getspecific;
+		_thr_join;
+		_thr_keycreate;
+		_thr_kill;
+		_thr_libthread;
+		_thr_main;
+		 thr_probe_getfunc_addr;	# libtfnprobe.so.1
+		 thr_probe_setup;		# libtfnprobe.so.1
+		_thr_self;
+		_thr_setconcurrency;
+		_thr_setprio;
+		_thr_setspecific;
+		_thr_sigsetmask;
+		_thr_stksegment;
+		_thr_suspend;
+		_thr_yield;
+		__fork_init;			# libpthread.so.1
+		__pthread_min_stack;
+		_alarm;
+		_cond_timedwait_cancel;
+		_cond_wait_cancel;
+		_pthread_attr_destroy;
+		_pthread_attr_getdetachstate;
+		_pthread_attr_getinheritsched;
+		_pthread_attr_getschedparam;
+		_pthread_attr_getschedpolicy;
+		_pthread_attr_getscope;
+		_pthread_attr_getstackaddr;
+		_pthread_attr_getstacksize;
+		_pthread_attr_init;
+		_pthread_attr_setdetachstate;
+		_pthread_attr_setinheritsched;
+		_pthread_attr_setschedparam;
+		_pthread_attr_setschedpolicy;
+		_pthread_attr_setscope;
+		_pthread_attr_setstackaddr;
+		_pthread_attr_setstacksize;
+		_pthread_cancel;
+		_pthread_cond_broadcast;
+		_pthread_cond_destroy;
+		_pthread_cond_init;
+		_pthread_cond_signal;
+		_pthread_cond_timedwait;
+		_pthread_cond_wait;
+		_pthread_condattr_destroy;
+		_pthread_condattr_getpshared;
+		_pthread_condattr_init;
+		_pthread_condattr_setpshared;
+		_pthread_create;
+		_pthread_detach;
+		_pthread_equal;
+		_pthread_exit;
+		_pthread_getschedparam;
+		_pthread_getspecific;
+		_pthread_join;
+		_pthread_key_create;
+		_pthread_key_delete;
+		_pthread_kill;
+		_pthread_mutex_destroy;
+		_pthread_mutex_getprioceiling;
+		_pthread_mutex_init;
+		_pthread_mutex_lock;
+		_pthread_mutex_setprioceiling;
+		_pthread_mutex_trylock;
+		_pthread_mutex_unlock;
+		_pthread_mutexattr_destroy;
+		_pthread_mutexattr_getprioceiling;
+		_pthread_mutexattr_getprotocol;
+		_pthread_mutexattr_getpshared;
+		_pthread_mutexattr_init;
+		_pthread_mutexattr_setprioceiling;
+		_pthread_mutexattr_setprotocol;
+		_pthread_mutexattr_setpshared;
+		_pthread_once;
+		_pthread_self;
+		_pthread_setcancelstate;
+		_pthread_setcanceltype;
+		_pthread_setcleanupinit;
+		_pthread_setschedparam;
+		_pthread_setspecific;
+		_pthread_sigmask;
+		_pthread_testcancel;
+		_sema_wait_cancel;
+		_setitimer;
+		_thr_errnop;
+		_thr_detach;
+		_thr_key_delete;
+		_thr_min_stack;
+};
+

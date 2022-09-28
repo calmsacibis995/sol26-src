@@ -1,0 +1,32 @@
+SUNWprivate_1.1 {
+	global:
+		# PAM Convenience Functions
+		# PAM Convenience Functions
+		__pam_free_resp;
+		__pam_display_msg;
+		__pam_get_input;
+		__pam_get_authtok;
+		__pam_get_i18n_msg;
+};
+
+SUNW_1.1 {
+	global:
+		# Published PAM interface
+		pam_start;
+		pam_end;
+		pam_set_item;
+		pam_get_item;
+		pam_get_user;
+		pam_set_data;
+		pam_get_data;
+		pam_strerror;
+		pam_authenticate;
+		pam_acct_mgmt;
+		pam_open_session;
+		pam_close_session;
+		pam_setcred;
+		pam_chauthtok;
+
+	local:
+		*;
+};

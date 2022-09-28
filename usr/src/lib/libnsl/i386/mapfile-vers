@@ -1,0 +1,26 @@
+#
+#ident	"@(#)mapfile-vers	1.6	96/05/22 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# Intel386 specific interface definition for usr/src/lib/libnsl.
+
+
+SUNW_1.1 {
+	global:
+		    # Entries from the SPARC compliance definition.
+
+		    rpc_broadcast_exp;
+		    gethostbyaddr;
+		    gethostbyname;
+		    inet_addr;
+		    inet_netof;
+		    inet_ntoa;
+		   _null_auth;
+		    svc_fdset;
+} SYSVABI_1.3;
+
+SUNWprivate_1.1 {
+	global:
+};

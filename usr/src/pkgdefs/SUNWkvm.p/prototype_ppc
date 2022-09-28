@@ -1,0 +1,20 @@
+#       Copyright (c) 1990-94 Sun Microsystems, Inc.
+#               All Rights Reserved
+#
+#       @(#)prototype_ppc	1.4     94/08/15 (c) Sun Microsystems, Inc.
+#
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+#
+#
+# List files which are Intel specific here
+#
+# source locations relative to the prototype file
+#
+#
+# SUNWkvm.p
+#

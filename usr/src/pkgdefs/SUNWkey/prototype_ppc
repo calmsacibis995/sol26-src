@@ -1,0 +1,62 @@
+#	Copyright (c) 1995 Sun Microsystems, Inc.
+#		All Rights Reserved
+#
+#	@(#)prototype_ppc	1.4	95/06/22 (c) Sun Microsystems, Inc.
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+# List files which are PPC specific here
+#
+# source locations relative to the prototype file
+#
+# SUNWkey
+#
+d none usr/share/lib/keytables 755 bin bin
+d none usr/share/lib/keytables/type_101 755 bin bin
+f none usr/share/lib/keytables/type_101/canadian_french2 444 bin bin
+f none usr/share/lib/keytables/type_101/denmark 444 bin bin
+f none usr/share/lib/keytables/type_101/france 444 bin bin
+f none usr/share/lib/keytables/type_101/germany 444 bin bin
+f none usr/share/lib/keytables/type_101/italy 444 bin bin
+f none usr/share/lib/keytables/type_101/japan 444 bin bin
+f none usr/share/lib/keytables/type_101/korea 444 bin bin
+f none usr/share/lib/keytables/type_101/netherlands 444 bin bin
+f none usr/share/lib/keytables/type_101/norway 444 bin bin
+f none usr/share/lib/keytables/type_101/portugal 444 bin bin
+f none usr/share/lib/keytables/type_101/reset 444 bin bin
+f none usr/share/lib/keytables/type_101/spain 444 bin bin
+f none usr/share/lib/keytables/type_101/sweden 444 bin bin
+f none usr/share/lib/keytables/type_101/swiss_french 444 bin bin
+f none usr/share/lib/keytables/type_101/swiss_german 444 bin bin
+f none usr/share/lib/keytables/type_101/uk 444 bin bin
+f none usr/share/lib/keytables/type_101/us 444 bin bin
+l none usr/share/lib/keytables/type_101/layout_00=../../../../../usr/share/lib/keytables/type_101/us
+l none usr/share/lib/keytables/type_101/layout_01=../../../../../usr/share/lib/keytables/type_101/us
+l none usr/share/lib/keytables/type_101/layout_23=../../../../../usr/share/lib/keytables/type_101/france
+l none usr/share/lib/keytables/type_101/layout_24=../../../../../usr/share/lib/keytables/type_101/denmark
+l none usr/share/lib/keytables/type_101/layout_25=../../../../../usr/share/lib/keytables/type_101/germany
+l none usr/share/lib/keytables/type_101/layout_26=../../../../../usr/share/lib/keytables/type_101/italy
+l none usr/share/lib/keytables/type_101/layout_27=../../../../../usr/share/lib/keytables/type_101/netherlands
+l none usr/share/lib/keytables/type_101/layout_28=../../../../../usr/share/lib/keytables/type_101/norway
+l none usr/share/lib/keytables/type_101/layout_29=../../../../../usr/share/lib/keytables/type_101/portugal
+l none usr/share/lib/keytables/type_101/layout_2a=../../../../../usr/share/lib/keytables/type_101/spain
+l none usr/share/lib/keytables/type_101/layout_2b=../../../../../usr/share/lib/keytables/type_101/sweden
+l none usr/share/lib/keytables/type_101/layout_2c=../../../../../usr/share/lib/keytables/type_101/swiss_french
+l none usr/share/lib/keytables/type_101/layout_2d=../../../../../usr/share/lib/keytables/type_101/swiss_german
+l none usr/share/lib/keytables/type_101/layout_2e=../../../../../usr/share/lib/keytables/type_101/uk
+l none usr/share/lib/keytables/type_101/layout_2f=../../../../../usr/share/lib/keytables/type_101/korea
+l none usr/share/lib/keytables/type_101/layout_31=../../../../../usr/share/lib/keytables/type_101/japan
+l none usr/share/lib/keytables/type_101/layout_32=../../../../../usr/share/lib/keytables/type_101/canadian_french2

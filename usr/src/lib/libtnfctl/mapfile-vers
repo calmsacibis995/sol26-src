@@ -1,0 +1,61 @@
+#
+#ident	"@(#)mapfile-vers	1.2	96/08/15 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/libtnfctl
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNW_1.1 {
+	global:
+		tnfctl_exec_open;
+		tnfctl_pid_open;
+		tnfctl_continue;
+		tnfctl_internal_open;
+		tnfctl_kernel_open;
+		tnfctl_indirect_open;
+		tnfctl_trace_attrs_get;
+		tnfctl_buffer_alloc;
+		tnfctl_register_funcs;
+		tnfctl_probe_apply;
+		tnfctl_probe_apply_ids;
+		tnfctl_probe_state_get;
+		tnfctl_probe_enable;
+		tnfctl_probe_disable;
+		tnfctl_probe_trace;
+		tnfctl_probe_untrace;
+		tnfctl_check_libs;
+		tnfctl_close;
+		tnfctl_strerror;
+		tnfctl_probe_connect;
+		tnfctl_probe_disconnect_all;
+		tnfctl_buffer_dealloc;
+		tnfctl_trace_state_set;
+		tnfctl_filter_state_set;
+		tnfctl_filter_list_get;
+		tnfctl_filter_list_add;
+		tnfctl_filter_list_delete;
+
+	local:
+		*;
+};
+
+SUNWprivate_1.1 {
+	global:
+		_tnfctl_internal_tracing_flag;
+		_tnfctl_externally_traced_pid;
+	local:
+		*;
+};

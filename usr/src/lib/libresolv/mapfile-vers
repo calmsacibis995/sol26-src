@@ -1,0 +1,57 @@
+#
+#ident	"@(#)mapfile-vers	1.10	96/01/04 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/libresolv.
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNW_1.1 {
+	global:
+		_getlong;
+		_getshort;
+		_res;
+		dn_comp;
+		dn_expand;
+		dn_skipname;
+		fp_query;
+		h_errno;
+		hostalias;
+		p_cdname;
+		p_class;
+		p_query;
+		p_rr;
+		p_time;
+		p_type;
+		putlong;
+		res_init;
+		res_mkquery;
+		res_send;
+		res_search;
+		res_query;
+		res_querydomain;
+		strcasecmp;
+		strncasecmp;
+	local:
+		*;
+};
+
+SUNWprivate_1.1 {
+	global:
+		_res_close;
+		_res_opcodes;		# in.named
+		_res_resultcodes;	# in.named
+		res_gethostbyname;	# hotjava
+};

@@ -1,0 +1,113 @@
+#!/sbin/sh
+#	Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T
+#	  All Rights Reserved
+
+#	THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF AT&T
+#	The copyright notice above does not evidence any
+#	actual or intended publication of such source code.
+
+#
+#	Copyright (c) 1996, by Sun Microsystems, Inc.
+#
+
+#ident	"@(#)keymap	1.5	96/07/23 SMI"
+
+# This file loads keyboard mappings and initializes keyboard defaults
+
+if [ "`uname -m`" = "i86pc" ]
+then
+	#
+	# Load the default fonts. 
+	#
+	LOADFONT=/usr/bin/loadfont
+	ETC_DEFAULTFONT=/etc/defaultfont
+	SYS_DEFAULTFONT=/usr/share/lib/fonts/8859.bdf
+
+	if [ -x $LOADFONT ]
+	then
+		if [ -f $ETC_DEFAULTFONT ]
+		then
+			$LOADFONT -f `cat $ETC_DEFAULTFONT` < /dev/console
+		else
+			if [ -f $SYS_DEFAULTFONT ]
+			then
+				$LOADFONT -f $SYS_DEFAULTFONT < /dev/console
+			else
+				echo "Failed to set the default fonts."
+				echo "Neither $ETC_DEFAULTFONT nor $SYS_DEFAULTFONT exists."
+			fi
+			echo "$ETC_DEFAULTFONT does not exist, used $SYS_DEFAULTFONT instead."
+		fi
+	else
+		echo "Failed to set the default font."
+		echo "$LOADFONT does not exist or not executable."
+	fi
+
+	#
+	# Load the default keyboard mappings. 
+	#
+	PCMAPKEYS=/usr/bin/pcmapkeys
+	SYS_DEFAULTKB=/usr/share/lib/keyboards/8859/en_US
+
+	if [ -x $PCMAPKEYS ]
+	then
+		MAPDIR="/usr/share/lib/keyboards"
+		#
+		# Default to US english kbd if can't get a good eeprom value
+		#
+		MAPFILE=8859/en_US
+		EEPROM=/usr/sbin/eeprom
+		if [ -x $EEPROM ]
+		then
+			KBDTYPE="`$EEPROM kbd-type | /usr/bin/sed s/kbd-type=//`"
+		else
+			KBDTYPE="US-English"
+		fi
+		case $KBDTYPE in
+		"Danish" )		MAPFILE=8859/da_dk ;;
+		"Dutch" )		MAPFILE=8859/nl_NL ;;
+		"French" )		MAPFILE=8859/fr_FR ;;
+		"French-Canadian" ) 	MAPFILE=8859/fr_CA ;;
+		"German" )		MAPFILE=8859/de_DE ;;
+		"Italian" )		MAPFILE=8859/it_IT ;;
+		"Japanese(106)" ) 	MAPFILE=japan/ja_JP ;;
+		"Japanese(J3100)" ) 	MAPFILE=japan/j3100 ;;
+		"Korean" )		MAPFILE=korean/ko_KR ;;
+		"Norwegian" )		MAPFILE=8859/no_NO ;;
+		"Spanish" )		MAPFILE=8859/es_ES ;;
+		"Swedish" )		MAPFILE=8859/sv_SE ;;
+		"Swiss-French" ) 	MAPFILE=8859/fr_CH ;;
+		"Swiss-German" ) 	MAPFILE=8859/de_CH ;;
+		"Taiwanese" )		MAPFILE=tchinese/zh_TW ;;
+		"UK-English" )		MAPFILE=8859/en_UK ;;
+		"US-English" )		MAPFILE=8859/en_US ;;
+		"US-English(Microsoft-Natural)" ) MAPFILE=8859/en_US ;;
+		esac
+		if [ -f $MAPDIR/$MAPFILE ]
+		then
+			$PCMAPKEYS -f $MAPDIR/$MAPFILE < /dev/console
+		else
+			echo "Failed to set the default keyboard mappings."
+			echo "$MAPDIR/$MAPFILE does not exist."
+		fi
+	else
+		echo "Failed to set the default keyboard mappings."
+		echo "$PCMAPKEYS does not exist or not executable."
+	fi
+else
+	#
+	# Load the keymap for the attached keyboard.
+	#
+	if [ -x /usr/bin/loadkeys ]
+	then
+		/usr/bin/loadkeys -e
+	fi
+fi
+
+#
+# Initialize the keyboard defaults
+#
+if [ -x /usr/bin/kbd ]
+then
+	/usr/bin/kbd -i
+fi

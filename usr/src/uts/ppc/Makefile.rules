@@ -1,0 +1,295 @@
+#
+# uts/ppc/Makefile.rules
+# Copyright (c) 1995, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.rules	1.60	96/10/08 SMI"
+#
+#	This Makefile defines all file modules and build rules for the
+# directory uts/ppc and it's children. These are the source files which
+# are specific to the ppc processor.
+#
+
+#
+#	This was implemented by pattern matching rules of the form:
+#
+# $(OBJS_DIR)/%.o:	 $(UTSBASE)/common/os/%.c
+#	$(COMPILE.c) -o $@ $<
+#
+# $(LINTS_DIR)/%.ln:	$(UTSBASE)/common/os/%.c
+#	@($(LHEAD) $(LINT.c) $< $(LTAIL))
+#
+#	For each directory containing source. This proved to slow under
+#	Nse because it caused a significant additional number of stats
+#	and stats are real slow under TFS. If TFS performance should
+#	improve, one might consider returning to the former implementation.
+#	In the former implementation, this file (Makefile.rules) was not
+#	needed and the pattern matching rules were in Makefile.files.
+#
+
+#
+#	C object build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(OBJS_DIR)/wscons.o:		$(UTSBASE)/common/io/wscons.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/wscons.c
+
+$(OBJS_DIR)/prmachdep.o:	$(UTSBASE)/ppc/fs/proc/prmachdep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/fs/proc/prmachdep.c
+
+$(OBJS_DIR)/profile.o:	$(UTSBASE)/ppc/io/profile.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/io/profile.c
+
+$(OBJS_DIR)/consconfig.o:	$(UTSBASE)/ppc/io/consconfig.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/io/consconfig.c
+
+#$(OBJS_DIR)/sysinit.o:	$(UTSBASE)/ppc/io/sysinit.c
+#	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/io/sysinit.c
+
+$(OBJS_DIR)/kobj_boot.o:	$(UTSBASE)/ppc/krtld/kobj_boot.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/krtld/kobj_boot.c
+
+$(OBJS_DIR)/kobj_crt.o:	$(UTSBASE)/ppc/krtld/kobj_crt.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/ppc/krtld/kobj_crt.s
+
+$(OBJS_DIR)/kobj_reloc.o:	$(UTSBASE)/ppc/krtld/kobj_reloc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/krtld/kobj_reloc.c
+
+$(OBJS_DIR)/kobj_isa.o:		$(UTSBASE)/ppc/krtld/kobj_isa.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/krtld/kobj_isa.c
+
+$(OBJS_DIR)/addupc.o:		$(UTSBASE)/ppc/ml/addupc.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/ppc/ml/addupc.s
+
+$(OBJS_DIR)/copy.o:		$(UTSBASE)/ppc/ml/copy.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/ppc/ml/copy.s
+
+$(OBJS_DIR)/ddi_ppc_asm.o:	$(UTSBASE)/ppc/ml/ddi_ppc_asm.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/ppc/ml/ddi_ppc_asm.s
+
+$(OBJS_DIR)/float.o:		$(UTSBASE)/ppc/ml/float.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/ppc/ml/float.s
+
+$(OBJS_DIR)/ip_ocsum.o:		$(UTSBASE)/ppc/ml/ip_ocsum.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/ppc/ml/ip_ocsum.s
+
+$(OBJS_DIR)/lock_prim.o:	$(UTSBASE)/ppc/ml/lock_prim.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/ppc/ml/lock_prim.s
+
+$(OBJS_DIR)/mcount.o:		$(UTSBASE)/ppc/ml/mcount.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/ppc/ml/mcount.s
+
+$(OBJS_DIR)/ppc_subr.o:		$(UTSBASE)/ppc/ml/ppc_subr.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/ppc/ml/ppc_subr.s
+
+$(OBJS_DIR)/ppcmmu_asm.o:	$(UTSBASE)/ppc/ml/ppcmmu_asm.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/ppc/ml/ppcmmu_asm.s
+
+$(OBJS_DIR)/prom_config.o:      $(UTSBASE)/ppc/os/prom_config.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/os/prom_config.c
+
+$(OBJS_DIR)/swtch.o:            $(UTSBASE)/ppc/ml/swtch.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/ppc/ml/swtch.s
+
+$(OBJS_DIR)/__var_arg.o:	$(UTSBASE)/ppc/os/__var_arg.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/os/__var_arg.c
+
+$(OBJS_DIR)/archdep.o:		$(UTSBASE)/ppc/os/archdep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/os/archdep.c
+
+$(OBJS_DIR)/atomic.o:		$(UTSBASE)/ppc/os/atomic.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/os/atomic.c
+
+$(OBJS_DIR)/cons_subr.o:	$(UTSBASE)/ppc/os/cons_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/os/cons_subr.c
+
+$(OBJS_DIR)/ddi_ppc.o:		$(UTSBASE)/ppc/os/ddi_ppc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/os/ddi_ppc.c
+
+$(OBJS_DIR)/divrem64.o:		$(UTSBASE)/ppc/os/divrem64.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/os/divrem64.c
+
+$(OBJS_DIR)/fpu.o:		$(UTSBASE)/ppc/os/fpu.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/os/fpu.c
+
+#$(OBJS_DIR)/kprof.o:		$(UTSBASE)/ppc/os/kprof.c
+#	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/os/kprof.c
+
+$(OBJS_DIR)/mutex.o:		$(UTSBASE)/ppc/os/mutex.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/os/mutex.c
+
+$(OBJS_DIR)/rwlock.o:		$(UTSBASE)/ppc/os/rwlock.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/os/rwlock.c
+
+#$(OBJS_DIR)/ppc_vtrace.o:	$(UTSBASE)/ppc/os/ppc_vtrace.c
+#	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/os/ppc_vtrace.c
+#
+$(OBJS_DIR)/sundep.o:		$(UTSBASE)/ppc/os/sundep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/os/sundep.c
+
+$(OBJS_DIR)/syscall.o:		$(UTSBASE)/ppc/os/syscall.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/os/syscall.c
+
+$(OBJS_DIR)/getcontext.o:	$(UTSBASE)/ppc/syscall/getcontext.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/syscall/getcontext.c
+
+$(OBJS_DIR)/install_utrap.o:	$(UTSBASE)/ppc/syscall/install_utrap.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/syscall/install_utrap.c
+
+$(OBJS_DIR)/lwp_private.o:	$(UTSBASE)/ppc/syscall/lwp_private.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/syscall/lwp_private.c
+
+$(OBJS_DIR)/hat_ppcmmu.o:	$(UTSBASE)/ppc/vm/hat_ppcmmu.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/vm/hat_ppcmmu.c
+
+$(OBJS_DIR)/mach_ppcmmu.o:	$(UTSBASE)/ppc/vm/mach_ppcmmu.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/vm/mach_ppcmmu.c
+
+$(OBJS_DIR)/mmu.o:		$(UTSBASE)/ppc/vm/mmu.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/vm/mmu.c
+
+$(OBJS_DIR)/seg_kmem.o:		$(UTSBASE)/ppc/vm/seg_kmem.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/vm/seg_kmem.c
+
+$(OBJS_DIR)/vm_machdep.o:	$(UTSBASE)/ppc/vm/vm_machdep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/vm/vm_machdep.c
+
+#
+#	Lint `object' build rules.
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(LINTS_DIR)/wscons.ln:		$(UTSBASE)/common/io/wscons.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/wscons.c $(LTAIL))
+
+$(LINTS_DIR)/prmachdep.ln:	$(UTSBASE)/ppc/fs/proc/prmachdep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/fs/proc/prmachdep.c $(LTAIL))
+
+$(OBJS_DIR)/profile.ln:	$(UTSBASE)/ppc/io/profile.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/io/profile.c $(LTAIL))
+
+$(LINTS_DIR)/consconfig.ln:	$(UTSBASE)/ppc/io/consconfig.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/io/consconfig.c $(LTAIL))
+
+#$(LINTS_DIR)/sysinit.ln:	$(UTSBASE)/ppc/io/sysinit.c
+#	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/io/sysinit.c $(LTAIL))
+
+$(LINTS_DIR)/doreloc.ln:	$(UTSBASE)/ppc/krtld/doreloc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/krtld/doreloc.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_boot.ln:	$(UTSBASE)/ppc/krtld/kobj_boot.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/krtld/kobj_boot.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_convrelstr.ln:	$(UTSBASE)/ppc/krtld/kobj_convrelstr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/krtld/kobj_convrelstr.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_crt.ln:	$(UTSBASE)/ppc/krtld/kobj_crt.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/ppc/krtld/kobj_crt.s $(LTAIL))
+
+$(LINTS_DIR)/kobj_reloc.ln:	$(UTSBASE)/ppc/krtld/kobj_reloc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/krtld/kobj_reloc.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_isa.ln:	$(UTSBASE)/ppc/krtld/kobj_isa.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/krtld/kobj_isa.c $(LTAIL))
+
+$(LINTS_DIR)/addupc.ln:		$(UTSBASE)/ppc/ml/addupc.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/ppc/ml/addupc.s $(LTAIL))
+
+$(LINTS_DIR)/copy.ln:		$(UTSBASE)/ppc/ml/copy.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/ppc/ml/copy.s $(LTAIL))
+
+$(LINTS_DIR)/ddi_ppc_asm.ln:	$(UTSBASE)/ppc/ml/ddi_ppc_asm.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/ppc/ml/ddi_ppc_asm.s $(LTAIL))
+
+$(LINTS_DIR)/float.ln:		$(UTSBASE)/ppc/ml/float.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/ppc/ml/float.s $(LTAIL))
+
+$(LINTS_DIR)/int_entry.ln:	$(UTSBASE)/ppc/ml/int_entry.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/ppc/ml/int_entry.s $(LTAIL))
+
+$(LINTS_DIR)/ip_ocsum.ln:	$(UTSBASE)/ppc/ml/ip_ocsum.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/ppc/ml/ip_ocsum.s $(LTAIL))
+
+$(LINTS_DIR)/lock_prim.ln:	$(UTSBASE)/ppc/ml/lock_prim.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/ppc/ml/lock_prim.s $(LTAIL))
+
+$(LINTS_DIR)/mcount.ln:		$(UTSBASE)/ppc/ml/mcount.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/ppc/ml/mcount.s $(LTAIL))
+
+$(LINTS_DIR)/ppc_subr.ln:	$(UTSBASE)/ppc/ml/ppc_subr.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/ppc/ml/ppc_subr.s $(LTAIL))
+
+$(LINTS_DIR)/ppcmmu_asm.ln:	$(UTSBASE)/ppc/ml/ppcmmu_asm.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/ppc/ml/ppcmmu_asm.s $(LTAIL))
+
+$(LINTS_DIR)/prom_config.ln:    $(UTSBASE)/ppc/os/prom_config.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/os/prom_config.c $(LTAIL))
+
+$(LINTS_DIR)/swtch.ln:          $(UTSBASE)/ppc/ml/swtch.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/ppc/ml/swtch.s $(LTAIL))
+
+$(LINTS_DIR)/__var_arg.ln:	$(UTSBASE)/ppc/os/__var_arg.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/os/__var_arg.c $(LTAIL))
+
+$(LINTS_DIR)/archdep.ln:	$(UTSBASE)/ppc/os/archdep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/os/archdep.c $(LTAIL))
+
+$(LINTS_DIR)/atomic.ln:		$(UTSBASE)/ppc/os/atomic.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/os/atomic.c $(LTAIL))
+
+$(LINTS_DIR)/cons_subr.ln:	$(UTSBASE)/ppc/os/cons_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/os/cons_subr.c $(LTAIL))
+
+$(LINTS_DIR)/ddi_ppc.ln:	$(UTSBASE)/ppc/os/ddi_ppc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/os/ddi_ppc.c $(LTAIL))
+
+$(LINTS_DIR)/divrem64.ln:	$(UTSBASE)/ppc/os/divrem64.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/os/divrem64.c $(LTAIL))
+
+$(LINTS_DIR)/fpu.ln:		$(UTSBASE)/ppc/os/fpu.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/os/fpu.c $(LTAIL))
+
+#$(LINTS_DIR)/kprof.ln:		$(UTSBASE)/ppc/os/kprof.c
+#	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/os/kprof.c $(LTAIL))
+#
+$(LINTS_DIR)/mutex.ln:		$(UTSBASE)/ppc/os/mutex.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/os/mutex.c $(LTAIL))
+
+#$(LINTS_DIR)/ppc_vtrace.ln:		$(UTSBASE)/ppc/os/ppc_vtrace.c
+#	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/os/ppc_vtrace.c $(LTAIL))
+#
+$(LINTS_DIR)/rwlock.ln:		$(UTSBASE)/ppc/os/rwlock.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/os/rwlock.c $(LTAIL))
+
+$(LINTS_DIR)/sundep.ln:		$(UTSBASE)/ppc/os/sundep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/os/sundep.c $(LTAIL))
+
+$(LINTS_DIR)/syscall.ln:	$(UTSBASE)/ppc/os/syscall.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/os/syscall.c $(LTAIL))
+
+$(LINTS_DIR)/getcontext.ln:	$(UTSBASE)/ppc/syscall/getcontext.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/syscall/getcontext.c $(LTAIL))
+
+$(LINTS_DIR)/install_utrap.ln:	$(UTSBASE)/ppc/syscall/install_utrap.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/syscall/install_utrap.c $(LTAIL))
+
+$(LINTS_DIR)/lwp_private.ln:	$(UTSBASE)/ppc/syscall/lwp_private.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/syscall/lwp_private.c $(LTAIL))
+
+$(LINTS_DIR)/hat_ppcmmu.ln:	$(UTSBASE)/ppc/vm/hat_ppcmmu.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/vm/hat_ppcmmu.c $(LTAIL))
+
+$(LINTS_DIR)/mach_ppcmmu.ln:	$(UTSBASE)/ppc/vm/mach_ppcmmu.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/vm/mach_ppcmmu.c $(LTAIL))
+
+$(LINTS_DIR)/mmu.ln:		$(UTSBASE)/ppc/vm/mmu.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/vm/mmu.c $(LTAIL))
+
+$(LINTS_DIR)/seg_kmem.ln:	$(UTSBASE)/ppc/vm/seg_kmem.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/vm/seg_kmem.c $(LTAIL))
+
+$(LINTS_DIR)/vm_machdep.ln:	$(UTSBASE)/ppc/vm/vm_machdep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/vm/vm_machdep.c $(LTAIL))

@@ -1,0 +1,88 @@
+/*
+ *		<<<<<  Quick Reference to PowerPC Disassembler Files  >>>>>
+ *
+ */
+
+#ident	"@(#)README	1.2	94/03/08 SMI"
+#pragma ident "@(#)README 1.2	93/10/09 vla"
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@																	 @
+@						<<<<< WARNING! >>>>>						 @
+@																	 @
+@    All files in this directory were edited with tab stops = 4		 @
+@																	 @
+@	 use the ":set ts=4" from vi's command mode to reproduce the 	 @
+@	 original formatting.											 @
+@																	 @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+xxxxx ppc_dis.c xxxxx
+/*
+ * PowerPC Disassembler
+ */
+
+xxxxx ppcdis_branch.h xxxxx
+/*
+ * This file contains the encoding for the Power PC Branch Operands (BO/BI)
+ */
+
+xxxxx ppcdis_debug.h xxxxx
+/*
+ * This file contains debug flag definitions for the PowerPC disassembler.
+ * Judicious use of these flags allows per-module granularity of debug output.
+ *
+
+xxxxx ppcdis_extern.h xxxxx
+/*
+ * This file contains external function declarations used by the
+ * PowerPC disassembler.
+ */
+
+xxxxx ppcdis_inst_fmt.h xxxxx
+/*
+ * This file contains all the structures that describe the various Power PC
+ * instruction formats.  Cf. the union "op" at the end of this file that
+ * includes all structures below.
+ */
+
+xxxxx ppcdis_mnemonics.h xxxxx
+/*
+ * This file contains all the Power PC standard mnemonics
+ * NOTE: Extended mnemonics are handled on a per-case basis.
+ */
+
+xxxxx ppcdis_opcodes.h xxxxx
+/*
+ * This file contains all of the primary and secondary opcodes used by the
+ * Power PC architecture instruction set.
+ */
+
+xxxxx ppcdis_parse.c xxxxx
+/*
+ * PowerPC disassembler - main parser
+ */
+
+xxxxx ppcdis_regs.h xxxxx
+/*
+ * This file contains Power PC typically used Register and Bit Assignments
+ */
+
+xxxxx ppcdis_trap.h xxxxx
+/*
+ * This file contains the encoding for the Power PC Trap Operand (TO)
+ */
+
+xxxxx ppcdis_utl.c xxxxx
+/*
+ * various utility routines used by the PowerPC disassembler.
+ * parsers for branch/trap operands, special purpose registers,
+ * miscellaneous flags.
+ */
+
+xxxxx ppcdis_print.c xxxxx
+/*
+ * formatted print routines for various common instruction types.
+ */

@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# Copyright (c) 1994 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)nscd	1.6	96/02/11 SMI"
+#
+
+case "$1" in
+    start)
+	test -f /etc/nscd.conf -a -f /usr/sbin/nscd || exit 0
+	secure=""
+	for table in passwd group hosts
+	do
+		if egrep '^'$table':.*nisplus' /etc/nsswitch.conf >/dev/null
+		then
+			/usr/lib/nscd_nischeck $table ||
+				secure="$secure -S $table,yes"
+		fi
+	done
+	/usr/sbin/nscd$secure 
+	;;
+    stop)
+	test -f /usr/sbin/nscd || exit 0
+	/usr/sbin/nscd -K
+	;;
+    *)
+	echo "Usage: /etc/init.d/nscd { start | stop }"
+	;;
+esac
+exit 0

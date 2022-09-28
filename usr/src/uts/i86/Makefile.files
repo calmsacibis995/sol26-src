@@ -1,0 +1,101 @@
+#
+# uts/i86/Makefile.files
+# Copyright (c) 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.files	1.59	96/10/04 SMI"
+#
+#	This Makefile defines all file modules and build rules for the
+# directory uts/i86 and it's children. These are the source files which
+# are specific to the i86 processor.
+#
+
+#
+#	object lists
+#
+CORE_OBJS +=	copy.o		tables2.o	swtch.o	\
+		ddi_i86.o	ddi_i86_asm.o	i86_subr.o 	sysi86.o \
+		mcount.o	\
+		seg_kmem.o	hat_i86.o	vm_machdep.o \
+		int_entry.o	float.o		fpu.o		lock_prim.o \
+		v86gptrap.o 	\
+		mach_i86mmu.o	i86_vtrace.o	mutex.o	\
+		rwlock.o	mach_page.o
+#
+#		Generic-unix Module
+#
+GENUNIX_OBJS += addupc.o	\
+		archdep.o	\
+		getcontext.o	\
+		install_utrap.o	\
+		lwp_private.o	\
+		sundep.o	\
+		syscall.o
+
+#
+#			PROM Routines
+#
+GENUNIX_OBJS +=								\
+	prom_alloc.o	prom_boot.o	prom_devname.o	prom_enter.o	\
+	prom_exit.o	prom_fb.o	prom_getchar.o	prom_gettime.o	\
+	prom_init.o	prom_io.o	prom_kbd.o	prom_node.o	\
+	prom_panic.o	prom_printf.o	prom_prop.o	prom_putchar.o	\
+	prom_reboot.o	prom_string.o	prom_version.o
+
+#
+#			file system modules
+#
+CORE_OBJS +=	prmachdep.o
+
+#
+#	Driver modules
+#
+AUDIOCS_OBJS +=	audio_4231.o audio_4231_8237dma.o
+
+#
+#			misc. modules
+#
+
+CONSCONFIG_OBJS	+=	consmsconf.o
+
+EMUL_80387_OBJS += emul_init.o glue.o dcode.o arith.o divmul.o lipsq.o reg.o \
+                   remsc.o round.o status.o store.o subadd.o trans.o
+
+KRTLD_BOOT_OBJS +=	kobj_boot.o
+KRTLD_OBJS +=		kobj_crt.o	kobj_reloc.o	kobj_isa.o \
+			doreloc.o	kobj_convrelstr.o
+
+OPENEEPR_OBJS += openprom.o
+
+PROFILE_OBJS +=	profile.o
+
+#
+#			special files
+#
+MODSTUB_OBJ =	modstubs.o
+
+#
+#	Build up paths and defines.
+#
+LINT_DEFS	+= -Di86
+INC_PATH	+= -I$(UTSBASE)/i86
+
+#
+# Since assym.s is a derived file, the dependency must be explicit for
+# all files including this file. (This is only actually required in the
+# instance when the .nse_depinfo file does not exist.) It may seem that
+# the lint targets should also have a similar dependency, but they don't
+# since only C headers are included when #defined(lint) is true.
+#
+ASSYM_DEPS	+= \
+	copy.o \
+	mcount.o i86_subr.o int_entry.o float.o \
+	glue.o dcode.o arith.o divmul.o lipsq.o reg.o \
+	remsc.o round.o status.o store.o subadd.o trans.o \
+	ddi_i86_asm.o kprof.o lock_prim.o swtch.o v86gptrap.o
+
+#
+# Inlined assembler routines.
+#
+INLINES		+= $(UTSBASE)/i86/ml/i86.il
+

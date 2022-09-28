@@ -1,0 +1,50 @@
+#
+#ident	"@(#)mapfile-vers	1.7	96/03/07 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/libnisdb.
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNW_2.1 {
+	local:
+		*;
+};
+
+SUNWprivate_2.1 {
+	global:
+		free_entry;
+		db_add_entry;
+		db_checkpoint;
+		db_create_table;
+		db_destroy_table;
+		db_first_entry;
+		db_initialize;
+		db_list_entries;
+		db_massage_dict;
+		db_next_entry;
+		db_remove_entry;
+		db_reset_next_entry;
+		db_standby;
+		db_table_exists;
+		db_unload_table;
+		db_perror;
+		db_abort_merge_dict;
+		db_end_merge_dict;
+		db_begin_merge_dict;
+		db_copy_file;
+		db_in_dict_file;
+		db_extract_dict_entries;
+};

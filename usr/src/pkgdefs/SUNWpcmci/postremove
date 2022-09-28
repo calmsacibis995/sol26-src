@@ -1,0 +1,104 @@
+#! /bin/sh
+#	Copyright (c) 1996 Sun Microsystems, Inc.
+#		All Rights Reserved
+
+# ident "@(#)postremove	1.10	96/05/23 SMI"
+# SUNWpcmci postremove script
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+EXIT=0
+
+PCMCIA_USER_DAEMON=pcmciad
+
+ARCH="`uname -p`"
+
+REMDRV=/usr/sbin/rem_drv
+
+DEVLINKTB="$BASEDIR/etc/devlink.tab"
+
+if test ! -f ${DEVLINKTB} -o ! -w ${DEVLINKTB}; then
+	echo "SUNWpcmci: file ${DEVLINKTB} is missing/inacessible." >&2
+	exit 1
+fi
+
+trap "rm -f /tmp/$$.*;exit" 0 1 2 3 13 15
+TMP=/tmp/$$
+
+#
+# killproc - kill the named process(es)
+#
+killproc() {            # kill the named process(es)
+	pid=`/usr/bin/ps -e |
+	     /usr/bin/grep $1 |
+	     /usr/bin/sed -e 's/^  *//' -e 's/ .*//'`
+	[ "$pid" != "" ] && kill $pid
+}
+
+#
+# rem_devlink - removes an entry from ${DEVLINKTB}
+#
+rem_devlink()
+{
+	PATTERN="$1"
+	LINK="$2"
+
+	grep -v "^$PATTERN	$LINK$" ${DEVLINKTB} >$TMP.devlink
+	mv $TMP.devlink ${DEVLINKTB}
+}
+
+#
+# remove_minor - removes minor node in /dev for passed driver
+#
+#    Usage:	remove_minor {driver_name}
+#
+remove_minor()
+{
+	DRIVER="$1"
+	DEVNODE="${BASEDIR}/dev/${DRIVER}"
+	rm -f $DEVNODE
+}
+
+#
+# Kill the PCMCIA user daemon if we're modifying the running system
+#
+if [ "$BASEDIR" = "/" ] ; then
+	killproc ${PCMCIA_USER_DAEMON}
+fi
+
+#
+# We remove the following drivers in this order:
+#
+#    SPARC:
+#	/kernel/drv/pcs
+#	/kernel/drv/stp4020
+#	/kernel/drv/pem
+#
+#    x86 and PPC:
+#	/kernel/drv/ra
+#	/kernel/drv/pcs
+#	/kernel/drv/pcic
+#	/kernel/drv/pem
+#
+case "${ARCH}" in
+	sparc)
+		${REMDRV} -b ${BASEDIR} pcs
+		${REMDRV} -b ${BASEDIR} stp4020
+		remove_minor stp4020
+		;;
+	ppc|i386)
+		${REMDRV} -b ${BASEDIR} ra
+		remove_minor ra
+		${REMDRV} -b ${BASEDIR} pcs
+		${REMDRV} -b ${BASEDIR} pcic
+		remove_minor pcic
+		;;
+esac
+
+${REMDRV} -b ${BASEDIR} pem
+rem_devlink 'type=pcmcia:event;name=pem' 'pem'
+
+touch ${BASEDIR}/reconfigure
+
+exit ${EXIT}

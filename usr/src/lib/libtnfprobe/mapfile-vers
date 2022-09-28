@@ -1,0 +1,88 @@
+#
+#ident	"@(#)mapfile-vers	1.4	96/08/20 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/libtnfprobe.
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNWprivate_1.1 {
+	global:
+		# Uncommitted
+
+		__tnf_tag_version_1_info;
+		__tnf_probe_version_1_info;
+		tnf_char_tag_data;
+		tnf_int8_tag_data;
+		tnf_uint8_tag_data;
+		tnf_int16_tag_data;
+		tnf_uint16_tag_data;
+		tnf_int32_tag_data;
+		tnf_uint32_tag_data;
+		tnf_int64_tag_data;
+		tnf_uint64_tag_data;
+		tnf_float32_tag_data;
+		tnf_float64_tag_data;
+		tnf_tag_tag_data;
+		tnf_string_tag_data;
+		tnf_name_tag_data;
+		tnf_size_tag_data;
+		tnf_opaque_tag_data;
+		tnf_time_base_tag_data;
+		tnf_time_delta_tag_data;
+		tnf_probe_event_tag_data;
+		tnf_pid_tag_data;
+		tnf_lwpid_tag_data;
+		tnf_user_struct_properties;
+		tnf_ref32_1;
+		tnf_string_1;
+		tnf_struct_tag_1;
+		tnf_allocate;
+		tnf_process_disable;
+		tnf_process_enable;
+		tnf_thread_disable;
+		tnf_thread_enable;
+
+		# Sun Private / Project Private
+
+		__tnf_probe_thr_sync;
+		tnf_threaded_test_addr;
+		tnf_non_threaded_test_addr;
+		tnf_trace_file_name;
+		tnf_trace_file_size;
+		tnf_trace_file_min;
+		_tnfw_b_control;
+		tnf_trace_alloc;
+		tnf_trace_end;
+		tnf_trace_commit;
+		tnf_trace_rollback;
+		tnf_probe_debug;
+		__tnf_probe_list_head;
+		__tnf_probe_list_valid;
+		__tnf_probe_memseg_p;
+		__tnf_probe_notify;
+		__tnf_probe_alloc;
+		tnf_probe_get_num_args;
+		tnf_probe_get_arg_indexed;
+		tnf_probe_get_type_indexed;
+		tnf_probe_get_value;
+		tnf_probe_get_chars;
+		fork1;
+		fork;
+		thr_create;
+		_resume_ret;
+	local:
+		*;
+};

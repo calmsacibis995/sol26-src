@@ -1,0 +1,54 @@
+#
+# Copyright (c), 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.target 1.7	96/09/17 SMI"
+#
+
+$(ROOTDIRS):
+	-$(INS.dir)
+
+$(ROOTISOSRCDIR):
+	-$(INS.dir)
+
+$(ROOTPOSIX):
+	cd $(ROOTLOCALE); $(RM) POSIX; $(SYMLINK) ./$(CLOCALE) $(POSIXLOCALE)
+
+#
+# WARNING: if the output of localedef changes then this ISOLOCALE
+# must be regenerated and the C source put here.
+# If you know of a way to build a makefile dependency then please do so.
+#
+
+$(ISOOBJECT):	$(PROG) $(ISOSRCS) $(ISOLOCALE).c
+	$(CC) $(CFLAGS) -KPIC -G -v $(CPPFLAGS) $(ISOLOCALE).c \
+		-h $(ISOOBJECT) -o $(ISOOBJECT) $(LDLIBS)
+	$(POST_PROCESS)
+
+$(ROOTISO)/%:	%
+	$(INS.file)
+
+$(ROOTISOSRCDIR)/%:	$(ISOLOCALE).%
+	$(INS.rename)
+
+$(ROOTC):	$(ROOTLOCALE)
+
+$(ROOTISO):	$(ROOTLOCALE)
+
+$(ROOTSYMLN):	$(ROOTLOCALE)
+
+$(ROOTC)/LC_CTYPE:	$(ROOTC)
+
+$(ROOTC)/LC_COLLATE:	$(ROOTC)
+
+$(ROOTC)/LC_NUMERIC:	$(ROOTC)
+
+$(ROOTC)/LC_TIME:	$(ROOTC)
+
+$(ROOTC)/LC_MONETARY:	$(ROOTC)
+
+$(ROOTC)/LC_MESSAGES:	$(ROOTC)
+
+$(ROOTISO)/LC_CTYPE:	$(ROOTISO)
+
+$(ROOTISOOBJECT):	$(ROOTISO)

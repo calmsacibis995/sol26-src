@@ -1,0 +1,29 @@
+#
+#ident	"@(#)mapfile-vers	1.7	96/05/22 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# SPARC specific interface definition for usr/src/lib/libnsl.
+
+
+SUNW_1.1 {
+
+} SISCD_2.3;
+
+SISCD_2.3 {
+	global:
+		    rpc_broadcast_exp;		# Table 6-7
+
+		    gethostbyaddr;		# Table 6-8
+		    gethostbyname;
+		    inet_addr;
+		    inet_netof;
+		    inet_ntoa;
+		   _null_auth;
+		    svc_fdset;
+} SYSVABI_1.3;
+
+SUNWprivate_1.1 {
+	global:
+};

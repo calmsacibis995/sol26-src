@@ -1,0 +1,57 @@
+#
+#ident	"@(#)mapfile-vers	1.11	96/07/02 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/libvolmgt.
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNW_1.3 {
+	global:
+		volmgt_feature_enabled;
+} SUNW_1.2;
+
+SUNW_1.2 {
+	global:
+		volmgt_acquire;
+		volmgt_release;
+} SUNW_1.1;
+
+SUNW_1.1 {
+	global:
+		media_findname;
+		media_getattr;
+		media_getid;
+		media_setattr;
+		volmgt_check;
+		volmgt_inuse;
+		volmgt_ownspath;
+		volmgt_root;
+		volmgt_running;
+		volmgt_symdev;
+		volmgt_symname;
+	local:
+		*;
+};
+
+SUNWprivate_1.1 {
+	global:
+		# ON-private interfaces.
+
+		_dev_mounted;
+		_dev_unmount;
+		_media_oldaliases;
+		_media_printaliases;
+};

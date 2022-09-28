@@ -1,0 +1,229 @@
+#
+#ident	"@(#)mapfile-vers	1.6	96/01/04 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/libbsm.
+#
+# For information regarding the establishment of versioned definitions see:
+# 	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNW_1.1 {
+	global:
+		au_close;
+		au_open;
+		au_preselect;
+		au_to_arg;
+		au_to_attr;
+		au_to_cmd;
+		au_to_data;
+		au_to_groups;
+		au_to_in_addr;
+		au_to_ipc;
+		au_to_iport;
+		au_to_me;
+		au_to_newgroups;
+		au_to_opaque;
+		au_to_path;
+		au_to_process;
+		au_to_return ;
+		au_to_socket;
+		au_to_subject;
+		au_to_text;
+		au_user_mask;
+		au_write;
+		audit;
+		auditon;
+		auditsvc;
+		endac;
+		endauclass;
+		endauevent;
+		endauuser;
+		getacdir;
+		getacflg;
+		getacmin;
+		getacna;
+		getauclassent;
+		getauclassent_r;
+		getauclassnam;
+		getauclassnam_r;
+		getaudit;
+		getauditflagsbin;
+		getauditflagschar;
+		getauevent;
+		getauevent_r;
+		getauevnam;
+		getauevnam_r;
+		getauevnonam;
+		getauevnum;
+		getauevnum_r;
+		getauid;
+		getauuserent;
+		getauuserent_r;
+		getauusernam;
+		getauusernam_r;
+		getfauditflags;
+		setac;
+		setauclass;
+		setauclassfile;
+		setaudit;
+		setauevent;
+		setaueventfile;
+		setauid;
+		setauuser;
+		setauuserfile;
+		testac;
+	local:
+		*;
+};
+
+
+SUNWprivate_1.1 {
+	global:
+		adr_char;
+		adr_count;
+		adr_long;
+		adr_short;
+		adr_start;
+		adrf_char;
+		adrf_int;
+		adrf_long;
+		adrf_opaque;
+		adrf_peek;
+		adrf_short;
+		adrf_start;
+		adrf_string;
+		adrf_u_char;
+		adrf_u_int;
+		adrf_u_long;
+		adrf_u_short;
+		adrm_char;
+		adrm_int;
+		adrm_long;
+		adrm_opaque;
+		adrm_short;
+		adrm_start;
+		adrm_string;
+		adrm_u_char;
+		adrm_u_int;
+		adrm_u_long;
+		adrm_u_short;
+		au_to_exec_args;
+		au_to_exec_env;
+		au_to_exit;
+		au_to_header;
+		au_to_seq;
+		au_to_trailer;
+		au_to_xatom;
+		au_to_xobj;
+		au_to_xproto;
+		au_to_xselect;
+		audit_allocate_argv;
+		audit_allocate_device;
+		audit_allocate_list;
+		audit_allocate_record;
+		audit_cron_session;
+		audit_ftpd_bad_pw;
+		audit_ftpd_excluded;
+		audit_ftpd_failure;
+		audit_ftpd_no_anon;
+		audit_ftpd_sav_data;
+		audit_ftpd_success;
+		audit_ftpd_unknown;
+		audit_halt_fail;
+		audit_halt_setup;
+		audit_halt_success;
+		audit_inetd_config;
+		audit_inetd_service;
+		audit_login_bad_dialup;
+		audit_login_bad_pw;
+		audit_login_maxtrys;
+		audit_login_not_console;
+		audit_login_save_flags;
+		audit_login_save_host;
+		audit_login_save_machine;
+		audit_login_save_port;
+		audit_login_save_pw;
+		audit_login_save_ttyn;
+		audit_login_success;
+		audit_mountd_mount;
+		audit_mountd_setup;
+		audit_mountd_umount;
+		audit_passwd_attributes_sorf;
+		audit_passwd_init_id;
+		audit_passwd_sorf;
+		audit_reboot_fail;
+		audit_reboot_setup;
+		audit_reboot_success;
+		audit_rexd_fail;
+		audit_rexd_setup;
+		audit_rexd_success;
+		audit_rexecd_fail;
+		audit_rexecd_setup;
+		audit_rexecd_success;
+		audit_rshd_fail;
+		audit_rshd_setup;
+		audit_rshd_success;
+		audit_su_bad_authentication;
+		audit_su_bad_uid;
+		audit_su_bad_username;
+		audit_su_init_info;
+		audit_su_reset_ai;
+		audit_su_success;
+		audit_su_unknown_failure;
+		aug_audit;
+		aug_get_machine;
+		aug_get_port;
+		aug_init;
+		aug_na_selected;
+		aug_save_afunc;
+		aug_save_asid;
+		aug_save_auid;
+		aug_save_egid;
+		aug_save_euid;
+		aug_save_event;
+		aug_save_gid;
+		aug_save_me;
+		aug_save_na;
+		aug_save_namask;
+		aug_save_path;
+		aug_save_pid;
+		aug_save_policy;
+		aug_save_sorf;
+		aug_save_text;
+		aug_save_tid;
+		aug_save_uid;
+		aug_save_user;
+		aug_selected;
+		cacheauclass;
+		cacheauclassnam;
+		cacheauevent;
+		cannot_audit;
+		enddaent;
+		enddmapent;
+		getdadfield;
+		getdaent;
+		getdafield;
+		getdanam;
+		getdatype;
+		getdmapdev;
+		getdmapdfield;
+		getdmapent;
+		getdmapfield;
+		getdmapnam;
+		getdmaptype;
+		setdaent;
+		setdafile;
+		setdmapent;
+		setdmapfile;
+};

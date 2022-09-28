@@ -1,0 +1,11 @@
+#pragma ident	"@(#)mapfile	1.5	95/02/22 SMI"
+ 
+text    = LOAD ?RX V0xfdf00078;
+text    : $PROGBITS ?A!W;
+ 
+data    = LOAD ?RWX;
+data    : $PROGBITS ?AW;
+data    : $NOBITS ?AW;
+ 
+note    = NOTE;
+note    : $NOTE;

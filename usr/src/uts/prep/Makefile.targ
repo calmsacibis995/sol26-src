@@ -1,0 +1,24 @@
+#
+# uts/prep/Makefile.targ
+# Copyright (c) 1994 by Sun Microsystems, Inc.
+#
+#pragma ident	"@(#)Makefile.targ	1.4	95/02/16 SMI"
+#
+#	This Makefile defines the set of all required, target containing
+# included Makefiles for the prep "implementation architecture".
+#
+
+#
+#	Targets for all implementations:
+#
+include $(UTSBASE)/Makefile.targ
+
+#
+#	Target set for prep (order is not important, as it is with the
+# isomorphic Makefile.files set).
+#
+include $(UTSBASE)/prep/Makefile.rules
+include $(UTSBASE)/ppc/Makefile.rules
+include $(PSMBASE)/promif/$(PROMIF)/common/Makefile.rules
+include $(PSMBASE)/promif/$(PROMIF)/prep/Makefile.rules
+include $(UTSBASE)/common/Makefile.rules

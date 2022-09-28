@@ -1,0 +1,58 @@
+#
+#ident	"@(#)mapfile-vers	1.6	96/01/16 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/libkvm.
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+#
+#
+# The following symbols are all UNCOMMITTED and documented in section 3K.
+#
+# The UNCOMMITTED classification is due to the fact that there is almost
+# nothing you can put as a symbol in a namelist which has any form of
+# release to release stability.  The syntax of these routines is actually
+# pretty stable, but being UNCOMMITTED, the door is always open for change.
+#
+
+SUNW_1.1 {
+	global:
+		kvm_close;
+		kvm_getcmd;
+		kvm_getproc;
+		kvm_getu;
+		kvm_kread;
+		kvm_kwrite;
+		kvm_nextproc;
+		kvm_nlist;
+		kvm_open;
+		kvm_read;
+		kvm_setproc;
+		kvm_uread;
+		kvm_uwrite;
+		kvm_write;
+	local:
+		*;
+};
+
+#
+# The following two symbols are a unofficial private interface between
+# the crash command and libkvm.  The interface classification level must
+# be consolidation private (or more restrictive).
+#
+SUNWprivate_1.1 {
+	global:
+		kvm_as_read;
+		kvm_physaddr;
+};

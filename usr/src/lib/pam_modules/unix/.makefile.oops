@@ -1,0 +1,149 @@
+#
+# Copyright (c) 1992-1995, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile	1.4	96/09/18 SMI"
+#
+# lib/pam_modules/unix/Makefile
+#
+
+# this library is private and is statically linked by usr/src/cmd/passwd.c
+PASSWD_LIB=libunixpasswd.a
+VERS = .1
+
+SCHOBJECTS=	unix_authenticate.o \
+		unix_setcred.o \
+		unix_acct_mgmt.o \
+		unix_close_session.o \
+		unix_open_session.o \
+		unix_chauthtok.o \
+		unix_update_authtok.o \
+		unix_set_authtokattr.o \
+		unix_get_authtokattr.o \
+		unix_update_authtok_file.o \
+		unix_update_authtok_nis.o \
+		unix_update_authtok_nisplus.o \
+		nispasswd_xdr.o \
+		npd_clnt.o \
+		switch_utils.o \
+		unix_utils.o
+
+PASSWDLIB_OBJS=	pics/unix_update_authtok.o \
+		pics/unix_set_authtokattr.o \
+		pics/unix_get_authtokattr.o \
+		pics/unix_update_authtok_file.o \
+		pics/unix_update_authtok_nis.o \
+		pics/unix_update_authtok_nisplus.o \
+		pics/nispasswd_xdr.o \
+		pics/npd_clnt.o \
+		pics/switch_utils.o \
+		pics/unix_utils.o
+
+DEFOBJECTS=$(SCHOBJECTS:%=def_%)
+
+DEFOBJS=$(DEFOBJECTS:%=objs/%)
+
+DEFPICS=$(DEFOBJECTS:%=pics/%)
+
+
+
+OBJECTS= $(SCHOBJECTS)
+SRCS= $(OBJECTS:%.o=%.c)
+CLOBBERFILES += $(PASSWD_LIB)
+
+# include library definitions
+include ../../Makefile.lib
+
+
+# library dependency
+LDLIBS += -lc -lpam -lnsl -lcmd -lmp
+
+# resolve with local variables in shared library
+DYNFLAGS += -Bsymbolic
+LINTFLAGS=
+
+# EXPORT DELETE START
+INTLMAP =
+INTLMAP += -Dcbc_crypt=_C0095A0A
+INTLMAP += -Debc_crypt=_C0095A0B
+INTLMAP += -D__des_crypt=_C0095A0C
+INTLMAP += -D__npd_cbc_crypt=_C0095A0D
+INTLMAP += -D__npd_ecb_crypt=_C0095A0E
+INTLMAP += -Dxencrypt=_C0095A0F
+INTLMAP += -Dxdecrypt=_C0095A10
+CPPFLAGS += $(INTLMAP)
+# EXPORT DELETE END
+CPPFLAGS += -DPAM_SECURE_RPC -DPAM_NIS -DPAM_NISPLUS
+
+PROTOCOL_DIR = $(ROOT)/usr/include/rpcsvc
+DERIVED_FILES= nispasswd_xdr.c
+
+DYNLIB= pam_unix.so$(VERS)
+LIBS = $(DYNLIB)
+
+# override ROOTLIBDIR and ROOTLINKS
+ROOTLIBDIR=	$(ROOT)/usr/lib/security
+ROOTLIBS=	$(LIBS:%=$(ROOTLIBDIR)/%)
+
+OWNER = root
+GROUP = sys
+
+
+OBJ_DIR=	objs
+PIC_DIR=	pics
+
+.KEEP_STATE:
+
+.PARALLEL:	$(DEFOBJS) $(DEFPICS)
+
+BUILD.SO=	$(CC) -o $@ -M mapfile -G $(DYNFLAGS) $(PICS) $(LDLIBS)
+
+all: $(DERIVED_FILES) $(LIBS) $(PASSWD_LIB)
+
+defobjs: $(OBJ_DIR) .WAIT $(DEFOBJS)
+
+defpics: $(PIC_DIR) .WAIT $(DEFPICS)
+
+$(ROOTLIBDIR):
+	$(INS.dir)
+
+#install libunixpasswd.a into proto area (usr/lib)
+install: all $(ROOTLIBDIR) $(ROOTLIBS) \
+	$(ROOTLIBDIR)/pam_unix.so $(ROOTLIBDIR)/$(PASSWD_LIB)
+
+$(ROOTLIBDIR)/pam_unix.so:
+	$(RM) $@; $(SYMLINK) $(DYNLIB) $@
+
+# include library targets
+include ../../Makefile.targ
+
+# EXPORT DELETE START
+# CRYPT DELETE START
+# Special target to clean up the source tree for export distribution
+# Warning: This target changes the source tree
+SED = /bin/sed
+EXPORT_SRC:
+	$(SED) -e "/^# EXPORT DELETE START/,/^# EXPORT DELETE END/d"	\
+		< Makefile > Makefile+
+	$(MV) Makefile+ Makefile
+	$(CHMOD) 444 Makefile
+ 
+CRYPT_SRC:
+	$(SED) -e "/^# CRYPT DELETE START/,/^# CRYPT DELETE END/d"	\
+		< Makefile					\
+	| $(SED) -e "/EXPORT DELETE/d"				\
+		> Makefile+
+	$(MV) Makefile+ Makefile
+	$(CHMOD) 444 Makefile
+
+# CRYPT DELETE END
+# EXPORT DELETE END
+
+# DERIVED_FILES
+nispasswd_xdr.c: $(PROTOCOL_DIR)/nispasswd.x
+	$(RPCGEN) -c -C -M $(PROTOCOL_DIR)/nispasswd.x > nispasswd_xdr.c
+
+$(PASSWD_LIB) : $(PASSWDLIB_OBJS)
+	$(AR) -r $(PASSWD_LIB) $(PASSWDLIB_OBJS)
+
+lint:	$(SRCS:.c=.ln)

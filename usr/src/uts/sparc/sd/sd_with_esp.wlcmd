@@ -1,0 +1,33 @@
+# Copyright (c) 1996, by Sun Microsystems, Inc.
+#
+# All rights reserved.
+#ident	"@(#)sd_with_esp.wlcmd 1.5	96/10/16 SMI"
+
+add scsi_watch_request::swr_callback targets \
+	sd.c:sd_mhd_watch_cb \
+	sd.c:sd_media_watch_cb
+
+add esp_cmd::cmd_pkt.pkt_comp targets \
+	sd.c:sd_mhd_watch_cb \
+	sd.c:sd_media_watch_cb \
+	sd.c:sd_mhd_watch_cb \
+	scsi_watch.c:scsi_watch_request_intr \
+	sd.c:sd_restart_unit_callback \
+	sd.c:sdintr
+
+one scsi_device
+one esp 
+
+add notify_entry::callback target  sd_mhd_reset_notify_cb
+
+ignore esp_kmem_cache_constructor esp_kmem_cache_destructor
+ignore scsi_errmsg  esp.c:esp_scsi_dmafree esp.c:esp_scsi_sync_pkt
+
+# choose one of the two for finding problems:
+#
+#assert order esp::e_mutex scsi_device::sd_mutex
+assert order scsi_device::sd_mutex  esp::e_mutex
+
+disallow esp_call_pkt_comp sd_mhd_watch_cb
+disallow esp_call_pkt_comp scsi_watch_request_intr
+

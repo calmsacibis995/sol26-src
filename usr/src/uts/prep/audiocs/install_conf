@@ -1,0 +1,83 @@
+#
+# Copyright (c) 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)install_conf	1.7	96/08/14 SMI"
+#
+# Auto-configuration script for PPC audiocs driver
+#
+
+MODULE=audiocs
+CONF_FILE="${MODULE}.conf"
+OLDCONF="${SRC}/uts/prep/io/${CONF_FILE}"
+dir="${1}"
+
+#
+# create the appropriate audiocs.conf file for the specified platform.
+#
+	NEWCONF="${CONF_FILE}"; export NEWCONF
+	egrep "^#gen|^#pragma" "${OLDCONF}" | sed 's/^#gen/#/' >"${NEWCONF}"
+	echo >>"${NEWCONF}"
+	NEWFILE=TRUE
+
+	case $dir in
+
+	IBM,PPS_Model_6015)
+		grep "^#i6015" "${OLDCONF}" | sed 's/^#i6015/#/' >>"${NEWCONF}"
+			;;
+
+	IBM,PPS_Model_6040 | IBM,PPS_Model_6040__E_ | \
+	IBM,PPS_Model_6042 | IBM,PPS_Model_6042__E_)
+		grep "^#i6040" "${OLDCONF}" | sed 's/^#i6040/#/' >>"${NEWCONF}"
+				;;
+
+	IBM,PPS_Model_6050_6070 | IBM,PPS_Model_6050_6070__E_ | \
+	IBM,PPS_Model_6070 | IBM,PPS_Model_6070__E_ | \
+	IBM,PPS_Model_7248 | IBM,PPS_Model_7248__E_)
+		grep "^#i6070" "${OLDCONF}" | sed 's/^#i6070/#/' >>"${NEWCONF}"
+				;;
+
+	MOT,Blackhawk)
+		grep "^#motomt" "${OLDCONF}" | sed 's/^#motomt/#/' >>${NEWCONF}
+				;;
+
+	MOT,Comet)
+		grep "^#motoe" "${OLDCONF}" | sed 's/^#motoe/#/' >>"${NEWCONF}"
+				;;
+
+	MOT,Genesis_1_X)
+		rm -f "${NEWCONF}" 2>/dev/null
+		NEWFILE=FALSE
+				;;
+
+	#
+	# make the last case "prep", not "prep | *"; the original assumption
+	# was that all platforms *would* include audio support, because
+	# this was called out in the PReP spec.  However, we no have a
+	# system that does *not* have audio support.  Therefore the default
+	# will change accordingly, to "do not create and audiocs.conf file
+	# unless specifically directed to do so".
+	#
+	prep)
+		cp -p "${OLDCONF}" "${NEWCONF}"
+		sed -e 's/^#gen/#/
+			s/^#i6015/#/
+			s/^#i6040/#/
+			s/^#i6070/#/
+			s/^#motomt/#/
+			s/^#motoe/#/
+			s/^#tosh/#/' <${NEWCONF} >${NEWCONF}.tmp
+		mv -f ${NEWCONF}.tmp ${NEWCONF}
+		NEWFILE=FALSE
+				;;
+
+	esac
+
+	if [ "${NEWFILE}" = "TRUE" ]
+	then
+		sed -e 's/^#name/name/
+			s/^#	/	/' <${NEWCONF} >${NEWCONF}.tmp
+		mv "${NEWCONF}.tmp" "${NEWCONF}"
+	fi
+
+exit 0

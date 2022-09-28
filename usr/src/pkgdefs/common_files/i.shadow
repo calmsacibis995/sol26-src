@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+#ident	"@(#)i.shadow	1.1	95/11/05 SMI"
+#
+# Copyright (c) 1995, by Sun Microsystems, Inc.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		#
+		# Add the 'nobody' user from 4.x so that people don't
+		# assign it to a regular user and confuse themselves
+		#
+		NOBODY4_LINE="nobody4:NP:6445::::::"
+		if grep "$NOBODY4_LINE" $dest; then
+			:
+		else
+			printf '/^noaccess:NP\na\n%s\n.\nw\nq\n' \
+				"$NOBODY4_LINE" | ed -s $dest > /dev/null
+		fi
+	fi
+done
+
+exit 0

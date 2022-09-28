@@ -1,0 +1,256 @@
+#
+# uts/prep/Makefile.rules
+# Copyright (c) 1995 - 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.rules	1.98	96/08/13 SMI"
+#
+#	This Makefile defines the build rules for the directory uts/prep
+#	and it's children. These are the source files which prep
+#	"implementation architecture" dependent.
+#
+
+#
+#	This was implemented by pattern matching rules of the form:
+#
+# $(OBJS_DIR)/%.o:	 $(UTSBASE)/prep/os/%.c
+#	$(COMPILE.c) -o $@ $<
+#
+# $(LINTS_DIR)/%.ln:	$(UTSBASE)/prep/os/%.c
+#	@($(LHEAD) $(LINT.c) $< $(LTAIL))
+#
+#	For each directory containing source. This proved to slow under
+#	Nse because it caused a significant additional number of stats
+#	and stats are real slow under TFS. If TFS performance should
+#	improve, one might consider returning to the former implementation.
+#	In the former implementation, this file (Makefile.rules) was not
+#	needed and the pattern matching rules were in Makefile.files.
+#
+
+#
+#	C object build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+# The lint rules got particularly long and hard to read without this...
+#
+$(OBJS_DIR)/avintr.o:		$(UTSBASE)/common/io/avintr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/avintr.c
+
+$(OBJS_DIR)/hardclk.o:		$(UTSBASE)/common/io/hardclk.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/hardclk.c
+
+$(OBJS_DIR)/bootdev.o:		$(UTSBASE)/ppc/os/bootdev.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/ppc/os/bootdev.c
+
+$(OBJS_DIR)/confunix.o:		$(UTSBASE)/prep/conf/confunix.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/conf/confunix.c
+
+$(OBJS_DIR)/autoconf.o:		$(UTSBASE)/prep/io/autoconf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/io/autoconf.c
+
+#$(OBJS_DIR)/isa.o:		$(UTSBASE)/prep/io/isa.c
+#	$(COMPILE.c) -o $@ $(UTSBASE)/prep/io/isa.c
+#
+$(OBJS_DIR)/mem_kern.o:		$(UTSBASE)/prep/io/mem_kern.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/io/mem_kern.c
+
+$(OBJS_DIR)/pci.o:		$(UTSBASE)/prep/io/pci.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/io/pci.c
+
+$(OBJS_DIR)/pci_to_isa.o:	$(UTSBASE)/prep/io/pci_to_isa.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/io/pci_to_isa.c
+
+$(OBJS_DIR)/locore.o:		$(UTSBASE)/prep/ml/locore.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/prep/ml/locore.s
+
+$(OBJS_DIR)/notes.o:            $(UTSBASE)/prep/ml/notes.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/prep/ml/notes.s
+
+$(OBJS_DIR)/ddi_impl.o:		$(UTSBASE)/prep/os/ddi_impl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/os/ddi_impl.c
+
+$(OBJS_DIR)/dvma.o:		$(UTSBASE)/prep/os/dvma.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/os/dvma.c
+
+$(OBJS_DIR)/machdep.o:		$(UTSBASE)/prep/os/machdep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/os/machdep.c
+
+$(OBJS_DIR)/mach_page.o:	$(UTSBASE)/common/vm/mach_page.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/mach_page.c
+
+$(OBJS_DIR)/mlsetup.o:		$(UTSBASE)/prep/os/mlsetup.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/os/mlsetup.c
+
+$(OBJS_DIR)/startup.o:		$(UTSBASE)/prep/os/startup.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/os/startup.c
+
+$(OBJS_DIR)/ppage.o:		$(UTSBASE)/prep/os/ppage.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/os/ppage.c
+
+$(OBJS_DIR)/bp_map.o:		$(UTSBASE)/prep/os/bp_map.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/os/bp_map.c
+
+$(OBJS_DIR)/mp_call.o:		$(UTSBASE)/prep/os/mp_call.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/os/mp_call.c
+
+$(OBJS_DIR)/mp_machdep.o:		$(UTSBASE)/prep/os/mp_machdep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/os/mp_machdep.c
+
+$(OBJS_DIR)/mp_implfuncs.o:		$(UTSBASE)/prep/os/mp_implfuncs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/os/mp_implfuncs.c
+
+$(OBJS_DIR)/rootnex.o:		$(UTSBASE)/prep/io/rootnex.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/io/rootnex.c
+
+$(OBJS_DIR)/openprom.o:		$(UTSBASE)/prep/io/openprom.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/io/openprom.c
+
+$(OBJS_DIR)/uppc.o:		$(UTSBASE)/prep/io/psm/uppc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/io/psm/uppc.c
+
+$(OBJS_DIR)/uppc_ml.o:		$(UTSBASE)/prep/io/psm/uppc_ml.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/prep/io/psm/uppc_ml.s
+
+$(OBJS_DIR)/trap.o:		$(UTSBASE)/prep/os/trap.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/os/trap.c
+
+$(OBJS_DIR)/x_call.o:		$(UTSBASE)/prep/os/x_call.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/os/x_call.c
+
+$(OBJS_DIR)/clgd5434.o:		$(UTSBASE)/prep/io/clgd5434.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/io/clgd5434.c
+
+$(OBJS_DIR)/icecube.o:		$(UTSBASE)/prep/io/icecube.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/io/icecube.c
+
+$(OBJS_DIR)/mach_sysconfig.o:	$(UTSBASE)/prep/os/mach_sysconfig.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/os/mach_sysconfig.c
+
+$(OBJS_DIR)/woodfield-wd90c24a2.o:		$(UTSBASE)/prep/io/woodfield-wd90c24a2.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/io/woodfield-wd90c24a2.c
+
+$(OBJS_DIR)/s3.o:		$(UTSBASE)/prep/io/s3.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/io/s3.c
+
+$(OBJS_DIR)/p9000.o:		$(UTSBASE)/prep/io/p9000.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/io/p9000.c
+
+$(OBJS_DIR)/p9100.o:		$(UTSBASE)/prep/io/p9100.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/prep/io/p9100.c
+
+#
+#	Lint `object' build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(LINTS_DIR)/avintr.ln:		$(UTSBASE)/common/io/avintr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/avintr.c $(LTAIL))
+
+$(LINTS_DIR)/hardclk.ln:	$(UTSBASE)/common/io/hardclk.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/hardclk.c $(LTAIL))
+
+$(LINTS_DIR)/bootdev.ln:		$(UTSBASE)/ppc/os/bootdev.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/ppc/os/bootdev.c $(LTAIL))
+
+$(LINTS_DIR)/confunix.ln:	$(UTSBASE)/prep/conf/confunix.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/conf/confunix.c $(LTAIL))
+
+$(LINTS_DIR)/autoconf.ln:	$(UTSBASE)/prep/io/autoconf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/io/autoconf.c $(LTAIL))
+
+#$(LINTS_DIR)/isa.ln:	$(UTSBASE)/prep/io/isa.c
+#	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/io/isa.c $(LTAIL))
+#
+$(LINTS_DIR)/mem_kern.ln:	$(UTSBASE)/prep/io/mem_kern.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/io/mem_kern.c $(LTAIL))
+
+$(LINTS_DIR)/pci.ln:	$(UTSBASE)/prep/io/pci.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/io/pci.c $(LTAIL))
+
+$(LINTS_DIR)/pci_to_isa.ln:	$(UTSBASE)/prep/io/pci_to_isa.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/io/pci_to_isa.c $(LTAIL))
+
+$(LINTS_DIR)/locore.ln:		$(UTSBASE)/prep/ml/locore.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/prep/ml/locore.s $(LTAIL))
+
+$(LINTS_DIR)/mpcore.ln:		$(UTSBASE)/prep/ml/mpcore.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/prep/ml/mpcore.s $(LTAIL))
+
+$(LINTS_DIR)/notes.ln:	$(UTSBASE)/prep/ml/notes.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/prep/ml/notes.s $(LTAIL))
+
+$(LINTS_DIR)/ddi_impl.ln:	$(UTSBASE)/prep/os/ddi_impl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/os/ddi_impl.c $(LTAIL))
+
+$(LINTS_DIR)/dvma.ln:		$(UTSBASE)/prep/os/dvma.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/os/dvma.c $(LTAIL))
+
+$(LINTS_DIR)/machdep.ln:	$(UTSBASE)/prep/os/machdep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/os/machdep.c $(LTAIL))
+
+$(LINTS_DIR)/startup.ln:	$(UTSBASE)/prep/os/startup.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/os/startup.c $(LTAIL))
+
+$(LINTS_DIR)/mach_page.ln:	$(UTSBASE)/common/vm/mach_page.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/mach_page.c $(LTAIL))
+
+$(LINTS_DIR)/mlsetup.ln:	$(UTSBASE)/prep/os/mlsetup.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/os/mlsetup.c $(LTAIL))
+
+$(LINTS_DIR)/ppage.ln:	$(UTSBASE)/prep/os/ppage.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/os/ppage.c $(LTAIL))
+
+$(LINTS_DIR)/bp_map.ln:	$(UTSBASE)/prep/os/bp_map.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/os/bp_map.c $(LTAIL))
+
+$(LINTS_DIR)/mp_call.ln:	$(UTSBASE)/prep/os/mp_call.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/os/mp_call.c $(LTAIL))
+
+$(LINTS_DIR)/mp_machdep.ln:	$(UTSBASE)/prep/os/mp_machdep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/os/mp_machdep.c $(LTAIL))
+
+$(LINTS_DIR)/mp_implfuncs.ln:	$(UTSBASE)/prep/os/mp_implfuncs.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/os/mp_implfuncs.c $(LTAIL))
+
+$(LINTS_DIR)/mach_sysconfig.ln:	$(UTSBASE)/prep/os/mach_sysconfig.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/os/mach_sysconfig.c $(LTAIL))
+
+$(LINTS_DIR)/rootnex.ln:	$(UTSBASE)/prep/io/rootnex.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/io/rootnex.c $(LTAIL))
+
+$(LINTS_DIR)/openprom.ln:	$(UTSBASE)/prep/io/openprom.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/io/openprom.c $(LTAIL))
+
+$(LINTS_DIR)/uppc.ln:		$(UTSBASE)/prep/io/psm/uppc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/io/psm/uppc.c $(LTAIL))
+
+$(LINTS_DIR)/uppc_ml.ln:	$(UTSBASE)/prep/io/psm/uppc_ml.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/prep/io/psm/uppc_ml.s $(LTAIL))
+
+$(LINTS_DIR)/trap.ln:		$(UTSBASE)/prep/os/trap.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/os/trap.c $(LTAIL))
+
+$(LINTS_DIR)/x_call.ln:		$(UTSBASE)/prep/os/x_call.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/os/x_call.c $(LTAIL))
+
+$(LINTS_DIR)/clgd5434.ln:		$(UTSBASE)/prep/io/clgd5434.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/io/clgd5434.c $(LTAIL))
+
+$(LINTS_DIR)/icecube.ln:		$(UTSBASE)/prep/io/icecube.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/io/icecube.c $(LTAIL))
+
+$(LINTS_DIR)/p9000.ln:		$(UTSBASE)/prep/io/p9000.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/io/p9000.c $(LTAIL))
+
+$(LINTS_DIR)/p9100.ln:		$(UTSBASE)/prep/io/p9100.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/io/p9100.c $(LTAIL))
+
+$(LINTS_DIR)/s3.ln:		$(UTSBASE)/prep/io/s3.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/io/s3.c $(LTAIL))
+
+$(LINTS_DIR)/woodfield-wd90c24a2.ln:	$(UTSBASE)/prep/io/woodfield-wd90c24a2.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/prep/io/woodfield-wd90c24a2.c $(LTAIL))
+

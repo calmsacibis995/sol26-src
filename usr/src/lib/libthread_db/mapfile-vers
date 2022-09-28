@@ -1,0 +1,43 @@
+#
+#ident	"@(#)mapfile-vers	1.4	96/01/04 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/libthread_db (0).
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNWprivate_1.1 {
+	global:
+		_tpmask;
+		thread_db_err;
+		thread_db_from_vcpu;
+		thread_db_get_fregs;
+		thread_db_get_regs;
+		thread_db_id;
+		thread_db_init;
+		thread_db_iter;
+		thread_db_lwpid;
+		thread_db_notify_on_death;
+		thread_db_pc;
+		thread_db_set_fregs;
+		thread_db_set_regs;
+		thread_db_startpc;
+		thread_db_status;
+		thread_db_sync;
+		thread_db_valid;
+		thread_db_vers;
+	local:
+		*;
+};

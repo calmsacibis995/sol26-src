@@ -1,0 +1,141 @@
+#
+#ident	"@(#)mapfile-vers	1.19	96/09/24 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# PPC specific interface definition for usr/src/lib/libc.
+
+
+SUNW_1.1 {
+	global:
+		   _thr_errno_addr;
+		
+		# SPARC compliance definition symbols.
+
+		   _addseverity;
+		    addseverity;
+		    asctime_r;
+		   _crypt;
+		    crypt;
+		    ctime_r;
+		  __div64;
+		  __dtoll;
+		  __dtoull;
+		    endgrent;
+		    endpwent;
+		   _encrypt;
+		    encrypt;
+		 ___errno;
+		    errno;
+		    fgetgrent;
+		    fgetgrent_r;
+		    fgetpwent;
+		    fgetpwent_r;
+		    flockfile;
+		  __ftoll;
+		  __ftoull;
+		    funlockfile;
+		    getc_unlocked;
+		    getchar_unlocked;
+		    getgrent;
+		    getgrent_r;
+		    getgrgid_r;
+		    getgrnam_r;
+		   _getitimer;
+		    getitimer;
+		   _gettimeofday;
+		    gettimeofday;
+		    getlogin_r;
+		    getpwent;
+		    getpwent_r;
+		    getpwnam_r;
+		    getpwuid_r;
+		    gmtime_r;
+		   _iob;
+		    localtime_r;
+		  __mul64;
+		    putc_unlocked;
+		    putchar_unlocked;
+		    rand_r;
+		    readdir_r;
+		  __rem64;
+		    setgrent;
+		   _setitimer;
+		    setitimer;
+		   _setkey;
+		    setkey;
+		    setpwent;
+		    strtok_r;
+		   _sysinfo;
+		    sysinfo;
+		    ttyname_r;
+		  __udiv64;
+		  __umul64;
+		  __urem64;
+
+		# Optional libsys support routines not already defined within
+		# other binary interfaces (table 6-2)
+
+		   _q_lltoq;
+		   _q_qtoll;
+		   _q_qtoull;
+		   _q_ulltoq;
+} SYSVABI_1.3;
+
+SYSVABI_1.3 {
+	global:
+		# C Library (libc.so.1) interface.
+
+		  __va_arg;
+		  __add_module_tags;
+		  __delete_module_tags;
+		  __tag_lookup_pc;
+
+		# System Library (libsys.so.1) interface.
+
+		    sbrk;		# Support Routines
+		   _sbrk;
+
+		  __flt_rounds;		# Global External Data Symbols
+		  __huge_val;
+
+		   _q_add;		# Symbols in ppc suplement
+		   _q_cmp;		# for libsys.so.1
+		   _q_cmpe;
+		   _q_div;
+		   _q_dtoq;
+		   _q_feq;
+		   _q_fge;
+		   _q_fgt;
+		   _q_fle;
+		   _q_flt;
+		   _q_fne;
+		   _q_itoq;
+		   _q_mul;
+		   _q_neg;
+		   _q_qtod;
+		   _q_qtoi;
+		   _q_qtos;
+		   _q_qtou;
+		   _q_sqrt;
+		   _q_stoq;
+		   _q_sub;
+		   _q_utoq;
+		  __dtou;
+};
+
+SUNWprivate_1.1 {
+	global:
+		   _QgetRD;
+		   _cerror;
+		   _cerror64;
+		    ntohl;		# BUG: defined in libsocket.so, they
+		    ntohs;		# shouldn't be defined here also.
+		    htonl;		# needed by libnsl, so it should depend
+		    htons;		# on libsocket.so
+
+		  __errno_fix;
+		  __mt_sigpending;	# bugid 1156192
+		   _libc_nanosleep;	# bugid 1213650
+};

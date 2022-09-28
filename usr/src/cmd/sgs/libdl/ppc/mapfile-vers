@@ -1,0 +1,16 @@
+#
+#ident	"@(#)mapfile-vers	1.2	96/01/04 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# PPC specific interface definition for usr/src/lib/libdl.
+
+
+SUNW_1.1 {
+	global:
+		 dlclose;
+		 dlerror;
+		 dlopen;
+		 dlsym;
+};

@@ -1,0 +1,124 @@
+#
+#ident	"@(#)Makefile.targ	1.14	96/07/25 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# sgs/libelf/Makefile.targ
+
+
+objs/%.o \
+profs/%.o \
+pics/%.o:	%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+objs/%.o \
+profs/%.o \
+pics/%.o:	../misc/%.c
+		$(COMPILE.c) -DELF -o $@ $<
+		$(POST_PROCESS_O)
+
+objs/%.o \
+profs/%.o \
+pics/%.o:	../common/%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+all:		$(BLTSRCS) .WAIT $(LIBS)
+
+install:	all .WAIT $(ROOTLIBS) $(ROOTLINKS) $(ROOTDEMODIR) \
+		.WAIT $(ROOTDEMOFILES)
+
+lint:		$(BLTSRCS) .WAIT $(LINTLIB)
+
+delete:
+		$(RM) $(DYNLIB)
+
+$(DYNLIB):	$(MAPFILE)
+
+# include common library targets
+#
+include		$(SRC)/lib/Makefile.targ
+
+
+$(ROOTDEMODIR):
+		$(INS.dir)
+
+$(ROOTDEMODIR)/%:	../demo/%
+		$(INS.file)
+
+xlate.c:	../common/xlate.m4
+		$(M4) < ../common/xlate.m4 > xlate.c
+
+objs/msg.o \
+pics/msg.o \
+profs/msg.o:	msg.c
+
+objs/error.o \
+pics/error.o \
+profs/error.o:	msg.h
+
+objs/ar.o \
+pics/ar.o \
+profs/ar.o:	msg.h
+
+objs/xlate.o \
+pics/xlate.o \
+profs/xlate.o:	xlate.c
+
+#
+# Targets needed to support running of Warlock, warlock can be
+# located at:
+#	suntools.eng:/export/tools/internal/warlock
+#
+# to use add the following to your path:
+#	export PATH=/net/suntools.eng/export/tools/internal/warlock/bin:$PATH
+#
+.PARALLEL: $(WARLOCKFILES)
+warlock: wlocks .WAIT warlock_files
+	warlock -c ../common/libelf.wlcmd $(WARLOCKFILES)
+
+warlock_files: $(BLTSRCS) .WAIT $(WARLOCKFILES)
+
+wlocks:
+	-@mkdir -p $@
+
+wlocks/%.ll:	%.c
+	wlcc $(CFLAGS) $(CPPFLAGS) -o $@ $<
+
+wlocks/%.ll:	../misc/%.c
+	wlcc $(CFLAGS) $(CPPFLAGS) -o $@ $<
+
+wlocks/%.ll:	../common/%.c
+	wlcc $(CFLAGS) $(CPPFLAGS) -o $@ $<
+
+
+# Special target for native builds (ie. when we need to build a version of ld
+# to build a version of ld :-).
+ 
+native:		$(SGSPROTO)/$(DYNLIB)
+
+$(SGSPROTO)/$(DYNLIB): \
+		pics .WAIT $$(PICS)
+		$(BUILD.SO)
+		$(POST_PROCESS_SO)
+		-@$(RM) $(SGSPROTO)/$(LIBLINKS)
+		$(SYMLINK) $(DYNLIB) $(SGSPROTO)/$(LIBLINKS)
+
+
+# Derived source and header files (messaging).  Make sure that the sgsmsg
+# command is constructed - libelf might not be built with the whole sgs.
+
+catalog:	$(BLTMESG)
+
+$(BLTDEFS) + \
+$(BLTDATA) + \
+$(BLTMESG) :    $(SGSTOOLS)/sgsmsg ../common/libelf.msg
+		$(SGSTOOLS)/sgsmsg $(SGSMSGFLAGS) ../common/libelf.msg
+
+$(SGSTOOLS)/sgsmsg: FRC
+		@ cd $(SGSTOOLS); pwd; $(MAKE) catalog
+		@ pwd
+
+FRC:

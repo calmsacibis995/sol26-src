@@ -1,0 +1,150 @@
+#
+#ident	"@(#)mapfile-vers	1.29	96/09/06 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# SPARC specific interface definition for usr/src/lib/libc.
+
+
+SUNW_1.1 {
+	global:
+		  __flt_rounds;
+} SISCD_2.3;
+
+# SPARC International SPARC compliance definition 2.3.
+
+SISCD_2.3 {
+	global:
+		   _addseverity;
+		    addseverity;
+		    asctime_r;
+		   _crypt;
+		    crypt;
+		    ctime_r;
+		  __div64;
+		  __dtoll;
+		  __dtoull;
+		    endgrent;
+		    endpwent;
+		   _encrypt;
+		    encrypt;
+		 ___errno;
+		    errno;
+		    fgetgrent;
+		    fgetgrent_r;
+		    fgetpwent;
+		    fgetpwent_r;
+		    flockfile;
+		  __ftoll;
+		  __ftoull;
+		    funlockfile;
+		    getc_unlocked;
+		    getchar_unlocked;
+		    getgrent;
+		    getgrent_r;
+		    getgrgid_r;
+		    getgrnam_r;
+		   _getitimer;
+		    getitimer;
+		   _gettimeofday;
+		    gettimeofday;
+		    getlogin_r;
+		    getpwent;
+		    getpwent_r;
+		    getpwnam_r;
+		    getpwuid_r;
+		    gmtime_r;
+		   _iob;
+		    localtime_r;
+		  __mul64;
+		    putc_unlocked;
+		    putchar_unlocked;
+		    rand_r;
+		    readdir_r;
+		  __rem64;
+		   _sbrk;
+		    sbrk;
+		    setgrent;
+		   _setitimer;
+		    setitimer;
+		   _setkey;
+		    setkey;
+		    setpwent;
+		    strtok_r;
+		   _sysinfo;
+		    sysinfo;
+		    ttyname_r;
+		  __udiv64;
+		  __umul64;
+		  __urem64;
+} SYSVABI_1.3;
+
+SYSVABI_1.3 {
+	global:
+		# System Library (libsys.so.1) interface.
+
+		   _Q_add;		# Support Routines
+		   _Q_cmp;		# System V ABI (SPARC), Figure 6-1
+		   _Q_cmpe;
+		   _Q_div;
+		   _Q_dtoq;
+		   _Q_feq;
+		   _Q_fge;
+		   _Q_fgt;
+		   _Q_fle;
+		   _Q_flt;
+		   _Q_fne;
+		   _Q_itoq;
+		   _Q_mul;
+		   _Q_neg;
+		   _Q_qtod;
+		   _Q_qtoi;
+		   _Q_qtos;
+		   _Q_qtou;
+		   _Q_sqrt;
+		   _Q_stoq;
+		   _Q_sub;
+		   _Q_utoq;
+		   .div;
+		  __dtou;
+		  __ftou;
+		   .mul;
+		   .rem;
+		   .stret1;
+		   .stret2;
+		   .stret4;
+		   .stret8;
+		   .udiv;
+		   .umul;
+		   .urem;
+
+		  __huge_val;		# Global External Data Symbols
+					# System V ABI (SPARC), Figure 6-2.
+};
+
+SUNWprivate_1.1 {
+	global:
+		   _QgetRD;
+		   _QgetRP;
+		   _QswapRD;
+		   _QswapRP;
+		   _Q_lltoq;
+		   _Q_qtoll;		# /opt/SUNWspro/SC2.0.1/acomp
+		   _Q_qtoull;		# /opt/SUNWspro/SC2.0.1/acomp
+		   _Q_ulltoq;
+		   _cerror;
+		   _cerror64;
+		   _halt;
+		   _install_utrap;	# wabi
+		    install_utrap;
+		   _libc_nanosleep;	# bugid 1213650
+		  __lyday_to_month;
+		  __mon_lengths;
+		  __mt_sigpending;	# bugid 1156192
+		    nop;
+		   _sbrk_unlocked;	# referenced by java
+		   _syssun;
+		   _xregs_clrptr;	# libthread.so calls
+		  __yday_to_month;
+};

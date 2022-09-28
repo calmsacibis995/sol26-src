@@ -1,0 +1,27 @@
+#
+#ident	"@(#)mapfile-vers	1.2	96/05/22 SMI"
+
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# interface definition for usr/src/lib/libdevinfo.
+
+SUNWprivate_1.1 {
+	global:
+		devfs_find;
+		devfs_find_all;
+		devfs_iscbdriver;
+		devfs_is_nexus_driver;
+		local_addr;
+		devfs_path_to_drv;
+		devfs_dev_to_prom_name;
+		devfs_resolve_aliases;
+		devfs_bootdev_set_list;
+		devfs_bootdev_modifiable;
+		devfs_bootdev_get_list;
+		devfs_bootdev_free_list;
+		devfs_get_prom_names;
+	local:
+		*;
+};

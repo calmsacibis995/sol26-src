@@ -1,0 +1,26 @@
+#
+#ident	"@(#)mapfile-vers	1.5	96/01/04 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# Intel386 specific interface definition for usr/src/lib/libsys.
+
+
+SYSVABI_1.3 {
+	global:
+		 _fxstat;		# Additional Required Entry Points
+		 _lxstat;		# System V ABI (i386), Figure 6-1
+		  nuname;
+		 _nuname;
+		 _xmknod;
+		 _xstat;
+
+		 _fpstart;		# Support Routines
+		  sbrk;			# System V ABI (i386), Figure 6-2
+		 _sbrk;
+
+		__flt_rounds;		# Global Externl Data Symbols
+		 _fp_hw;		# System V ABI (i386), Figure 6-3
+		__huge_val;
+};

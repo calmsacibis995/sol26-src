@@ -1,0 +1,43 @@
+#
+# uts/sun4u/Makefile.targ
+# Copyright (c) 1994 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.targ	1.8	96/10/15 SMI"
+#
+#	This Makefile defines the set of all required, target containing
+# included Makefiles for the sun4u "implementation architecture".
+#
+
+#
+#	Targets for all implementations:
+#
+include $(UTSBASE)/Makefile.targ
+
+#
+#	Target set for sun4u (order is not important, as it is with the
+# isomorphic Makefile.files set).
+#
+include $(UTSBASE)/sun4u/Makefile.rules
+include $(UTSBASE)/sfmmu/Makefile.rules
+include $(UTSBASE)/sparc/v9/Makefile.rules
+include $(UTSBASE)/sparc/Makefile.rules
+include $(UTSBASE)/sun/Makefile.rules
+include $(PSMBASE)/promif/$(PROMIF)/common/Makefile.rules
+include $(PSMBASE)/promif/$(PROMIF)/$(PLATFORM)/Makefile.rules
+include $(UTSBASE)/common/Makefile.rules
+
+#
+# Platform targets
+#
+$(ROOT_PLAT_MOD_DIRS): $(ROOT_PLAT_DIRS)
+	-$(INS.dir.root.sys)
+
+$(ROOT_PLAT_MISC_DIRS): $(ROOT_PLAT_MOD_DIRS)
+	-$(INS.dir.root.sys)
+
+$(ROOT_SUNFIRE_MISC_DIR)/%: % $(ROOT_SUNFIRE_MISC_DIR)
+	$(INS.file)
+
+$(ROOT_TAZMO_MISC_DIR)/%: % $(ROOT_TAZMO_MISC_DIR)
+	$(INS.file)

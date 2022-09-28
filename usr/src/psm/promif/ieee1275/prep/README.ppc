@@ -1,0 +1,23 @@
+This directory contains powerpc implementations of promif routines.
+The implementation of the functions are platform dependent and/or
+the functions use platform-dependent client interfaces that are not
+generic.
+
+a.  Implementation of prom_alloc() can be done in number of ways.
+
+	prom_alloc(and prom_malloc), prom_free - use claim release client 
+	services.
+	prom_alloc_ppc() - uses /memory node, and /chosen node's mmu property. 
+	till we have a 1275 machine we won't know if /chosen node's mmu
+	property exists or not.
+	prom_map() - who needs this capability...on sparc cpr needs this.
+
+b. We are not sure at this point if we need callbacks or not...
+
+	prom_set_callback() is first attempt at initializing callback
+	handlers for Firmware. Depending on Kernel's calling syntax we may 
+	want to change this.
+
+c. Makefiles, file names and directory structures of the boot/prom directorties
+   are still changing not settled yet. when we have final sun4u structure we
+   will faithfully follow it.

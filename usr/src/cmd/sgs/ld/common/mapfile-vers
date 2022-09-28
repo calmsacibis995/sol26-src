@@ -1,0 +1,24 @@
+#
+#ident	"@(#)mapfile-vers	1.7	96/02/28 SMI"
+#
+# Copyright (c) 1995 by Sun Microsystems, Inc.
+# All rights reserved.
+
+# Indicate that the dependency on liblddbg is USED
+
+liblddbg.so -	$USED;
+
+# Specify what global symbols we export.  Note that we're not really
+# interested in declaring a version, simply scoping the file is sufficient.
+
+{
+	global:
+		main;			# Provides basic adb symbol offsets
+
+		dbg_mask;		# Debugging support (liblddbg)
+		dbg_print;
+
+		eprintf;		# Error message support
+	local:
+		*;
+};

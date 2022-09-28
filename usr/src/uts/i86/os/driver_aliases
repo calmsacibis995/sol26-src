@@ -1,0 +1,8 @@
+dpt "pci1044,a400"
+pci_pci "pci1011,1"
+pci_pci "pci1011,21"
+pci_pci "pci1014,22"
+audiocs	"SUNW,CS4231"
+mlx "pci1069,1"
+elx "pci10b7,5900"
+elx "pci10b7,5950"

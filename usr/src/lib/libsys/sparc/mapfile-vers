@@ -1,0 +1,54 @@
+#
+#ident	"@(#)mapfile-vers	1.6	96/01/04 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# SPARC specific interface definition for usr/src/lib/libsys.
+
+
+SISCD_2.3 {
+	global:
+		SISCD_2.3;
+} SYSVABI_1.3;
+
+SYSVABI_1.3 {
+	global:
+		 _Q_add;		# Support Routines
+		 _Q_cmp;		# System V ABI (SPARC), Figure 6-1
+		 _Q_cmpe;
+		 _Q_div;
+		 _Q_dtoq;
+		 _Q_feq;
+		 _Q_fge;
+		 _Q_fgt;
+		 _Q_fle;
+		 _Q_flt;
+		 _Q_fne;
+		 _Q_itoq;
+		 _Q_mul;
+		 _Q_neg;
+		 _Q_qtod;
+		 _Q_qtoi;
+		 _Q_qtos;
+		 _Q_qtou;
+		 _Q_sqrt;
+		 _Q_stoq;
+		 _Q_sub;
+		 _Q_utoq;
+		 __dtou;
+		 __ftou;
+		 .div;
+		 .mul;
+		 .rem;
+		 .stret1;
+		 .stret2;
+		 .stret4;
+		 .stret8;
+		 .udiv;
+		 .umul;
+		 .urem;
+
+		__huge_val;		# Global External Data Symbols
+					# System V ABI (SPARC), Figure 6-2.
+};

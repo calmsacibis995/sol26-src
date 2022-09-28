@@ -1,0 +1,95 @@
+#	Copyright (c) 1996 Sun Microsystems, Inc.
+#		All Rights Reserved
+#
+#	@(#)prototype_ppc	1.26	96/06/12 SMI
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+#
+#
+# List files which are PPC specific here
+#
+# source locations relative to the prototype file
+#
+#
+# SUNWhea
+#
+f none usr/include/kerberos/conf-svppc.h 644 bin bin
+f none usr/include/module_tags.h 644 bin bin
+f none usr/include/sys/asm_misc.h 644 bin bin
+f none usr/include/sys/bootsvcs.h 644 bin bin
+f none usr/include/sys/clock.h 644 bin bin
+f none usr/include/sys/console.h 644 bin bin
+f none usr/include/sys/debug/debugreg.h 644 bin bin
+d none usr/include/sys/dktp 755 bin bin
+f none usr/include/sys/dktp/altsctr.h 644 bin bin
+f none usr/include/sys/dktp/cmpkt.h 644 bin bin
+f none usr/include/sys/dktp/dadkio.h 644 bin bin
+f none usr/include/sys/dktp/fdisk.h 644 bin bin
+f none usr/include/sys/dma_engine.h 644 bin bin
+f none usr/include/sys/dma_i8237A.h 644 bin bin
+f none usr/include/sys/font.h 644 bin bin
+d none usr/include/sys/fpu 755 bin bin
+f none usr/include/sys/fpu/fpusystm.h 644 bin bin
+f none usr/include/sys/gld.h 644 bin bin
+f none usr/include/sys/i8272A.h 644 bin bin
+f none usr/include/sys/immu.h 644 bin bin
+f none usr/include/sys/ltem.h 644 bin bin
+f none usr/include/sys/machcpuvar.h 644 bin bin
+f none usr/include/sys/machparam.h 644 bin bin
+f none usr/include/sys/machsystm.h 644 bin bin
+f none usr/include/sys/machthread.h 644 bin bin
+f none usr/include/sys/mmu.h 644 bin bin
+f none usr/include/sys/mutex_impl.h 644 bin bin
+f none usr/include/sys/obpdefs.h 644 bin bin
+f none usr/include/sys/openprom.h 644 bin bin
+f none usr/include/sys/pci_impl.h 644 bin bin
+f none usr/include/sys/pcic_reg.h 644 bin bin
+f none usr/include/sys/pcic_var.h 644 bin bin
+f none usr/include/sys/pic.h 644 bin bin
+f none usr/include/sys/pit.h 644 bin bin
+f none usr/include/sys/prom_isa.h 644 bin bin
+f none usr/include/sys/prom_plat.h 644 bin bin
+f none usr/include/sys/prom_config.h 644 bin bin
+f none usr/include/sys/psm.h 644 bin bin
+f none usr/include/sys/psm_defs.h 644 bin bin
+f none usr/include/sys/psm_modctl.h 644 bin bin
+f none usr/include/sys/psm_types.h 644 bin bin
+f none usr/include/sys/pte.h 644 bin bin
+f none usr/include/sys/rtc.h 644 bin bin
+f none usr/include/sys/rwlock_impl.h 644 bin bin
+f none usr/include/sys/smp_impldefs.h 644 bin bin
+f none usr/include/sys/sunddi_lyr.h 644 bin bin
+f none usr/include/sys/synch32.h 644 bin bin
+f none usr/include/sys/spl.h 644 bin bin
+f none usr/include/sys/tem.h 644 bin bin
+f none usr/include/sys/traptrace.h 644 bin bin
+f none usr/include/sys/vm_machparam.h 644 bin bin
+f none usr/include/sys/x_call.h 644 bin bin
+f none usr/include/sys/xc_levels.h 644 bin bin
+d none usr/include/sys/scsi/targets 755 bin bin
+f none usr/include/sys/scsi/targets/stdef.h 644 bin bin
+d none usr/platform 755 root sys
+d none usr/platform/prep 755 root sys
+d none usr/platform/prep/include 755 bin bin
+d none usr/platform/prep/include/vm 755 bin bin
+f none usr/platform/prep/include/vm/hat_ppcmmu.h 644 bin bin
+f none usr/platform/prep/include/vm/mach_ppcmmu.h 644 bin bin
+f none usr/platform/prep/include/vm/mach_page.h 644 bin bin
+f none usr/platform/prep/include/vm/seg_kmem.h 644 bin bin
+d none usr/share/src/uts/prep 755 bin bin
+s none usr/share/src/uts/prep/vm=../../../../platform/prep/include/vm
+

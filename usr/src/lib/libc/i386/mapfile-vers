@@ -1,0 +1,133 @@
+#
+#ident	"@(#)mapfile-vers	1.30	96/08/21 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# Intel386 specific interface definition for usr/src/lib/libc.
+
+
+SUNW_1.1 {
+	global:
+		   _thr_errno_addr;
+		
+		# SPARC compliance definition symbols.
+
+		   _addseverity;
+		    addseverity;
+		    asctime_r;
+		   _crypt;
+		    crypt;
+		    ctime_r;
+		  __div64;
+		  __dtoll;
+		  __dtoull;
+		    endgrent;
+		    endpwent;
+		   _encrypt;
+		    encrypt;
+		 ___errno;
+		    errno;
+		    fgetgrent;
+		    fgetgrent_r;
+		    fgetpwent;
+		    fgetpwent_r;
+		    flockfile;
+		  __ftoll;
+		  __ftoull;
+		    funlockfile;
+		    getc_unlocked;
+		    getchar_unlocked;
+		    getgrent;
+		    getgrent_r;
+		    getgrgid_r;
+		    getgrnam_r;
+		   _getitimer;
+		    getitimer;
+		   _gettimeofday;
+		    gettimeofday;
+		    getlogin_r;
+		    getpwent;
+		    getpwent_r;
+		    getpwnam_r;
+		    getpwuid_r;
+		    gmtime_r;
+		   _iob;
+		    localtime_r;
+		  __mul64;
+		    putc_unlocked;
+		    putchar_unlocked;
+		    rand_r;
+		    readdir_r;
+		  __rem64;
+		    setgrent;
+		   _setitimer;
+		    setitimer;
+		   _setkey;
+		    setkey;
+		    setpwent;
+		    strtok_r;
+		   _sysinfo;
+		    sysinfo;
+		    ttyname_r;
+		  __udiv64;
+#		  __umul64;
+		  __urem64;
+} SYSVABI_1.3;
+
+SYSVABI_1.3 {
+	global:
+		# C Library (libc.so.1) interface.
+
+		  __fpstart;
+
+		# System Library (libsys.so.1) interface.
+
+		   _fxstat;		# Additional Required Entry Points
+		   _lxstat;		# System V ABI (i386), Figure 6-1
+		    nuname;
+		   _nuname;
+		   _xmknod;
+		   _xstat;
+
+		   _fpstart;		# Support Routines
+		    sbrk;		# System V ABI (i386), Figure 6-2;
+		   _sbrk;
+
+		  __flt_rounds;		# Global External Data Symbols
+		   _fp_hw;		# System V ABI (i386), Figure 6-3
+		  __huge_val;
+};
+
+SUNWprivate_1.1 {
+	global:
+		  __alloc_selector;	# libthread.so
+		  __free_all_selectors;	# libthead.so
+		  __freegs;		# libthread.so
+		   _libc_nanosleep;	# bugid 1213650
+		  __lock_clear;
+		  __lock_try;
+		  __mt_sigpending;	# bugid 1156192
+		  __setupgs;		# libthread.so
+		  __swapEX;
+		  __swapRD;
+		  __swapTE;
+		   _sysi86;		# cmd/rtc
+		    sysi86;		# cmd/rtc
+		  __xgetRD;		# needed by i386.libw.so
+		  __xtol;		# cmd/acct
+		  __xtoll;
+		  __xtoul;		# cmd/format
+  
+		    ntohl;		# BUG: defined in libsocket.so, they
+		    ntohs;		# shouldn't be defined here also.
+		    htonl;		# needed by libnsl, so it should depend
+		    htons;		# on libsocket.so
+
+		  __divrem64;		# cmd/backup
+		  __errno_fix;
+		  __fltrounds;
+		  __xtoull;		# acomp references it
+		  __udivrem64;		# libkvm.so
+		  _sbrk_unlocked;	# bugid 1242274
+};

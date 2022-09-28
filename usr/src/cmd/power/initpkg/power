@@ -1,0 +1,99 @@
+#!/bin/sh
+#
+# Copyright (c) 1993 - 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident  "@(#)power	1.7	96/09/25 SMI"
+
+#
+# Startup for Power Management
+#
+
+#   If the /etc/power.conf file does not have a "statefile" entry
+#   to specify the pathname of the cpr statefile, build one and
+#   add the line.  We require that the fs containing the statefile
+#   have at least MINSZ free blocks.
+
+init_statefile_entry() {
+	# whitespace regular expression below is [<TAB><SPACE>]
+	PATTERN="^[ 	]*statefile[	 ][	 ]*/"
+
+	if [ ! -f /etc/power.conf -o ! -w /etc/power.conf ]; then
+		return
+	elif [ `/usr/bin/grep -c "${PATTERN}" /etc/power.conf` -ge 1 ]; then
+		return
+	fi
+
+	MINSZ=10000		# 10Mb absolute minimum for the statefile
+	ROOTSZ=0		# free blocks in /
+	USRSZ=0			# free blocks in /usr
+	BIGSZ=0			# free blocks in largest "other" filesystem
+	FNAME=.CPR		# default name for cpr statefile
+
+	rm -f /${FNAME}		# remove old statfile (if any) from root
+
+	/usr/bin/df -k -F ufs |
+	(			# force following cmds into same subshell
+
+		read DUMMY	# skip the header line output of df
+		while read DUMMY DUMMY DUMMY SZ DUMMY FILESYS
+			do
+				case $FILESYS in
+					   /) ROOTSZ=$SZ		;;
+
+					/usr) USRSZ=$SZ			;;
+
+					   *) if [ $SZ -gt $BIGSZ ]; then
+						BIGSZ=$SZ
+						BIGFS=$FILESYS
+					      fi			;;
+				esac
+			done
+		
+		if [ $ROOTSZ -ge $MINSZ ]; then
+			WINNER=
+		elif [ $USRSZ -ge $MINSZ ]; then
+			WINNER=/usr
+		elif [ $BIGSZ -ge $MINSZ ]; then
+			WINNER=$BIGFS
+		else
+			WINNER=
+		fi
+
+		echo "statefile		${WINNER}/${FNAME}" >> /etc/power.conf
+
+		return
+	)
+}
+
+killproc() {		# kill the named process(es)
+	pid=`/usr/bin/ps -e |
+	     /usr/bin/grep $1 |
+	     /usr/bin/sed -e 's/^  *//' -e 's/ .*//'`
+	[ "$pid" != "" ] && kill $pid
+}
+
+case "$1" in
+'start')
+	 if [ `/usr/bin/uname -p`  = "sparc" -a		\
+	      `/usr/bin/uname -m` != "sun4c" -a		\
+	      `/usr/bin/uname -m` != "sun4d" ]; then
+		init_statefile_entry
+	fi
+	if [ -x /usr/sbin/pmconfig -a -r /etc/power.conf ] ; then
+		/usr/sbin/pmconfig 1>/dev/console 2>&1
+	fi
+	;;
+'stop')
+	killproc powerd
+	/usr/sbin/pmconfig -r 1>/dev/null 2>/dev/null
+	MID=`/usr/sbin/modinfo | grep "power manager" | awk '{print $1}'`
+	if [ "X${MID}" != "X" ] ;  then
+		/usr/sbin/modunload -i $MID 1> /dev/null 2>&1
+	fi
+	;;
+*)
+	echo "Usage: /etc/init.d/power { start | stop }"
+	;;
+esac
+exit 0

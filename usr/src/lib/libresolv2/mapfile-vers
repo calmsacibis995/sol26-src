@@ -1,0 +1,66 @@
+#
+#pragma ident	"@(#)mapfile-vers	1.13	96/08/02 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/libresolv2 (BIND 4.9.3).
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNW_2.1 {
+	global:
+		_getlong;
+		_getshort;
+		_res;
+		__dn_skipname;
+		__fp_query;
+		__hostalias;
+		__p_cdname;
+		__p_class;
+		__p_query;
+		__p_rr;
+		__p_time;
+		__p_type;
+		__putlong;
+		dn_comp;
+		dn_expand;
+		h_errno;
+		res_init;
+		res_mkquery;
+		res_send;
+		res_search;
+		res_query;
+		res_querydomain;
+	local:
+		*;
+};
+
+SUNWprivate_2.1 {
+	global:
+		__fp_nquery;		# in.named, named-xfer
+		__fp_resstat;		# dig
+		__putshort;		# in.named, named-xfer, BIND4.9.3 tools
+		__res_nameinquery;	# in.named
+		__res_randomid;		# in.named
+		_res_close;		# nss_dns.so.1
+		_res_resultcodes;	# nslookup, dig
+		_res_opcodes;		# nslookup
+		h_errlist;		# dnsquery
+		herror;			# nslookup
+		inet_aton;		# in.named, named-xfer, BIND4.9.3 tools
+		inet_nsap_addr;		# in.named
+		inet_nsap_ntoa;		# in.named, named-xfer, nslookup, dig
+		res_gethostbyaddr;	# host
+		res_gethostbyname;	# hotjava, named-xfer, BIND4.9.3 tools
+};

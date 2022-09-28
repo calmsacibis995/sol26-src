@@ -1,0 +1,51 @@
+#
+#ident	"@(#)Makefile.targ	1.11	96/05/24 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+
+all:		$(PROG)
+
+install \
+package:	all $(ROOTCCSBINPROG)
+
+%.o:		../common/%.c
+		$(COMPILE.c) $<
+		$(POST_PROCESS_O)
+
+$(PROG):	$(MAPFILE)
+
+$(ROOTCCSBIN)/%: %
+		$(INS.file)
+
+$(LINTOUT):	$(SRCS)
+		$(LINT.c) $(SRCS) > $(LINTOUT) 2>&1
+
+clean:
+		$(RM) $(OBJS) $(CLEANFILES)
+
+delete:
+		$(RM) $(PROG)
+
+lint:		$(LINTOUT)
+
+include		$(SRC)/cmd/Makefile.targ
+
+# Special target for native builds (ie. when we need to build a version of ld
+# to build a version of ld :-).
+
+native:		$(SGSPROTO)/$(PROG)
+
+$(SGSPROTO)/$(PROG) \
+$(PROG):	$$(OBJS)
+		$(LINK.c) $(OBJS) -o $@ $(LDLIBS)
+		$(POST_PROCESS)
+
+# Derived source and header files (messaging).
+ 
+catalog:	$(BLTMESG)
+
+$(BLTDEFS) + \
+$(BLTDATA) + \
+$(BLTMESG) :	../common/ld.msg
+		$(SGSTOOLS)/sgsmsg $(SGSMSGFLAGS) ../common/ld.msg

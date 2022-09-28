@@ -1,0 +1,20 @@
+#
+#ident	"@(#)mapfile-vers	1.5	96/01/04 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# SPARC specific interface definition for usr/src/lib/libdl.
+
+
+SUNW_1.1 {
+
+} SISCD_2.3;
+
+SISCD_2.3 {
+	global:
+		 dlclose;
+		 dlerror;
+		 dlopen;
+		 dlsym;
+};

@@ -1,0 +1,17 @@
+#
+#pragma ident	"@(#)Mapfile	1.11	95/10/09 SMI"
+#
+
+# Start text at KERNELBASE + pagesize for userio redzone.
+
+text	= LOAD ?RXN V0xe0001000;
+text	| .text;
+text	: $PROGBITS ?A!W;
+
+data	= LOAD ?RWX V0xe2000000 A0x1000;
+data	| .data;
+data	: $PROGBITS ?AW;
+data	: $NOBITS ?AW;
+
+note	= NOTE;
+note	: $NOTE;

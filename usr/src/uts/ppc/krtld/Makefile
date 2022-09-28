@@ -1,0 +1,68 @@
+#
+# uts/ppc/krtld/Makefile
+# Copyright (c) 1994, by Sun Microsystems, Inc.
+#
+#ident	"@(#)Makefile	1.6	96/06/11 SMI"
+#
+#	kernel linker/loader makefile.
+#
+#	ppc architecture dependent
+#
+
+#
+#	Path to the base of the uts directory tree (usually /usr/src/uts).
+#
+UTSBASE	= ../..
+
+#
+#	Define the module and object file sets.
+#
+MODULE		= krtld
+OBJECTS		= $(KRTLD_BOOT_OBJS:%=$(OBJS_DIR)/%) \
+		  $(KRTLD_OBJS:%=$(OBJS_DIR)/%)
+		  
+LINTS		= $(KRTLD_BOOT_OBJS:%.o=$(LINTS_DIR)/%.ln) \
+		  $(KRTLD_OBJS:%.o=$(LINTS_DIR)/%.ln)
+PICS		= $(KRTLD_BOOT_OBJS)
+ROOTMODULE	= $(ROOT_MISC_DIR)/$(MODULE)
+
+INC_PATH	+= -I$(UTSBASE)/common/krtld -I.
+
+#
+#	Include common rules.
+#
+include $(UTSBASE)/ppc/Makefile.ppc
+
+#
+#	Overrides.
+#
+CLOBBERFILES	+= $(MODULE)
+CFLAGS		+= -v
+CPPFLAGS	+= -DELF_TARGET_PPC
+LINKFLAGS	= -e _kobj_boot -M$(UTSBASE)/common/krtld/mapfile \
+		  -Breduce -znoversion
+LD		+= $(LINKFLAGS)
+
+$(PICS)		:= CFLAGS += -K pic
+
+#
+# Prevent GPROF flag and -xpg option from getting to krtld
+#
+$(MODULE)       := EXTRA_CFLAGS=
+$(MODULE)       := EXTRA_OPTIONS=
+
+#
+#	Default build targets.
+#
+.KEEP_STATE:
+
+all:		$(MODULE)
+
+lint:		$(MODULE).lint
+
+install:  	$(MODULE) $(ROOTMODULE)
+
+#
+#	Include common targets.
+#
+include $(UTSBASE)/ppc/Makefile.targ

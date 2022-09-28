@@ -1,0 +1,44 @@
+#	Copyright (c) 1990-95 Sun Microsystems, Inc.
+#		All Rights Reserved
+#
+#	@(#)prototype_ppc	1.9	95/06/26 SMI
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+#
+#
+# List files which are PPC specific here
+#
+# source locations relative to the prototype file
+#
+#
+# SUNWdfbh
+#
+f none usr/include/sys/bt485reg.h 0644 bin bin
+f none usr/include/sys/rgb525reg.h 0644 bin bin
+f none usr/include/sys/p9000var.h 0644 bin bin
+f none usr/include/sys/p9000reg.h 0644 bin bin
+f none usr/include/sys/fairway.h 0644 bin bin
+f none usr/include/sys/s3reg.h 0644 bin bin
+f none usr/include/sys/p9100var.h 0644 bin bin
+f none usr/include/sys/p9100reg.h 0644 bin bin
+f none usr/include/sys/viperreg.h 0644 bin bin
+f none usr/include/sys/viperio.h 0644 bin bin
+f none usr/include/sys/glacier.h 0644 bin bin
+f none usr/include/sys/wd90c24a2reg.h 0644 bin bin
+f none usr/include/sys/SDACreg.h 644 bin bin
+f none usr/include/sys/clgd5434reg.h 644 bin bin
+f none usr/include/sys/vgareg.h 644 bin bin

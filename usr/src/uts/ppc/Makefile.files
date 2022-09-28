@@ -1,0 +1,102 @@
+#
+# uts/ppc/Makefile.files
+# Copyright (c) 1995, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.files	1.57	96/10/04 SMI"
+#
+#	This Makefile defines all file modules and build rules for the
+# directory uts/ppc and its children. These are the source files which
+# are specific to the PowerPC processor.
+#
+
+#
+#	object lists
+#
+CORE_OBJS +=	\
+		__var_arg.o \
+		atomic.o \
+		cons_subr.o \
+		copy.o \
+		divrem64.o \
+		ddi_ppc.o \
+		float.o \
+		fpu.o \
+		hat_ppcmmu.o \
+		ip_ocsum.o \
+		lock_prim.o \
+		mach_ppcmmu.o \
+		mcount.o \
+		mmu.o \
+		mutex.o \
+		ppc_subr.o \
+		ppcmmu_asm.o \
+		rwlock.o \
+		seg_kmem.o \
+		swtch.o \
+		vm_machdep.o
+
+#		ddi_ppc_asm.o
+
+#
+#		Generic-unix Module
+#
+GENUNIX_OBJS +=	\
+		addupc.o \
+		archdep.o \
+		getcontext.o \
+		install_utrap.o \
+		lwp_private.o \
+		sundep.o \
+		syscall.o
+
+#
+#			file system modules
+#
+CORE_OBJS +=	prmachdep.o
+
+#
+#			driver modules
+#
+AUDIOCS_OBJS +=	audio_4231.o audio_4231_8237dma.o
+
+#
+#			misc. modules
+#
+#SYSINIT_OBJS +=	sysinit.o
+
+CONSCONFIG_OBJS	+=	consconfig.o
+
+KRTLD_BOOT_OBJS +=	kobj_boot.o
+KRTLD_OBJS +=		kobj_crt.o	kobj_reloc.o	kobj_isa.o \
+			doreloc.o	kobj_convrelstr.o
+
+PROFILE_OBJS +=		profile.o
+
+#
+#			special files
+#
+MODSTUB_OBJ =	modstubs.o
+
+#
+#	Build up paths and defines.
+#
+MACH_FLAG	= __$(MACH)
+LINT_DEFS	+= -D$(MACH_FLAG)
+INC_PATH	+= -I$(UTSBASE)/ppc
+
+#
+# Since assym.s is a derived file, the dependency must be explicit for
+# all files including this file. (This is only actually required in the
+# instance when the .nse_depinfo file does not exist.) It may seem that
+# the lint targets should also have a similar dependency, but they don't
+# since only C headers are included when #defined(lint) is true.
+#
+ASSYM_DEPS	+= \
+	copy.o mcount.o ppc_subr.o float.o lock_prim.o ppcmmu_asm.o \
+	swtch.o addupc.o ip_ocsum.o
+
+#
+# Inlined assembler routines.
+#
+INLINES		+= $(UTSBASE)/ppc/ml/ppc.il

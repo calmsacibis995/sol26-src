@@ -1,0 +1,24 @@
+#
+# ident	"@(#)mapfile-vers	1.3	96/07/12 SMI"
+#
+# Copyright (c) 1995 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+SUNW_1.1 {
+	global:
+		rd_delete;
+		rd_errstr;
+		rd_event_addr;
+		rd_event_enable;
+		rd_event_getmsg;
+		rd_init;
+		rd_loadobj_iter;
+		rd_log;
+		rd_new;
+		rd_objpad_enable;
+		rd_plt_resolution;
+		rd_reset;
+	local:
+		*;
+};

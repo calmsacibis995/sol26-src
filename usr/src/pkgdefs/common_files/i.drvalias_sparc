@@ -1,0 +1,143 @@
+#!/bin/sh
+#
+#ident  "@(#)i.drvalias_sparc 1.22 96/10/15 SMI"
+#
+# Copyright (c) 1993 by Sun Microsystems, Inc.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		sed -e '/^cpu modi4v0m[ 	]*$/d' \
+		    -e '/^cpu TI,TMS390Z50[ 	]*$/d' \
+		    -e '/^obio bootbus[ 	]*$/d' \
+		    -e '/^sw drum[	]*$/d' \
+		    -e '/^ie sie[	]*$/d' \
+		    -e '/^sbus sbi[ 	]*$/d' $dest > /tmp/tmp.$$
+		cp /tmp/tmp.$$ $dest
+		rm -f /tmp/tmp.$$
+		grep '^xbox ' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'xbox SUNW,xbox' >> $dest
+		fi
+		grep '^sx ' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'sx SUNW,sx' >> $dest
+		fi
+		grep '^isp QLGC,isp' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'isp QLGC,isp' >> $dest
+		fi
+		grep '^isp SUNW,isp' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'isp SUNW,isp' >> $dest
+		fi
+		grep '^isp SUNW,isptwo' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'isp SUNW,isptwo' >> $dest
+		fi
+		grep '^stc SUNW,spif' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'stc SUNW,spif' >> $dest
+		fi
+		grep '^audiocs SUNW,CS4231' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'audiocs SUNW,CS4231' >> $dest
+		fi
+		grep '^pci SUNW,pci' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pci SUNW,pci' >> $dest
+		fi
+		grep '^soc SUNW,soc' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'soc SUNW,soc' >> $dest
+		fi
+		grep '^pln SUNW,pln' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pln SUNW,pln' >> $dest
+		fi
+		grep '^ssd SUNW,ssd' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'ssd SUNW,ssd' >> $dest
+		fi
+		grep '^fas SUNW,fas' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'fas SUNW,fas' >> $dest
+		fi
+		grep '^hme SUNW,hme' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'hme SUNW,hme' >> $dest
+		fi
+		grep '^environ environment' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'environ environment' >> $dest
+		fi
+		grep '^simmstat simm-status' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'simmstat simm-status' >> $dest
+		fi
+		grep '^sysctrl clock-board' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'sysctrl clock-board' >> $dest
+		fi
+		grep '^ebus SUNW,ebus' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'ebus SUNW,ebus' >> $dest
+		fi
+		grep '^envctrl SUNW,envctrl' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'envctrl SUNW,envctrl' >> $dest
+		fi
+		grep '^fd fdthree' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'fd fdthree' >> $dest
+		fi
+		grep '^glm SUNW,glm' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'glm SUNW,glm' >> $dest
+		fi
+		grep '"pci1011,1"' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pci_pci "pci1011,1"' >> $dest
+		fi
+		grep '"pci1011,21"' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pci_pci "pci1011,21"' >> $dest
+		fi
+		grep '"pci1014,22"' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pci_pci "pci1014,22"' >> $dest
+		fi
+		grep '"pci1011,24"' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pci_pci "pci1011,24"' >> $dest
+		fi
+		grep '^pmc SUNW,pmc' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pmc SUNW,pmc' >> $dest
+		fi
+		grep '^mic SUNW,mic' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'mic SUNW,mic' >> $dest
+		fi
+		grep '^pci "pci108e,1000"' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pci "pci108e,1000"' >> $dest
+		fi
+		grep '^pci "pciclass,060000"' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pci "pciclass,060000"' >> $dest
+		fi
+		grep '^pci_pci "pciclass,060400"' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pci_pci "pciclass,060400"' >> $dest
+		fi
+	fi
+done
+
+exit 0

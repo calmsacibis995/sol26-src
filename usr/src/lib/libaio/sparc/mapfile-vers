@@ -1,0 +1,21 @@
+#
+#ident	"@(#)mapfile-vers	1.9	96/08/27 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# SPARC specific interface definition for usr/src/lib/libaio.
+
+SUNW_1.1 {
+
+} SISCD_2.3;
+
+# SPARC International SPARC compliance definition 2.3.
+
+SISCD_2.3 {
+	global:
+		aiocancel;
+		aioread;
+		aiowait;
+		aiowrite;
+};

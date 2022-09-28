@@ -1,0 +1,484 @@
+#
+# uts/i86/Makefile.rules
+# Copyright (c) 1991-95, by Sun Microsystems, Inc.
+#
+#ident   "@(#)Makefile.rules 1.61     96/10/04 SMI"
+#
+#	This Makefile defines all file modules and build rules for the
+# directory uts/i86 and it's children. These are the source files which
+# are specific to the i86 processor.
+#
+
+#
+#	This was implemented by pattern matching rules of the form:
+#
+# $(OBJS_DIR)/%.o:	 $(UTSBASE)/common/os/%.c
+#	$(COMPILE.c) -o $@ $<
+#
+# $(LINTS_DIR)/%.ln:	$(UTSBASE)/common/os/%.c
+#	@($(LHEAD) $(LINT.c) $< $(LTAIL))
+#
+#	For each directory containing source. This proved to slow under
+#	Nse because it caused a significant additional number of stats
+#	and stats are real slow under TFS. If TFS performance should
+#	improve, one might consider returning to the former implementation.
+#	In the former implementation, this file (Makefile.rules) was not
+#	needed and the pattern matching rules were in Makefile.files.
+#
+
+#
+#	C object build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(OBJS_DIR)/vc.o:		$(UTSBASE)/i86/disp/vc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/disp/vc.c
+
+$(OBJS_DIR)/vc_dptbl.o:		$(UTSBASE)/i86/disp/vc_dptbl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/disp/vc_dptbl.c
+
+$(OBJS_DIR)/prmachdep.o:	$(UTSBASE)/i86/fs/proc/prmachdep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/fs/proc/prmachdep.c
+
+$(OBJS_DIR)/consmsconf.o:	$(UTSBASE)/i86/io/consmsconf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/io/consmsconf.c
+
+$(OBJS_DIR)/openprom.o:		$(UTSBASE)/i86/io/openprom.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/io/openprom.c
+
+$(OBJS_DIR)/profile.o:	$(UTSBASE)/i86/io/profile.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/io/profile.c
+
+$(OBJS_DIR)/wscons.o:		$(UTSBASE)/i86/io/wscons.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/io/wscons.c
+
+$(OBJS_DIR)/kobj_boot.o:	$(UTSBASE)/i86/krtld/kobj_boot.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/krtld/kobj_boot.c
+
+$(OBJS_DIR)/kobj_crt.o:	$(UTSBASE)/i86/krtld/kobj_crt.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/krtld/kobj_crt.s
+
+$(OBJS_DIR)/kobj_reloc.o:	$(UTSBASE)/i86/krtld/kobj_reloc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/krtld/kobj_reloc.c
+
+$(OBJS_DIR)/kobj_isa.o:		$(UTSBASE)/i86/krtld/kobj_isa.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/krtld/kobj_isa.c
+
+$(OBJS_DIR)/addupc.o:		$(UTSBASE)/i86/ml/addupc.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/addupc.s
+
+$(OBJS_DIR)/copy.o:		$(UTSBASE)/i86/ml/copy.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/copy.s
+
+$(OBJS_DIR)/arith.o:		$(UTSBASE)/i86/ml/emul_80387/arith.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/emul_80387/arith.s
+
+$(OBJS_DIR)/dcode.o:		$(UTSBASE)/i86/ml/emul_80387/dcode.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/emul_80387/dcode.s
+
+$(OBJS_DIR)/divmul.o:		$(UTSBASE)/i86/ml/emul_80387/divmul.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/emul_80387/divmul.s
+
+$(OBJS_DIR)/emul_init.o:	$(UTSBASE)/i86/ml/emul_80387/emul_init.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/ml/emul_80387/emul_init.c
+
+$(OBJS_DIR)/glue.o:		$(UTSBASE)/i86/ml/emul_80387/glue.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/emul_80387/glue.s
+
+$(OBJS_DIR)/lipsq.o:		$(UTSBASE)/i86/ml/emul_80387/lipsq.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/emul_80387/lipsq.s
+
+$(OBJS_DIR)/reg.o:		$(UTSBASE)/i86/ml/emul_80387/reg.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/emul_80387/reg.s
+
+$(OBJS_DIR)/remsc.o:		$(UTSBASE)/i86/ml/emul_80387/remsc.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/emul_80387/remsc.s
+
+$(OBJS_DIR)/round.o:		$(UTSBASE)/i86/ml/emul_80387/round.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/emul_80387/round.s
+
+$(OBJS_DIR)/status.o:		$(UTSBASE)/i86/ml/emul_80387/status.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/emul_80387/status.s
+
+$(OBJS_DIR)/store.o:		$(UTSBASE)/i86/ml/emul_80387/store.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/emul_80387/store.s
+
+$(OBJS_DIR)/subadd.o:		$(UTSBASE)/i86/ml/emul_80387/subadd.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/emul_80387/subadd.s
+
+$(OBJS_DIR)/trans.o:		$(UTSBASE)/i86/ml/emul_80387/trans.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/emul_80387/trans.s
+
+$(OBJS_DIR)/float.o:		$(UTSBASE)/i86/ml/float.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/float.s
+
+$(OBJS_DIR)/ddi_i86_asm.o:	$(UTSBASE)/i86/ml/ddi_i86_asm.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/ddi_i86_asm.s
+
+$(OBJS_DIR)/i86_subr.o:		$(UTSBASE)/i86/ml/i86_subr.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/i86_subr.s
+
+$(OBJS_DIR)/int_entry.o:	$(UTSBASE)/i86/ml/int_entry.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/int_entry.s
+
+$(OBJS_DIR)/lock_prim.o:	$(UTSBASE)/i86/ml/lock_prim.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/lock_prim.s
+
+$(OBJS_DIR)/mcount.o:		$(UTSBASE)/i86/ml/mcount.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/mcount.s
+
+$(OBJS_DIR)/swtch.o:		$(UTSBASE)/i86/ml/swtch.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/swtch.s
+
+$(OBJS_DIR)/tables2.o:		$(UTSBASE)/i86/ml/tables2.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/ml/tables2.c
+
+$(OBJS_DIR)/v86gptrap.o:	$(UTSBASE)/i86/ml/v86gptrap.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/i86/ml/v86gptrap.s
+
+$(OBJS_DIR)/archdep.o:		$(UTSBASE)/i86/os/archdep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/os/archdep.c
+
+$(OBJS_DIR)/ddi_i86.o:		$(UTSBASE)/i86/os/ddi_i86.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/os/ddi_i86.c
+
+$(OBJS_DIR)/fpu.o:		$(UTSBASE)/i86/os/fpu.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/os/fpu.c
+
+$(OBJS_DIR)/i86_vtrace.o:	$(UTSBASE)/i86/os/i86_vtrace.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/os/i86_vtrace.c
+
+$(OBJS_DIR)/mutex.o:		$(UTSBASE)/i86/os/mutex.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/os/mutex.c
+
+$(OBJS_DIR)/rwlock.o:		$(UTSBASE)/i86/os/rwlock.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/os/rwlock.c
+
+$(OBJS_DIR)/sundep.o:		$(UTSBASE)/i86/os/sundep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/os/sundep.c
+
+$(OBJS_DIR)/sysi86.o:		$(UTSBASE)/i86/os/sysi86.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/os/sysi86.c
+
+$(OBJS_DIR)/syscall.o:		$(UTSBASE)/i86/os/syscall.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/os/syscall.c
+
+$(OBJS_DIR)/getcontext.o:	$(UTSBASE)/i86/syscall/getcontext.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/syscall/getcontext.c
+
+$(OBJS_DIR)/install_utrap.o:	$(UTSBASE)/i86/syscall/install_utrap.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/syscall/install_utrap.c
+
+$(OBJS_DIR)/lwp_private.o:	$(UTSBASE)/i86/syscall/lwp_private.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/syscall/lwp_private.c
+
+$(OBJS_DIR)/v86.o:		$(UTSBASE)/i86/os/v86.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/os/v86.c
+
+$(OBJS_DIR)/prom_alloc.o:	$(UTSBASE)/i86/promif/prom_alloc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_alloc.c
+
+$(OBJS_DIR)/prom_boot.o:	$(UTSBASE)/i86/promif/prom_boot.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_boot.c
+
+$(OBJS_DIR)/prom_devname.o:	$(UTSBASE)/i86/promif/prom_devname.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_devname.c
+
+$(OBJS_DIR)/prom_enter.o:	$(UTSBASE)/i86/promif/prom_enter.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_enter.c
+
+$(OBJS_DIR)/prom_exit.o:	$(UTSBASE)/i86/promif/prom_exit.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_exit.c
+
+$(OBJS_DIR)/prom_fb.o:	$(UTSBASE)/i86/promif/prom_fb.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_fb.c
+
+$(OBJS_DIR)/prom_getchar.o:	$(UTSBASE)/i86/promif/prom_getchar.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_getchar.c
+
+$(OBJS_DIR)/prom_gettime.o:	$(UTSBASE)/i86/promif/prom_gettime.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_gettime.c
+
+$(OBJS_DIR)/prom_init.o:	$(UTSBASE)/i86/promif/prom_init.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_init.c
+
+$(OBJS_DIR)/prom_io.o:	$(UTSBASE)/i86/promif/prom_io.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_io.c
+
+$(OBJS_DIR)/prom_kbd.o:	$(UTSBASE)/i86/promif/prom_kbd.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_kbd.c
+
+$(OBJS_DIR)/prom_node.o:	$(UTSBASE)/i86/promif/prom_node.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_node.c
+
+$(OBJS_DIR)/prom_panic.o:	$(UTSBASE)/i86/promif/prom_panic.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_panic.c
+
+$(OBJS_DIR)/prom_printf.o:	$(UTSBASE)/i86/promif/prom_printf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_printf.c
+
+$(OBJS_DIR)/prom_prop.o:	$(UTSBASE)/i86/promif/prom_prop.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_prop.c
+
+$(OBJS_DIR)/prom_putchar.o:	$(UTSBASE)/i86/promif/prom_putchar.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_putchar.c
+
+$(OBJS_DIR)/prom_reboot.o:	$(UTSBASE)/i86/promif/prom_reboot.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_reboot.c
+
+$(OBJS_DIR)/prom_string.o:	$(UTSBASE)/i86/promif/prom_string.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_string.c
+
+$(OBJS_DIR)/prom_version.o:	$(UTSBASE)/i86/promif/prom_version.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/promif/prom_version.c
+
+$(OBJS_DIR)/hat_i86.o:		$(UTSBASE)/i86/vm/hat_i86.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/vm/hat_i86.c
+
+$(OBJS_DIR)/mach_i86mmu.o:	$(UTSBASE)/i86/vm/mach_i86mmu.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/vm/mach_i86mmu.c
+
+$(OBJS_DIR)/seg_kmem.o:		$(UTSBASE)/i86/vm/seg_kmem.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/vm/seg_kmem.c
+
+$(OBJS_DIR)/seg_vpix.o:		$(UTSBASE)/i86/vm/seg_vpix.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/vm/seg_vpix.c
+
+$(OBJS_DIR)/vm_machdep.o:	$(UTSBASE)/i86/vm/vm_machdep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/i86/vm/vm_machdep.c
+
+$(OBJS_DIR)/mach_page.o:	$(UTSBASE)/common/vm/mach_page.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/mach_page.c
+
+#
+#	Lint `object' build rules.
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(LINTS_DIR)/vc.ln:		$(UTSBASE)/i86/disp/vc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/disp/vc.c $(LTAIL))
+
+$(LINTS_DIR)/vc_dptbl.ln:	$(UTSBASE)/i86/disp/vc_dptbl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/disp/vc_dptbl.c $(LTAIL))
+
+$(LINTS_DIR)/prmachdep.ln:	$(UTSBASE)/i86/fs/proc/prmachdep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/fs/proc/prmachdep.c $(LTAIL))
+
+$(LINTS_DIR)/consmsconf.ln:	$(UTSBASE)/i86/io/consmsconf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/io/consmsconf.c $(LTAIL))
+
+$(LINTS_DIR)/openprom.ln:	$(UTSBASE)/i86/io/openprom.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/io/openprom.c $(LTAIL))
+
+$(LINTS_DIR)/profile.ln:	$(UTSBASE)/i86/io/profile.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/io/profile.c $(LTAIL))
+	
+$(LINTS_DIR)/wscons.ln:		$(UTSBASE)/i86/io/wscons.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/io/wscons.c $(LTAIL))
+
+$(LINTS_DIR)/doreloc.ln:	$(UTSBASE)/i86/krtld/doreloc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/krtld/doreloc.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_boot.ln:	$(UTSBASE)/i86/krtld/kobj_boot.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/krtld/kobj_boot.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_convrelstr.ln:	$(UTSBASE)/i86/krtld/kobj_convrelstr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/krtld/kobj_convrelstr.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_crt.ln:	$(UTSBASE)/i86/krtld/kobj_crt.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/krtld/kobj_crt.s $(LTAIL))
+
+$(LINTS_DIR)/kobj_reloc.ln:	$(UTSBASE)/i86/krtld/kobj_reloc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/krtld/kobj_reloc.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_isa.ln:	$(UTSBASE)/i86/krtld/kobj_isa.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/krtld/kobj_isa.c $(LTAIL))
+
+$(LINTS_DIR)/addupc.ln:		$(UTSBASE)/i86/ml/addupc.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/addupc.s $(LTAIL))
+
+$(LINTS_DIR)/copy.ln:		$(UTSBASE)/i86/ml/copy.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/copy.s $(LTAIL))
+
+$(LINTS_DIR)/arith.ln:		$(UTSBASE)/i86/ml/emul_80387/arith.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/emul_80387/arith.s $(LTAIL))
+
+$(LINTS_DIR)/dcode.ln:		$(UTSBASE)/i86/ml/emul_80387/dcode.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/emul_80387/dcode.s $(LTAIL))
+
+$(LINTS_DIR)/divmul.ln:		$(UTSBASE)/i86/ml/emul_80387/divmul.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/emul_80387/divmul.s $(LTAIL))
+
+$(LINTS_DIR)/emul_init.ln:	$(UTSBASE)/i86/ml/emul_80387/emul_init.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/ml/emul_80387/emul_init.c $(LTAIL))
+
+$(LINTS_DIR)/glue.ln:		$(UTSBASE)/i86/ml/emul_80387/glue.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/emul_80387/glue.s $(LTAIL))
+
+$(LINTS_DIR)/lipsq.ln:		$(UTSBASE)/i86/ml/emul_80387/lipsq.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/emul_80387/lipsq.s $(LTAIL))
+
+$(LINTS_DIR)/reg.ln:		$(UTSBASE)/i86/ml/emul_80387/reg.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/emul_80387/reg.s $(LTAIL))
+
+$(LINTS_DIR)/remsc.ln:		$(UTSBASE)/i86/ml/emul_80387/remsc.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/emul_80387/remsc.s $(LTAIL))
+
+$(LINTS_DIR)/round.ln:		$(UTSBASE)/i86/ml/emul_80387/round.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/emul_80387/round.s $(LTAIL))
+
+$(LINTS_DIR)/status.ln:		$(UTSBASE)/i86/ml/emul_80387/status.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/emul_80387/status.s $(LTAIL))
+
+$(LINTS_DIR)/store.ln:		$(UTSBASE)/i86/ml/emul_80387/store.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/emul_80387/store.s $(LTAIL))
+
+$(LINTS_DIR)/subadd.ln:		$(UTSBASE)/i86/ml/emul_80387/subadd.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/emul_80387/subadd.s $(LTAIL))
+
+$(LINTS_DIR)/trans.ln:		$(UTSBASE)/i86/ml/emul_80387/trans.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/emul_80387/trans.s $(LTAIL))
+
+$(LINTS_DIR)/float.ln:		$(UTSBASE)/i86/ml/float.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/float.s $(LTAIL))
+
+$(LINTS_DIR)/ddi_i86_asm.ln:	$(UTSBASE)/i86/ml/ddi_i86_asm.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/ddi_i86_asm.s $(LTAIL))
+
+$(LINTS_DIR)/i86_subr.ln:	$(UTSBASE)/i86/ml/i86_subr.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/i86_subr.s $(LTAIL))
+
+$(LINTS_DIR)/int_entry.ln:	$(UTSBASE)/i86/ml/int_entry.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/int_entry.s $(LTAIL))
+
+$(LINTS_DIR)/lock_prim.ln:	$(UTSBASE)/i86/ml/lock_prim.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/lock_prim.s $(LTAIL))
+
+$(LINTS_DIR)/mcount.ln:		$(UTSBASE)/i86/ml/mcount.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/mcount.s $(LTAIL))
+
+$(LINTS_DIR)/swtch.ln:		$(UTSBASE)/i86/ml/swtch.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/swtch.s $(LTAIL))
+
+$(LINTS_DIR)/tables2.ln:	$(UTSBASE)/i86/ml/tables2.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/ml/tables2.c $(LTAIL))
+
+$(LINTS_DIR)/v86gptrap.ln:	$(UTSBASE)/i86/ml/v86gptrap.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/i86/ml/v86gptrap.s $(LTAIL))
+
+$(LINTS_DIR)/archdep.ln:	$(UTSBASE)/i86/os/archdep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/os/archdep.c $(LTAIL))
+
+$(LINTS_DIR)/ddi_i86.ln:	$(UTSBASE)/i86/os/ddi_i86.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/os/ddi_i86.c $(LTAIL))
+
+$(LINTS_DIR)/fpu.ln:		$(UTSBASE)/i86/os/fpu.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/os/fpu.c $(LTAIL))
+
+$(LINTS_DIR)/i86_vtrace.ln:	$(UTSBASE)/i86/os/i86_vtrace.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/os/i86_vtrace.c $(LTAIL))
+
+$(LINTS_DIR)/mutex.ln:		$(UTSBASE)/i86/os/mutex.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/os/mutex.c $(LTAIL))
+
+$(LINTS_DIR)/rwlock.ln:		$(UTSBASE)/i86/os/rwlock.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/os/rwlock.c $(LTAIL))
+
+$(LINTS_DIR)/sundep.ln:		$(UTSBASE)/i86/os/sundep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/os/sundep.c $(LTAIL))
+
+$(LINTS_DIR)/sysi86.ln:		$(UTSBASE)/i86/os/sysi86.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/os/sysi86.c $(LTAIL))
+
+$(LINTS_DIR)/syscall.ln:	$(UTSBASE)/i86/os/syscall.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/os/syscall.c $(LTAIL))
+
+$(LINTS_DIR)/v86.ln:		$(UTSBASE)/i86/os/v86.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/os/v86.c $(LTAIL))
+
+$(LINTS_DIR)/prom_alloc.ln:	$(UTSBASE)/i86/promif/prom_alloc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_alloc.c $(LTAIL))
+
+$(LINTS_DIR)/prom_boot.ln:	$(UTSBASE)/i86/promif/prom_boot.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_boot.c $(LTAIL))
+
+$(LINTS_DIR)/prom_devname.ln:	$(UTSBASE)/i86/promif/prom_devname.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_devname.c $(LTAIL))
+
+$(LINTS_DIR)/prom_enter.ln:	$(UTSBASE)/i86/promif/prom_enter.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_enter.c $(LTAIL))
+
+$(LINTS_DIR)/prom_exit.ln:	$(UTSBASE)/i86/promif/prom_exit.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_exit.c $(LTAIL))
+
+$(LINTS_DIR)/prom_fb.ln:	$(UTSBASE)/i86/promif/prom_fb.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_fb.c $(LTAIL))
+
+$(LINTS_DIR)/prom_getchar.ln:	$(UTSBASE)/i86/promif/prom_getchar.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_getchar.c $(LTAIL))
+
+$(LINTS_DIR)/prom_gettime.ln:	$(UTSBASE)/i86/promif/prom_gettime.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_gettime.c $(LTAIL))
+
+$(LINTS_DIR)/prom_init.ln:	$(UTSBASE)/i86/promif/prom_init.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_init.c $(LTAIL))
+
+$(LINTS_DIR)/prom_io.ln:	$(UTSBASE)/i86/promif/prom_io.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_io.c $(LTAIL))
+
+$(LINTS_DIR)/prom_kbd.ln:	$(UTSBASE)/i86/promif/prom_kbd.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_kbd.c $(LTAIL))
+
+$(LINTS_DIR)/prom_node.ln:	$(UTSBASE)/i86/promif/prom_node.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_node.c $(LTAIL))
+
+$(LINTS_DIR)/prom_panic.ln:	$(UTSBASE)/i86/promif/prom_panic.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_panic.c $(LTAIL))
+
+$(LINTS_DIR)/prom_printf.ln:	$(UTSBASE)/i86/promif/prom_printf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_printf.c $(LTAIL))
+
+$(LINTS_DIR)/prom_prop.ln:	$(UTSBASE)/i86/promif/prom_prop.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_prop.c $(LTAIL))
+
+$(LINTS_DIR)/prom_putchar.ln:	$(UTSBASE)/i86/promif/prom_putchar.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_putchar.c $(LTAIL))
+
+$(LINTS_DIR)/prom_reboot.ln:	$(UTSBASE)/i86/promif/prom_reboot.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_reboot.c $(LTAIL))
+
+$(LINTS_DIR)/prom_string.ln:	$(UTSBASE)/i86/promif/prom_string.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_string.c $(LTAIL))
+
+$(LINTS_DIR)/prom_version.ln:	$(UTSBASE)/i86/promif/prom_version.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/promif/prom_version.c $(LTAIL))
+
+$(LINTS_DIR)/getcontext.ln:	$(UTSBASE)/i86/syscall/getcontext.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/syscall/getcontext.c $(LTAIL))
+
+$(LINTS_DIR)/install_utrap.ln:	$(UTSBASE)/i86/syscall/install_utrap.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/syscall/install_utrap.c $(LTAIL))
+
+$(LINTS_DIR)/lwp_private.ln:	$(UTSBASE)/i86/syscall/lwp_private.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/syscall/lwp_private.c $(LTAIL))
+
+$(LINTS_DIR)/hat_i86.ln:	$(UTSBASE)/i86/vm/hat_i86.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/vm/hat_i86.c $(LTAIL))
+
+$(LINTS_DIR)/mach_i86mmu.ln:	$(UTSBASE)/i86/vm/mach_i86mmu.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/vm/mach_i86mmu.c $(LTAIL))
+
+$(LINTS_DIR)/seg_kmem.ln:	$(UTSBASE)/i86/vm/seg_kmem.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/vm/seg_kmem.c $(LTAIL))
+
+$(LINTS_DIR)/seg_vpix.ln:	$(UTSBASE)/i86/vm/seg_vpix.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/vm/seg_vpix.c $(LTAIL))
+
+$(LINTS_DIR)/vm_machdep.ln:	$(UTSBASE)/i86/vm/vm_machdep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/i86/vm/vm_machdep.c $(LTAIL))
+
+$(LINTS_DIR)/mach_page.ln:	$(UTSBASE)/common/vm/mach_page.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/mach_page.c $(LTAIL))
+

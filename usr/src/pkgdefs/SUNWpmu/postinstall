@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# Copyright (c) 1993 - 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)postinstall	1.1	96/09/13 SMI"
+#
+# SUNWpmu postinstall script
+
+#
+# adds sysidpm to the list of applications run out of sysidconfig.
+#
+if [ -x /usr/sbin/sysidconfig ]; then {
+	/usr/sbin/sysidconfig -b "${BASEDIR}" -l | /usr/bin/grep -s sysidpm >/dev/null
+	if [ $? -ne 0 ]; then
+                /usr/sbin/sysidconfig -b "${BASEDIR}" -a /usr/sbin/sysidpm
+        fi
+} else {
+        /usr/bin/grep -s sysidpm ${BASEDIR}/etc/.sysidconfig.apps >/dev/null
+        if [ $? -ne 0 ]; then
+                echo /usr/sbin/sysidpm >> ${BASEDIR}/etc/.sysidconfig.apps
+        fi
+} fi
+
+exit 0

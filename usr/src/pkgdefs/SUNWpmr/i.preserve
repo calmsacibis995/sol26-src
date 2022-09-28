@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# Copyright (c) 1993 - 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)i.preserve	1.3	96/09/13 SMI"
+
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		grep '@(#)power.conf' $src > /tmp/newident.$$ 2>/dev/null
+		grep -v '@(#)power.conf' $dest > /tmp/rest.$$ 2>/dev/null
+		cat /tmp/newident.$$ /tmp/rest.$$ > $dest
+	fi
+done
+exit 0

@@ -1,0 +1,69 @@
+#!/bin/sh
+#
+#pragma ident	"@(#)inc.flg	1.25	96/06/11 SMI" 
+#
+# Copyright (c) 1994 by Sun Microsystems, Inc.
+#
+
+find_files "s.*" \
+	usr/src/cmd/sgs/ar \
+	usr/src/cmd/sgs/c++ \
+	usr/src/cmd/sgs/gprof \
+	usr/src/cmd/sgs/include \
+	usr/src/cmd/sgs/ld \
+	usr/src/cmd/sgs/ldd \
+	usr/src/cmd/sgs/lddstub \
+	usr/src/cmd/sgs/libconv \
+	usr/src/cmd/sgs/libdl \
+	usr/src/cmd/sgs/libelf \
+	usr/src/cmd/sgs/libld \
+	usr/src/cmd/sgs/liblddbg \
+	usr/src/cmd/sgs/libldmake \
+	usr/src/cmd/sgs/libldstab \
+	usr/src/cmd/sgs/librtld \
+	usr/src/cmd/sgs/librtld_db \
+	usr/src/cmd/sgs/mcs \
+	usr/src/cmd/sgs/messages \
+	usr/src/cmd/sgs/pvs \
+	usr/src/cmd/sgs/m4 \
+	usr/src/cmd/sgs/nm \
+	usr/src/cmd/sgs/tsort \
+	usr/src/cmd/sgs/yacc \
+	usr/src/cmd/sgs/rtld \
+	usr/src/cmd/sgs/rtld.4.x \
+	usr/src/cmd/sgs/sparc \
+	usr/src/cmd/sgs/i386 \
+	usr/src/cmd/sgs/ppc \
+	usr/src/cmd/sgs/tools \
+	usr/src/cmd/sgs/0@0 \
+	usr/src/cmd/sgs/whatdir \
+	usr/src/lib/libc/inc \
+	usr/src/lib/common \
+	usr/src/uts/common/krtld \
+	usr/src/uts/i86/krtld \
+	usr/src/uts/ppc/krtld \
+	usr/src/uts/sparc/krtld
+
+echo_file usr/src/head/Makefile
+echo_file usr/src/head/dlfcn.h
+echo_file usr/src/head/libelf.h
+echo_file usr/src/head/link.h
+echo_file usr/src/head/proc_service.h
+echo_file usr/src/head/rtld_db.h
+echo_file usr/src/uts/common/sys/Makefile
+echo_file usr/src/uts/common/sys/auxv.h
+echo_file usr/src/uts/common/sys/elf.h
+echo_file usr/src/uts/common/sys/elf_386.h
+echo_file usr/src/uts/common/sys/elf_M32.h
+echo_file usr/src/uts/common/sys/elf_SPARC.h
+echo_file usr/src/uts/common/sys/elf_ppc.h
+echo_file usr/src/uts/common/sys/elf_notes.h
+echo_file usr/src/uts/common/sys/elftypes.h
+echo_file usr/src/uts/common/sys/link.h
+echo_file usr/src/uts/common/sys/note.h
+echo_file usr/src/uts/common/sys/systeminfo.h
+echo_file usr/src/cmd/sgs/Makefile
+echo_file usr/src/cmd/sgs/Makefile.com
+echo_file usr/src/cmd/sgs/Makefile.sub
+echo_file usr/src/lib/Makefile.lib
+echo_file usr/src/lib/Makefile.targ

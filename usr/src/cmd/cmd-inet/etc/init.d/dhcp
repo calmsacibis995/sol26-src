@@ -1,0 +1,49 @@
+#!/bin/sh
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc. All rights reserved.
+#
+#ident	"@(#)dhcp	1.13	96/05/21 SMI"
+
+if [ ! -d /usr/bin ]
+then			# /usr not mounted
+	exit 1
+fi
+
+killproc() {		# kill the named process(es)
+	pid=`/usr/bin/ps -e |
+	     /usr/bin/grep $1 |
+	     /usr/bin/sed -e 's/^  *//' -e 's/ .*//'`
+	[ "$pid" != "" ] && kill $pid
+}
+
+#
+# Start/stop DHCP service
+#
+# See in.dhcpd(1m) for more details.
+#
+
+DHCPDOPTIONS=""
+
+case "$1" in
+'start')
+	if [ -x /usr/lib/inet/in.dhcpd ]
+	then
+		echo ${DHCPDOPTIONS} | grep -s '\-r' > /dev/null
+		if [ ${?} -eq 0 -o \( -f /etc/default/dhcp -o -d /tftpboot \) ]
+		then
+			echo "Starting BOOTP/DHCP Service..." > /dev/console 2>&1
+			/usr/lib/inet/in.dhcpd ${DHCPDOPTIONS} > /dev/console 2>&1
+		fi
+	fi
+	;;
+
+'stop')
+	echo "Stopping BOOTP/DHCP Service." > /dev/console 2>&1
+	killproc in.dhcpd
+	;;
+*)
+	echo "Usage: /etc/init.d/dhcp { start | stop }" > /dev/console 2>&1
+	;;
+esac
+
+exit 0

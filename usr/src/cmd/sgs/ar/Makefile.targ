@@ -1,0 +1,53 @@
+#
+#ident	"@(#)Makefile.targ	1.1	96/04/11 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+
+objs/%.o \
+objs.xpg4/%.o:	../common/%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+all:		$(PROG) $(XPG4)
+
+clean:
+		$(RM) $(CLEANFILES)
+
+delete:
+		$(RM) $(PROG)
+
+install \
+package:	all $(ROOTCCSBINPROG) $(ROOTXPG4PROG)
+
+catalog:	$(POFILE)
+
+lint:		$(LINTOUT)
+
+$(PROG):	$(OBJS)
+		$(LINK.c) -o $@ $(OBJS) $(LDLIBS)
+		$(POST_PROCESS)
+
+$(XPG4):	$(XPG4OBJS)
+		$(LINK.c) -o $@ $(XPG4OBJS) $(LDLIBS)
+		$(POST_PROCESS)
+
+$(POFILE):
+		$(RM) $@
+		$(XGETTEXT) $(XGETFLAGS) ../common/main.c
+		$(SED) "/^domain/d" < messages.po > $@
+		$(XGETTEXT) -a $(XGETFLAGS) ../common/message.c
+		$(SED) "/^domain/d" < messages.po >> $@
+		$(RM) messages.po
+
+$(OBJS):	objs
+
+$(XPG4OBJS):	objs.xpg4
+
+objs objs.xpg4:
+		-@ mkdir -p $@
+
+$(LINTOUT):	$(SRCS)
+		$(LINT.c) $(SRCS) > $(LINTOUT) 2>&1
+
+include		$(SRC)/cmd/Makefile.targ

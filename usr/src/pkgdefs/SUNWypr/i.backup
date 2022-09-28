@@ -1,0 +1,14 @@
+#!/bin/sh -x
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		echo "EXISTING_FILE_RENAMED: $dest ${dest}:saved" >>\
+				/tmp/CLEANUP
+		mv $dest ${dest}:saved
+		cp $src $dest
+        fi
+done
+exit 0

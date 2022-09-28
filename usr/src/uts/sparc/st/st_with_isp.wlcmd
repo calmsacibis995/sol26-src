@@ -1,0 +1,20 @@
+# Copyright (c) 1996, by Sun Microsystems, Inc.
+#
+# All rights reserved.
+#ident	"@(#)st_with_isp.wlcmd 1.4	96/10/16 SMI"
+
+add scsi_watch_request::swr_callback targets \
+	st.c:st_media_watch_cb
+
+add scsi_pkt::pkt_comp targets \
+        st.c:st_media_watch_cb \
+	scsi_watch.c:scsi_watch_request_intr \
+	st.c:st_intr
+
+one scsi_device
+one isp 
+
+ignore isp_kmem_cache_constructor isp_kmem_cache_destructor
+ignore isp.c:isp_scsi_dmafree isp.c:isp_scsi_sync_pkt
+ignore isp.c:isp_scsi_reset_notify
+

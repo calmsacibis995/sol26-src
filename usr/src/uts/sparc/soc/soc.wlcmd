@@ -1,0 +1,17 @@
+# Copyright (c) 1996, by Sun Microsystems, Inc.
+#
+# All rights reserved
+#pragma ident   "@(#)soc.wlcmd  1.1    96/10/17 SMI"
+
+root dummy_warlock
+
+#
+#
+for ptr in `funcptrs | grep '^scsi_hba_tran::'`
+do
+	add $ptr target warlock_dummy
+done
+for ptr in `funcptrs | grep '^soc_statec_cb::'`
+do
+	add $ptr target warlock_dummy
+done

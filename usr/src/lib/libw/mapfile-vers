@@ -1,0 +1,110 @@
+#
+#ident	"@(#)mapfile-vers	1.12	96/04/24 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/libw.
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNW_1.1 {
+	global:
+		fgetwc = FUNCTION;
+		fgetws = FUNCTION;
+		fputwc = FUNCTION;
+		fputws = FUNCTION;
+		getwc = FUNCTION;
+		getwchar = FUNCTION;
+		getws = FUNCTION;
+		isenglish = FUNCTION;
+		isideogram = FUNCTION;
+		isnumber = FUNCTION;
+		isphonogram = FUNCTION;
+		isspecial = FUNCTION;
+		iswalnum = FUNCTION;
+		iswalpha = FUNCTION;
+		iswcntrl = FUNCTION;
+		iswctype = FUNCTION;
+		iswdigit = FUNCTION;
+		iswgraph = FUNCTION;
+		iswlower = FUNCTION;
+		iswprint = FUNCTION;
+		iswpunct = FUNCTION;
+		iswspace = FUNCTION;
+		iswupper = FUNCTION;
+		iswxdigit = FUNCTION;
+		putwc = FUNCTION;
+		putwchar = FUNCTION;
+		putws = FUNCTION;
+		strtows = FUNCTION;
+		towlower = FUNCTION;
+		towupper = FUNCTION;
+		ungetwc = FUNCTION;
+		watoll = FUNCTION;
+		wcscat = FUNCTION;
+		wcschr = FUNCTION;
+		wcscmp = FUNCTION;
+		wcscoll = FUNCTION;
+		wcscpy = FUNCTION;
+		wcscspn = FUNCTION;
+		wcsftime = FUNCTION;
+		wcslen = FUNCTION;
+		wcsncat = FUNCTION;
+		wcsncmp = FUNCTION;
+		wcsncpy = FUNCTION;
+		wcspbrk = FUNCTION;
+		wcsrchr = FUNCTION;
+		wcsspn = FUNCTION;
+		wcstod = FUNCTION;
+		wcstok = FUNCTION;
+		wcstol = FUNCTION;
+		wcstoul = FUNCTION;
+		wcswcs = FUNCTION;
+		wcswidth = FUNCTION;
+		wcsxfrm = FUNCTION;
+		wctype = FUNCTION;
+		wcwidth = FUNCTION;
+		wscasecmp = FUNCTION;
+		wscat = FUNCTION;
+		wschr = FUNCTION;
+		wscmp = FUNCTION;
+		wscol = FUNCTION;
+		wscoll = FUNCTION;
+		wscpy = FUNCTION;
+		wscspn = FUNCTION;
+		wsdup = FUNCTION;
+		wslen = FUNCTION;
+		wsncasecmp = FUNCTION;
+		wsncat = FUNCTION;
+		wsncmp = FUNCTION;
+		wsncpy = FUNCTION;
+		wspbrk = FUNCTION;
+		wsprintf = FUNCTION;
+		wsrchr = FUNCTION;
+		wsscanf = FUNCTION;
+		wsspn = FUNCTION;
+		wstod = FUNCTION;
+		wstok = FUNCTION;
+		wstol = FUNCTION;
+		wstoll = FUNCTION;
+		wstostr = FUNCTION;
+		wsxfrm = FUNCTION;
+	local:
+		*;
+};
+
+SUNWprivate_1.1 {
+	global:
+		SUNWprivate_1.1;
+};

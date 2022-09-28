@@ -1,0 +1,58 @@
+#
+#ident	"@(#)mapfile-vers	1.5	96/01/16 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# PPC specific interface definition for usr/src/lib/libthread.
+
+
+SUNW_1.1 {
+	global:
+		# SPARC compliance definition symbols.
+
+		cond_broadcast;
+		cond_destroy;
+		cond_init;
+		cond_signal;
+		cond_timedwait;
+		cond_wait;
+		fork1;
+		mutex_destroy;
+		mutex_init;
+		mutex_lock;
+		mutex_trylock;
+		mutex_unlock;
+		rw_rdlock;
+		rw_tryrdlock;
+		rw_trywrlock;
+		rw_unlock;
+		rw_wrlock;
+		rwlock_destroy;
+		rwlock_init;
+		sema_destroy;
+		sema_init;
+		sema_post;
+		sema_trywait;
+		sema_wait;
+		sigwait;
+		thr_continue;
+		thr_create;
+		thr_exit;
+		thr_getconcurrency;
+		thr_getprio;
+		thr_getspecific;
+		thr_join;
+		thr_keycreate;
+		thr_kill;
+		thr_main;
+		thr_min_stack;
+		thr_self;
+		thr_setconcurrency;
+		thr_setprio;
+		thr_setspecific;
+		thr_sigsetmask;
+		thr_stksegment;
+		thr_suspend;
+		thr_yield;
+};
